@@ -17,11 +17,9 @@
 4. [Formatos de serialización](#4--formatos-de-serialización)
 5. [Ejemplo práctico en Turtle](#5--ejemplo-práctico-en-turtle)
 6. [Consultas con SPARQL](#6--consultas-con-sparql)
-7. [Pruébalo tú mismo](#7--pruébalo-tú-mismo)
-8. [Ejercicios](#8--ejercicios)
-9. [Errores frecuentes](#9--errores-frecuentes)
-10. [Casos de uso](#10--casos-de-uso)
-11. [Recursos y siguiente paso](#11--recursos-y-siguiente-paso)
+7. [Errores frecuentes](#7--errores-frecuentes)
+8. [Casos de uso](#8--casos-de-uso)
+10. [Recursos y siguiente paso](#9--recursos-y-siguiente-paso)
 
 ---
 
@@ -37,7 +35,9 @@ A diferencia de las bases de datos relacionales (tablas) o de los documentos jer
 | JSON / XML | Documento | Árbol jerárquico |
 | **RDF** | **Terna** | **Grafo de afirmaciones** |
 
-**¿Por qué importa?** Porque la información resulta **procesable por máquinas** y facilita la **interoperabilidad** entre sistemas distribuidos: dos organizaciones pueden describir sus datos con los mismos identificadores globales sin ponerse de acuerdo sobre un esquema de base de datos.
+**¿Por qué importa?** 
+
+Porque la información resulta **procesable por máquinas** y facilita la **interoperabilidad** entre sistemas distribuidos: dos organizaciones pueden describir sus datos con los mismos identificadores globales sin ponerse de acuerdo sobre un esquema de base de datos.
 
 ---
 
@@ -56,14 +56,14 @@ Toda afirmación en RDF se descompone en **tres partes** (*triple*):
 | **Predicado** *(predicate)* | La propiedad o relación | Siempre una URI |
 | **Objeto** *(object)* | El valor de la propiedad | URI, nodo en blanco o literal |
 
-Ejemplo en lenguaje natural: *"El dataset de sensores tiene como título 'Lecturas de Sensores 2026'"*.
+Ejemplo en lenguaje natural: *"El libro fue escrito por un autor'"*.
 
 ```mermaid
 graph LR
-    S["ex:DatasetSensores<br/>(sujeto)"] -->|"dct:title<br/>(predicado)"| O["'Lecturas de Sensores 2026'@es<br/>(objeto)"]
+    S["LIBRO"] -->|"escrito-por"| O["Autor"]
 ```
 
-Un conjunto de ternas forma un **grafo**. Ese es todo el modelo: no hay nada más.
+Un conjunto de ternas forma un **grafo**.
 
 ---
 
@@ -76,21 +76,43 @@ Ejemplo: `http://schema.org/Person`.
 ### 🔤 Literales
 Valores de datos primitivos. Pueden llevar **tipo de dato** o **etiqueta de idioma**:
 
-```turtle
-"42"^^xsd:integer          # número entero
-"2026-09-29"^^xsd:date     # fecha
-"Hola"@es                  # texto en español
-```
+#### 1. Tipos de literales RDF
 
-### 👻 Nodos en blanco (*blank nodes*)
-Recursos **anónimos** sin URI global. Sirven para agrupar datos locales o representar entidades que no necesitan un identificador público.
+| Categoría | Tipo / forma | Ejemplo RDF/Turtle | Valor |
+|---|---|---|---|
+| **Cadena** | `xsd:string` | `"Gonzalo"` | Texto |
+| **Idioma** | `rdf:langString` | `"Hola"@es` | Texto + idioma |
+| **Booleano** | `xsd:boolean` | `true` / `false` | Verdadero/falso |
+| **Entero** | `xsd:integer` | `42` | Número entero |
+| **Decimal** | `xsd:decimal` | `3.14` | Número decimal |
+| **Float** | `xsd:float` | `3.14e0` | Coma flotante |
+| **Double** | `xsd:double` | `3.14E0` | Doble precisión |
+| **Fecha** | `xsd:date` | `"2026-09-29"^^xsd:date` | Fecha |
+| **Fecha y hora** | `xsd:dateTime` | `"2026-09-29T20:00:00"^^xsd:dateTime` | Fecha + hora |
+| **Hora** | `xsd:time` | `"20:00:00"^^xsd:time` | Hora |
+| **Año** | `xsd:gYear` | `"2026"^^xsd:gYear` | Año |
+| **Año-mes** | `xsd:gYearMonth` | `"2026-09"^^xsd:gYearMonth` | Año + mes |
+| **Duración** | `xsd:duration` | `"P1Y2M"^^xsd:duration` | Duración |
+| **URI** | `xsd:anyURI` | `"https://example.org"` | URI |
+| **Binario Base64** | `xsd:base64Binary` | `"SGVsbG8="^^xsd:base64Binary` | Datos binarios |
+| **Binario hexadecimal** | `xsd:hexBinary` | `"48656C6C6F"^^xsd:hexBinary` | Datos binarios |
 
-```turtle
-ex:Sensor01 ex:ubicacion [
-    ex:ciudad "Toledo" ;
-    ex:pais   "España"
-] .
-```
+#### 2. Subtipos numéricos de `xsd:integer`
+
+| Tipo | Ejemplo | Significado |
+|---|---:|---|
+| `xsd:long` | `100` | Entero de 64 bits |
+| `xsd:int` | `100` | Entero de 32 bits |
+| `xsd:short` | `100` | Entero de 16 bits |
+| `xsd:byte` | `100` | Entero de 8 bits |
+| `xsd:positiveInteger` | `5` | Entero positivo |
+| `xsd:negativeInteger` | `-5` | Entero negativo |
+| `xsd:nonNegativeInteger` | `0` | ≥ 0 |
+| `xsd:nonPositiveInteger` | `0` | ≤ 0 |
+| `xsd:unsignedLong` | `100` | Entero sin signo |
+| `xsd:unsignedInt` | `100` | Entero sin signo |
+| `xsd:unsignedShort` | `100` | Entero sin signo |
+| `xsd:unsignedByte` | `100` | Entero sin signo |
 
 ### 📚 Vocabularios y ontologías
 Conjuntos de URIs predefinidas para describir dominios concretos y **reutilizar** significado en lugar de inventarlo:
@@ -212,123 +234,11 @@ graph LR
 
 ## 6 · Consultas con SPARQL
 
-Para interactuar con repositorios RDF (*triplestores*) se usa **SPARQL**, el lenguaje de consulta estándar del W3C. Funciona por **coincidencia de patrones de grafo**: describes la forma de lo que buscas y el motor encuentra todo lo que encaja.
-
-**Objetivo:** obtener el título de cada dataset y el nombre de la organización que lo publica.
-
-```sparql
-PREFIX dcat: <http://www.w3.org/ns/dcat#>
-PREFIX dct:  <http://purl.org/dc/terms/>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-
-SELECT ?titulo ?nombrePublicador
-WHERE {
-  ?dataset a dcat:Dataset ;
-           dct:title     ?titulo ;
-           dct:publisher ?publicador .
-
-  ?publicador foaf:name ?nombrePublicador .
-}
-```
-
-**Resultado esperado:**
-
-| titulo | nombrePublicador |
-|:-------|:-----------------|
-| "Lecturas de Sensores 2026"@es | "Instituto Meteorológico de Castilla-La Mancha" |
-
-> 💡 Las variables empiezan por `?`. Fíjate en que `?publicador` actúa como **puente**: es el objeto de una terna y el sujeto de la siguiente.
-
-*(SPARQL se estudia en profundidad en [`04-SPARQL`](../04-SPARQL/).)*
+*Estudiaremos en profundidad este apartado en la sección [`04-SPARQL`](../04-SPARQL/)*
 
 ---
 
-## 7 · Pruébalo tú mismo
-
-### Opción A · Python con `rdflib`
-
-```bash
-pip install rdflib
-```
-
-Guarda el Turtle del apartado 5 como `sensores.ttl` y ejecuta:
-
-```python
-from rdflib import Graph
-
-g = Graph()
-g.parse("sensores.ttl", format="turtle")
-
-print(f"El grafo contiene {len(g)} ternas\n")
-
-consulta = """
-PREFIX dcat: <http://www.w3.org/ns/dcat#>
-PREFIX dct:  <http://purl.org/dc/terms/>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-
-SELECT ?titulo ?nombrePublicador
-WHERE {
-  ?dataset a dcat:Dataset ;
-           dct:title     ?titulo ;
-           dct:publisher ?publicador .
-  ?publicador foaf:name ?nombrePublicador .
-}
-"""
-
-for fila in g.query(consulta):
-    print(fila.titulo, "→", fila.nombrePublicador)
-
-# Convertir a otro formato
-print(g.serialize(format="nt"))
-```
-
-### Opción B · Sin instalar nada
-
-- 🌐 **Apache Jena Fuseki** o cualquier *triplestore* local para cargar el fichero y lanzar consultas.
-- 🌐 Endpoints públicos SPARQL como el de **Wikidata** para practicar consultas sobre datos reales.
-- 🌐 Validadores online de Turtle para comprobar la sintaxis.
-
----
-
-## 8 · Ejercicios
-
-<details>
-<summary><b>Ejercicio 1</b> · Añade una propiedad</summary>
-
-Añade al dataset la propiedad `dct:license` apuntando a una URI de licencia. ¿Cambia el resultado de la consulta del apartado 6?
-
-<sub>*Pista:* la consulta solo pide título y publicador, así que no cambia.</sub>
-</details>
-
-<details>
-<summary><b>Ejercicio 2</b> · Segundo dataset</summary>
-
-Crea `ex:DatasetPluviometros` publicado por la **misma** organización. Ejecuta de nuevo la consulta: ¿cuántas filas devuelve?
-
-<sub>*Pista:* dos, con el mismo `nombrePublicador`.</sub>
-</details>
-
-<details>
-<summary><b>Ejercicio 3</b> · Nodo en blanco</summary>
-
-Describe la ubicación de un sensor usando un nodo en blanco con ciudad y país (ver apartado 3).
-</details>
-
-<details>
-<summary><b>Ejercicio 4</b> · Cambia de formato</summary>
-
-Convierte `sensores.ttl` a JSON-LD y a N-Triples con `rdflib`. Compara los tres ficheros: ¿qué ganas y qué pierdes en legibilidad?
-</details>
-
-<details>
-<summary><b>Ejercicio 5</b> · Consulta nueva</summary>
-
-Escribe una consulta SPARQL que devuelva la **fecha de publicación** (`dct:issued`) de cada dataset junto con la **web** (`foaf:homepage`) de su publicador.
-</details>
-
----
-
-## 9 · Errores frecuentes
+## 7 · Errores frecuentes
 
 | ❌ Error | ✅ Solución |
 |:--------|:-----------|
@@ -341,7 +251,7 @@ Escribe una consulta SPARQL que devuelva la **fecha de publicación** (`dct:issu
 
 ---
 
-## 10 · Casos de uso
+## 8 · Casos de uso
 
 - 🏛️ **Espacios de Datos (*Data Spaces*):** intercambio de metadatos estandarizados entre organizaciones respetando la soberanía de los datos.
 - 🧠 **Grafos de conocimiento (*Knowledge Graphs*):** integración de bases de datos heterogéneas para inferir nueva información (p. ej. Wikidata).
@@ -349,7 +259,7 @@ Escribe una consulta SPARQL que devuelva la **fecha de publicación** (`dct:issu
 
 ---
 
-## 11 · Recursos y siguiente paso
+## 9 · Recursos y siguiente paso
 
 **Referencias oficiales**
 
@@ -361,14 +271,10 @@ Escribe una consulta SPARQL que devuelva la **fecha de publicación** (`dct:issu
 
 **Siguiente paso**
 
-RDF te permite *afirmar* cosas, pero no dice qué tipos de cosas existen ni cómo se relacionan. Eso lo aporta el siguiente nivel:
 
-➡️ [`02-RDFS` — RDF Schema](../02-RDFS/)
 
----
+## RDF te permite *afirmar* cosas, pero no dice qué tipos de cosas existen ni cómo se relacionan. 
 
-<div align="center">
+Eso lo aporta el siguiente nivel ➡️ [RDF Schema](../02-RDFS/)
 
-[⬅️ Volver al README principal](../README.md)
 
-</div>
