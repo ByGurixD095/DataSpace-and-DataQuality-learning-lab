@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:dq="http://example.org/lab/calidad/"
+   xmlns:ex="http://example.org/lab/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <rdf:Description rdf:about="http://example.org/lab/DatasetVentas">
+    <ex:columnas rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb4"/>
+    <ex:restricciones rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb12"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb2">
+    <rdf:first>nombre</rdf:first>
+    <rdf:rest rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb3"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb13">
+    <rdf:first rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb10"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/DatasetClientes">
+    <ex:tieneCompletitud rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.97</ex:tieneCompletitud>
+    <ex:formatosDisponibles rdf:resource="http://example.org/lab/altFormatos"/>
+    <ex:columnas rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb1"/>
+    <ex:tamano rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb14"/>
+    <ex:latenciaMedia rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb15"/>
+    <ex:esquema rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON">{"columnas":[{"nombre":"id","tipo":"integer"},{"nombre":"email","tipo":"string"}],"clave":"id"}</ex:esquema>
+    <ex:notaHtml rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#HTML">&lt;p&gt;Datos &lt;strong&gt;personales&lt;/strong&gt;: consultar el RGPD.&lt;/p&gt;</ex:notaHtml>
+    <ex:metadatosXml rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">&lt;meta&gt;&lt;origen&gt;CRM&lt;/origen&gt;&lt;version&gt;1.2&lt;/version&gt;&lt;/meta&gt;</ex:metadatosXml>
+    <ex:alias xml:lang="es">Clientes</ex:alias>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/medicion2">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"/>
+    <rdf:subject rdf:resource="http://example.org/lab/DatasetClientes"/>
+    <rdf:predicate rdf:resource="http://example.org/lab/tieneExactitud"/>
+    <rdf:object rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.60</rdf:object>
+    <dq:evaluadoPor rdf:resource="http://example.org/lab/AuditorExterno"/>
+    <dq:fechaEvaluacion rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-09-30</dq:fechaEvaluacion>
+    <dq:confianza rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.40</dq:confianza>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/seqPasos">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq"/>
+    <rdf:_1 rdf:resource="http://example.org/lab/Extraer"/>
+    <rdf:_2 rdf:resource="http://example.org/lab/Perfilar"/>
+    <rdf:_3 rdf:resource="http://example.org/lab/Validar"/>
+    <rdf:_4 rdf:resource="http://example.org/lab/Publicar"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/medicion1">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"/>
+    <rdf:subject rdf:resource="http://example.org/lab/DatasetClientes"/>
+    <rdf:predicate rdf:resource="http://example.org/lab/tieneCompletitud"/>
+    <rdf:object rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.97</rdf:object>
+    <dq:evaluadoPor rdf:resource="http://example.org/lab/HerramientaCalidad"/>
+    <dq:fechaEvaluacion rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-09-30</dq:fechaEvaluacion>
+    <dq:confianza rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.90</dq:confianza>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb11">
+    <rdf:first>no_nulo</rdf:first>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb10">
+    <rdf:first>fecha</rdf:first>
+    <rdf:rest rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb11"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/bagParticipantes">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag"/>
+    <rdf:_1 rdf:resource="http://example.org/lab/Gonzalo"/>
+    <rdf:_2 rdf:resource="http://example.org/lab/Lucia"/>
+    <rdf:_3 rdf:resource="http://example.org/lab/HerramientaCalidad"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb9">
+    <rdf:first>0</rdf:first>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb12">
+    <rdf:first rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb7"/>
+    <rdf:rest rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb13"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb5">
+    <rdf:first>importe</rdf:first>
+    <rdf:rest rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb6"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb7">
+    <rdf:first>importe</rdf:first>
+    <rdf:rest rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb8"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/tieneExactitud">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb14">
+    <rdf:value rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">250</rdf:value>
+    <ex:unidad rdf:resource="http://example.org/lab/Megabyte"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/tieneCompletitud">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb3">
+    <rdf:first>email</rdf:first>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb8">
+    <rdf:first>mayor_que</rdf:first>
+    <rdf:rest rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb9"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb6">
+    <rdf:first>fecha</rdf:first>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/PipelineCalidad">
+    <ex:pasos rdf:resource="http://example.org/lab/seqPasos"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/calidad/evaluadoPor">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/calidad/fechaEvaluacion">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb15">
+    <rdf:value rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.8</rdf:value>
+    <ex:unidad rdf:resource="http://example.org/lab/Segundo"/>
+    <ex:precision rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.1</ex:precision>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb1">
+    <rdf:first>id</rdf:first>
+    <rdf:rest rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/calidad/confianza">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/altFormatos">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Alt"/>
+    <rdf:_1>CSV</rdf:_1>
+    <rdf:_2>JSON</rdf:_2>
+    <rdf:_3>Parquet</rdf:_3>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb4">
+    <rdf:first>id_venta</rdf:first>
+    <rdf:rest rdf:nodeID="nfa49a0585926407f8d5f4e5eb839624cb5"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/EspacioDeDatosDemo">
+    <ex:participantes rdf:resource="http://example.org/lab/bagParticipantes"/>
+  </rdf:Description>
+</rdf:RDF>

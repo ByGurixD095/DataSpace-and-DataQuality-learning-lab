@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:ex="http://example.org/lab/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <rdf:Description rdf:about="http://example.org/lab/Gonzalo">
+    <rdf:type rdf:resource="http://example.org/lab/Persona"/>
+    <ex:nombre>Gonzalo</ex:nombre>
+    <ex:trabajaCon rdf:resource="http://example.org/lab/Lucia"/>
+    <ex:estudia rdf:resource="http://example.org/lab/EspaciosDeDatos"/>
+    <ex:estudia rdf:resource="http://example.org/lab/CalidadDelDato"/>
+    <ex:estudia rdf:resource="http://example.org/lab/GobiernoDelDato"/>
+    <ex:participaEn rdf:nodeID="nd16deb21f283407797f9f1c8a47b3afeb2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/Lucia">
+    <rdf:type rdf:resource="http://example.org/lab/Persona"/>
+    <rdf:type rdf:resource="http://example.org/lab/Responsable"/>
+    <ex:nombre>Lucía</ex:nombre>
+    <ex:participaEn rdf:nodeID="nd16deb21f283407797f9f1c8a47b3afeb2"/>
+    <ex:apodo>Lu</ex:apodo>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/DatasetClientes">
+    <rdf:type rdf:resource="http://example.org/lab/Dataset"/>
+    <ex:numeroRegistros rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12500</ex:numeroRegistros>
+    <ex:completitud rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.97</ex:completitud>
+    <ex:desviacion rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.32</ex:desviacion>
+    <ex:esPublico rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</ex:esPublico>
+    <ex:fechaCreacion rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-09-01</ex:fechaCreacion>
+    <ex:ultimaActualizacion rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-09-30T10:15:00+00:00</ex:ultimaActualizacion>
+    <ex:version rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1.2</ex:version>
+    <ex:titulo xml:lang="es">Clientes</ex:titulo>
+    <ex:titulo xml:lang="en">Customers</ex:titulo>
+    <ex:titulo xml:lang="de">Kunden</ex:titulo>
+    <ex:licencia rdf:nodeID="nd16deb21f283407797f9f1c8a47b3afeb1"/>
+    <ex:columnas rdf:nodeID="nd16deb21f283407797f9f1c8a47b3afeb3"/>
+    <ex:descripcion>Listado de clientes activos.
+Incluye datos de contacto y fecha de alta.
+Se actualiza a diario.</ex:descripcion>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nd16deb21f283407797f9f1c8a47b3afeb2">
+    <rdf:type rdf:resource="http://example.org/lab/Auditoria"/>
+    <ex:realizadaSobre rdf:resource="http://example.org/lab/DatasetClientes"/>
+    <ex:resultado>aprobada</ex:resultado>
+    <ex:fecha rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-09-15</ex:fecha>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nd16deb21f283407797f9f1c8a47b3afeb1">
+    <rdf:type rdf:resource="http://example.org/lab/Licencia"/>
+    <ex:nombre>CC-BY 4.0</ex:nombre>
+    <ex:url rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nd16deb21f283407797f9f1c8a47b3afeb4">
+    <rdf:first>nombre</rdf:first>
+    <rdf:rest rdf:nodeID="nd16deb21f283407797f9f1c8a47b3afeb5"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nd16deb21f283407797f9f1c8a47b3afeb5">
+    <rdf:first>email</rdf:first>
+    <rdf:rest rdf:nodeID="nd16deb21f283407797f9f1c8a47b3afeb6"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/DatasetVentas">
+    <ex:etiquetas rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nd16deb21f283407797f9f1c8a47b3afeb3">
+    <rdf:first>id</rdf:first>
+    <rdf:rest rdf:nodeID="nd16deb21f283407797f9f1c8a47b3afeb4"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="nd16deb21f283407797f9f1c8a47b3afeb6">
+    <rdf:first>fecha_alta</rdf:first>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/Nota">
+    <ex:texto>Dijo: "hola"	y cerró con una ñ y un acento: é</ex:texto>
+  </rdf:Description>
+</rdf:RDF>

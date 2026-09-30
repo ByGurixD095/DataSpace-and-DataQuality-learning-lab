@@ -1,0 +1,215 @@
+{
+  "@context": {
+    "dq": "http://example.org/lab/calidad/",
+    "ex": "http://example.org/lab/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "dq:evaluadoPor",
+      "@type": "rdf:Property"
+    },
+    {
+      "@id": "ex:tieneCompletitud",
+      "@type": "rdf:Property"
+    },
+    {
+      "@id": "ex:tieneExactitud",
+      "@type": "rdf:Property"
+    },
+    {
+      "@id": "ex:seqPasos",
+      "@type": "rdf:Seq",
+      "rdf:_1": {
+        "@id": "ex:Extraer"
+      },
+      "rdf:_2": {
+        "@id": "ex:Perfilar"
+      },
+      "rdf:_3": {
+        "@id": "ex:Validar"
+      },
+      "rdf:_4": {
+        "@id": "ex:Publicar"
+      }
+    },
+    {
+      "@id": "ex:bagParticipantes",
+      "@type": "rdf:Bag",
+      "rdf:_1": {
+        "@id": "ex:Gonzalo"
+      },
+      "rdf:_2": {
+        "@id": "ex:Lucia"
+      },
+      "rdf:_3": {
+        "@id": "ex:HerramientaCalidad"
+      }
+    },
+    {
+      "@id": "ex:medicion2",
+      "@type": "rdf:Statement",
+      "dq:confianza": {
+        "@type": "xsd:decimal",
+        "@value": "0.40"
+      },
+      "dq:evaluadoPor": {
+        "@id": "ex:AuditorExterno"
+      },
+      "dq:fechaEvaluacion": {
+        "@type": "xsd:date",
+        "@value": "2026-09-30"
+      },
+      "rdf:object": {
+        "@type": "xsd:decimal",
+        "@value": "0.60"
+      },
+      "rdf:predicate": {
+        "@id": "ex:tieneExactitud"
+      },
+      "rdf:subject": {
+        "@id": "ex:DatasetClientes"
+      }
+    },
+    {
+      "@id": "ex:EspacioDeDatosDemo",
+      "ex:participantes": {
+        "@id": "ex:bagParticipantes"
+      }
+    },
+    {
+      "@id": "ex:DatasetVentas",
+      "ex:columnas": {
+        "@list": [
+          "id_venta",
+          "importe",
+          "fecha"
+        ]
+      },
+      "ex:restricciones": {
+        "@list": [
+          {
+            "@list": [
+              "importe",
+              "mayor_que",
+              "0"
+            ]
+          },
+          {
+            "@list": [
+              "fecha",
+              "no_nulo"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "@id": "dq:confianza",
+      "@type": "rdf:Property"
+    },
+    {
+      "@id": "dq:fechaEvaluacion",
+      "@type": "rdf:Property"
+    },
+    {
+      "@id": "ex:altFormatos",
+      "@type": "rdf:Alt",
+      "rdf:_1": "CSV",
+      "rdf:_2": "JSON",
+      "rdf:_3": "Parquet"
+    },
+    {
+      "@id": "ex:PipelineCalidad",
+      "ex:pasos": {
+        "@id": "ex:seqPasos"
+      }
+    },
+    {
+      "@id": "ex:DatasetClientes",
+      "ex:alias": {
+        "@language": "es",
+        "@value": "Clientes"
+      },
+      "ex:columnas": {
+        "@list": [
+          "id",
+          "nombre",
+          "email"
+        ]
+      },
+      "ex:esquema": {
+        "@type": "rdf:JSON",
+        "@value": "{\"columnas\":[{\"nombre\":\"id\",\"tipo\":\"integer\"},{\"nombre\":\"email\",\"tipo\":\"string\"}],\"clave\":\"id\"}"
+      },
+      "ex:formatosDisponibles": {
+        "@id": "ex:altFormatos"
+      },
+      "ex:latenciaMedia": {
+        "@id": "_:nf023dd2f42b04e14b02a5e7ce1cf6628b15"
+      },
+      "ex:metadatosXml": {
+        "@type": "rdf:XMLLiteral",
+        "@value": "<meta><origen>CRM</origen><version>1.2</version></meta>"
+      },
+      "ex:notaHtml": {
+        "@type": "rdf:HTML",
+        "@value": "<p>Datos <strong>personales</strong>: consultar el RGPD.</p>"
+      },
+      "ex:tamano": {
+        "@id": "_:nf023dd2f42b04e14b02a5e7ce1cf6628b14"
+      },
+      "ex:tieneCompletitud": {
+        "@type": "xsd:decimal",
+        "@value": "0.97"
+      }
+    },
+    {
+      "@id": "_:nf023dd2f42b04e14b02a5e7ce1cf6628b14",
+      "ex:unidad": {
+        "@id": "ex:Megabyte"
+      },
+      "rdf:value": 250
+    },
+    {
+      "@id": "_:nf023dd2f42b04e14b02a5e7ce1cf6628b15",
+      "ex:precision": {
+        "@type": "xsd:decimal",
+        "@value": "0.1"
+      },
+      "ex:unidad": {
+        "@id": "ex:Segundo"
+      },
+      "rdf:value": {
+        "@type": "xsd:decimal",
+        "@value": "1.8"
+      }
+    },
+    {
+      "@id": "ex:medicion1",
+      "@type": "rdf:Statement",
+      "dq:confianza": {
+        "@type": "xsd:decimal",
+        "@value": "0.90"
+      },
+      "dq:evaluadoPor": {
+        "@id": "ex:HerramientaCalidad"
+      },
+      "dq:fechaEvaluacion": {
+        "@type": "xsd:date",
+        "@value": "2026-09-30"
+      },
+      "rdf:object": {
+        "@type": "xsd:decimal",
+        "@value": "0.97"
+      },
+      "rdf:predicate": {
+        "@id": "ex:tieneCompletitud"
+      },
+      "rdf:subject": {
+        "@id": "ex:DatasetClientes"
+      }
+    }
+  ]
+}

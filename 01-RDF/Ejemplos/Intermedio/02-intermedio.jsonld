@@ -1,0 +1,119 @@
+{
+  "@context": {
+    "ex": "http://example.org/lab/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "ex:DatasetClientes",
+      "@type": "ex:Dataset",
+      "ex:columnas": {
+        "@list": [
+          "id",
+          "nombre",
+          "email",
+          "fecha_alta"
+        ]
+      },
+      "ex:completitud": {
+        "@type": "xsd:decimal",
+        "@value": "0.97"
+      },
+      "ex:descripcion": "Listado de clientes activos.\nIncluye datos de contacto y fecha de alta.\nSe actualiza a diario.",
+      "ex:desviacion": 0.32,
+      "ex:esPublico": false,
+      "ex:fechaCreacion": {
+        "@type": "xsd:date",
+        "@value": "2026-09-01"
+      },
+      "ex:licencia": {
+        "@id": "_:n4d4a2eb2a3a0430fa9665b91eb08051bb1"
+      },
+      "ex:numeroRegistros": 12500,
+      "ex:titulo": [
+        {
+          "@language": "es",
+          "@value": "Clientes"
+        },
+        {
+          "@language": "en",
+          "@value": "Customers"
+        },
+        {
+          "@language": "de",
+          "@value": "Kunden"
+        }
+      ],
+      "ex:ultimaActualizacion": {
+        "@type": "xsd:dateTime",
+        "@value": "2026-09-30T10:15:00+00:00"
+      },
+      "ex:version": "1.2"
+    },
+    {
+      "@id": "_:n4d4a2eb2a3a0430fa9665b91eb08051bb1",
+      "@type": "ex:Licencia",
+      "ex:nombre": "CC-BY 4.0",
+      "ex:url": {
+        "@id": "https://creativecommons.org/licenses/by/4.0/"
+      }
+    },
+    {
+      "@id": "ex:Lucia",
+      "@type": [
+        "ex:Persona",
+        "ex:Responsable"
+      ],
+      "ex:apodo": "Lu",
+      "ex:nombre": "Lucía",
+      "ex:participaEn": {
+        "@id": "_:n4d4a2eb2a3a0430fa9665b91eb08051bb2"
+      }
+    },
+    {
+      "@id": "_:n4d4a2eb2a3a0430fa9665b91eb08051bb2",
+      "@type": "ex:Auditoria",
+      "ex:fecha": {
+        "@type": "xsd:date",
+        "@value": "2026-09-15"
+      },
+      "ex:realizadaSobre": {
+        "@id": "ex:DatasetClientes"
+      },
+      "ex:resultado": "aprobada"
+    },
+    {
+      "@id": "ex:Gonzalo",
+      "@type": "ex:Persona",
+      "ex:estudia": [
+        {
+          "@id": "ex:EspaciosDeDatos"
+        },
+        {
+          "@id": "ex:CalidadDelDato"
+        },
+        {
+          "@id": "ex:GobiernoDelDato"
+        }
+      ],
+      "ex:nombre": "Gonzalo",
+      "ex:participaEn": {
+        "@id": "_:n4d4a2eb2a3a0430fa9665b91eb08051bb2"
+      },
+      "ex:trabajaCon": {
+        "@id": "ex:Lucia"
+      }
+    },
+    {
+      "@id": "ex:Nota",
+      "ex:texto": "Dijo: \"hola\"\ty cerró con una ñ y un acento: é"
+    },
+    {
+      "@id": "ex:DatasetVentas",
+      "ex:etiquetas": {
+        "@list": []
+      }
+    }
+  ]
+}

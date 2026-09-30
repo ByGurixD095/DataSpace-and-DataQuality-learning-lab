@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:ex="http://example.org/lab/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <rdf:Description rdf:about="http://example.org/lab/DatasetClientes">
+    <rdf:type rdf:resource="http://example.org/lab/Dataset"/>
+    <ex:formato>CSV</ex:formato>
+    <ex:titulo>Clientes</ex:titulo>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/Gonzalo">
+    <rdf:type rdf:resource="http://example.org/lab/Persona"/>
+    <ex:trabajaCon rdf:resource="http://example.org/lab/Lucia"/>
+    <ex:haCreado rdf:resource="http://example.org/lab/DatasetClientes"/>
+    <ex:nombre>Gonzalo</ex:nombre>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/Lucia">
+    <rdf:type rdf:resource="http://example.org/lab/Persona"/>
+    <ex:esResponsableDe rdf:resource="http://example.org/lab/DatasetVentas"/>
+    <ex:nombre>Lucía</ex:nombre>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/lab/DatasetVentas">
+    <rdf:type rdf:resource="http://example.org/lab/Dataset"/>
+    <ex:derivadoDe rdf:resource="http://example.org/lab/DatasetClientes"/>
+    <ex:formato>JSON</ex:formato>
+    <ex:titulo>Ventas</ex:titulo>
+  </rdf:Description>
+</rdf:RDF>

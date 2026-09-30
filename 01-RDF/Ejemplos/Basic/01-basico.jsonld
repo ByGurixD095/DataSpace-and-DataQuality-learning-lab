@@ -1,0 +1,43 @@
+{
+  "@context": {
+    "ex": "http://example.org/lab/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "ex:Gonzalo",
+      "@type": "ex:Persona",
+      "ex:haCreado": {
+        "@id": "ex:DatasetClientes"
+      },
+      "ex:nombre": "Gonzalo",
+      "ex:trabajaCon": {
+        "@id": "ex:Lucia"
+      }
+    },
+    {
+      "@id": "ex:DatasetClientes",
+      "@type": "ex:Dataset",
+      "ex:formato": "CSV",
+      "ex:titulo": "Clientes"
+    },
+    {
+      "@id": "ex:DatasetVentas",
+      "@type": "ex:Dataset",
+      "ex:derivadoDe": {
+        "@id": "ex:DatasetClientes"
+      },
+      "ex:formato": "JSON",
+      "ex:titulo": "Ventas"
+    },
+    {
+      "@id": "ex:Lucia",
+      "@type": "ex:Persona",
+      "ex:esResponsableDe": {
+        "@id": "ex:DatasetVentas"
+      },
+      "ex:nombre": "Lucía"
+    }
+  ]
+}
