@@ -1,0 +1,165 @@
+# =====================================================================
+# 01-RDF · NIVEL AVANZADO
+# ---------------------------------------------------------------------
+# Objetivo: usar el vocabulario propio de RDF (namespace rdf:) para
+# modelar situaciones que las triples simples no cubren:
+#
+#   1. rdf:Property        -> declarar propiedades
+#   2. Reificación         -> hablar SOBRE una triple (rdf:Statement)
+#   3. Contenedores        -> rdf:Bag, rdf:Seq, rdf:Alt (rdf:_1, rdf:_2...)
+#   4. Listas explícitas   -> rdf:first / rdf:rest / rdf:nil
+#   5. Valores estructurados -> rdf:value
+#   6. Literales especiales -> rdf:JSON, rdf:HTML, rdf:XMLLiteral,
+#                              rdf:langString
+#
+# Todo es RDF puro: NO se usa RDFS (rdfs:) ni OWL (owl:).
+# El caso de uso conecta con calidad del dato: anotar quién midió una
+# métrica, cuándo y con qué confianza.
+# =====================================================================
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex:  <http://example.org/lab/> .
+@prefix dq:  <http://example.org/lab/calidad/> .
+
+# ---------------------------------------------------------------------
+# 1. Declaración de propiedades con rdf:Property
+#    (rdf:Property pertenece a RDF; rdfs:domain / rdfs:range serían RDFS)
+# ---------------------------------------------------------------------
+ex:tieneCompletitud  a rdf:Property .
+ex:tieneExactitud    a rdf:Property .
+dq:evaluadoPor       a rdf:Property .
+dq:fechaEvaluacion   a rdf:Property .
+dq:confianza         a rdf:Property .
+
+# ---------------------------------------------------------------------
+# 2. Reificación
+#    Problema: queremos decir "la completitud de DatasetClientes es 0.97,
+#    según la herramienta X, el día Y, con confianza Z". Una triple no
+#    puede ser sujeto de otra triple, así que se describe con un
+#    rdf:Statement que apunta a sus tres partes.
+#
+#    IMPORTANTE: reificar NO afirma la triple original. Para que el
+#    grafo la contenga hay que escribirla aparte (sección 2.a).
+# ---------------------------------------------------------------------
+
+# 2.a La triple original (afirmada)
+ex:DatasetClientes  ex:tieneCompletitud  "0.97"^^xsd:decimal .
+
+# 2.b Su descripción reificada + metadatos sobre ella
+ex:medicion1
+    a rdf:Statement ;
+    rdf:subject   ex:DatasetClientes ;
+    rdf:predicate ex:tieneCompletitud ;
+    rdf:object    "0.97"^^xsd:decimal ;
+    dq:evaluadoPor     ex:HerramientaCalidad ;
+    dq:fechaEvaluacion "2026-09-30"^^xsd:date ;
+    dq:confianza       "0.90"^^xsd:decimal .
+
+# 2.c Una afirmación que NO está en el grafo, solo reificada
+#     (p. ej. una medición que alguien propone pero aún no se acepta)
+ex:medicion2
+    a rdf:Statement ;
+    rdf:subject   ex:DatasetClientes ;
+    rdf:predicate ex:tieneExactitud ;
+    rdf:object    "0.60"^^xsd:decimal ;
+    dq:evaluadoPor     ex:AuditorExterno ;
+    dq:fechaEvaluacion "2026-09-30"^^xsd:date ;
+    dq:confianza       "0.40"^^xsd:decimal .
+
+# ---------------------------------------------------------------------
+# 3. Contenedores
+#    Se identifican con rdf:Bag, rdf:Seq o rdf:Alt y sus miembros con
+#    las propiedades rdf:_1, rdf:_2, rdf:_3...
+#
+#    Bag -> colección SIN orden, admite repetidos
+#    Seq -> colección CON orden
+#    Alt -> alternativas; el primer miembro (_1) es el valor por defecto
+#    Ojo: los contenedores son convención; RDF no impide añadir más
+#    miembros desde otro documento (las colecciones cerradas son las
+#    listas de la sección 4).
+# ---------------------------------------------------------------------
+
+# 3.a Bag: participantes de un espacio de datos (sin orden)
+ex:EspacioDeDatosDemo  ex:participantes  ex:bagParticipantes .
+ex:bagParticipantes
+    a rdf:Bag ;
+    rdf:_1 ex:Gonzalo ;
+    rdf:_2 ex:Lucia ;
+    rdf:_3 ex:HerramientaCalidad .
+
+# 3.b Seq: pasos ordenados de un pipeline de calidad
+ex:PipelineCalidad  ex:pasos  ex:seqPasos .
+ex:seqPasos
+    a rdf:Seq ;
+    rdf:_1 ex:Extraer ;
+    rdf:_2 ex:Perfilar ;
+    rdf:_3 ex:Validar ;
+    rdf:_4 ex:Publicar .
+
+# 3.c Alt: formatos de descarga alternativos (el primero es el preferido)
+ex:DatasetClientes  ex:formatosDisponibles  ex:altFormatos .
+ex:altFormatos
+    a rdf:Alt ;
+    rdf:_1 "CSV" ;
+    rdf:_2 "JSON" ;
+    rdf:_3 "Parquet" .
+
+# ---------------------------------------------------------------------
+# 4. Listas explícitas (colecciones cerradas)
+#    Es lo que Turtle genera por debajo cuando escribes ( a b c ).
+#    Aquí se escribe a mano para ver la estructura: cada celda tiene
+#    rdf:first (el elemento) y rdf:rest (el resto), y termina en rdf:nil.
+# ---------------------------------------------------------------------
+
+# 4.a Lista escrita a mano con nodos anónimos
+ex:DatasetClientes  ex:columnas  _:c1 .
+_:c1  rdf:first "id"        ;  rdf:rest _:c2 .
+_:c2  rdf:first "nombre"    ;  rdf:rest _:c3 .
+_:c3  rdf:first "email"     ;  rdf:rest rdf:nil .
+
+# 4.b La MISMA estructura con la sintaxis abreviada (genera 3 celdas más)
+ex:DatasetVentas  ex:columnas  ( "id_venta" "importe" "fecha" ) .
+
+# 4.c Listas anidadas: una lista cuyos elementos son otras listas
+ex:DatasetVentas  ex:restricciones  (
+    ( "importe" "mayor_que" "0" )
+    ( "fecha"   "no_nulo" )
+) .
+
+# ---------------------------------------------------------------------
+# 5. Valores estructurados con rdf:value
+#    Cuando el valor necesita más información (unidad, precisión...),
+#    se usa un nodo intermedio y rdf:value marca el valor "principal".
+# ---------------------------------------------------------------------
+ex:DatasetClientes
+    ex:tamano [
+        rdf:value "250"^^xsd:integer ;
+        ex:unidad ex:Megabyte
+    ] ;
+    ex:latenciaMedia [
+        rdf:value "1.8"^^xsd:decimal ;
+        ex:unidad ex:Segundo ;
+        ex:precision "0.1"^^xsd:decimal
+    ] .
+
+# ---------------------------------------------------------------------
+# 6. Literales con tipos propios de RDF
+# ---------------------------------------------------------------------
+
+# 6.a rdf:JSON  -> un documento JSON como literal
+ex:DatasetClientes  ex:esquema
+    """{"columnas":[{"nombre":"id","tipo":"integer"},{"nombre":"email","tipo":"string"}],"clave":"id"}"""^^rdf:JSON .
+
+# 6.b rdf:HTML  -> un fragmento HTML como literal
+ex:DatasetClientes  ex:notaHtml
+    "<p>Datos <strong>personales</strong>: consultar el RGPD.</p>"^^rdf:HTML .
+
+# 6.c rdf:XMLLiteral -> un fragmento XML bien formado como literal
+ex:DatasetClientes  ex:metadatosXml
+    "<meta><origen>CRM</origen><version>1.2</version></meta>"^^rdf:XMLLiteral .
+
+# 6.d rdf:langString -> es el tipo de dato implícito de todo literal con
+#     etiqueta de idioma. En Turtle NO se escribe ^^rdf:langString: basta
+#     con la etiqueta, y el procesador asigna el tipo internamente.
+ex:DatasetClientes  ex:alias  "Clientes"@es .

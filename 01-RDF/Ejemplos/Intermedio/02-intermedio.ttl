@@ -1,0 +1,107 @@
+# =====================================================================
+# 01-RDF · NIVEL INTERMEDIO
+# ---------------------------------------------------------------------
+# Objetivo: escribir RDF de forma expresiva y compacta, y usar los
+# distintos tipos de nodos y valores que ofrece el modelo:
+#
+#   - Abreviaturas de Turtle:  a   ;   ,   @base
+#   - Literales con tipo de dato (xsd) y con idioma (@es, @en...)
+#   - Nodos anónimos (blank nodes)
+#   - Colecciones ordenadas ( ... )
+#   - Literales multilínea y caracteres escapados
+#
+# Sigue siendo RDF puro: sin RDFS ni OWL.
+# =====================================================================
+
+@base   <http://example.org/lab/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex:  <http://example.org/lab/> .
+
+# ---------------------------------------------------------------------
+# 1. Abreviaturas
+#    "a"  es exactamente lo mismo que rdf:type
+#    ";"  repite el sujeto      (mismo sujeto, otro predicado)
+#    ","  repite sujeto+predicado (mismo sujeto y predicado, otro objeto)
+# ---------------------------------------------------------------------
+ex:Gonzalo
+    a ex:Persona ;
+    ex:nombre "Gonzalo" ;
+    ex:trabajaCon ex:Lucia ;
+    ex:estudia ex:EspaciosDeDatos , ex:CalidadDelDato , ex:GobiernoDelDato .
+
+# Un recurso puede tener varios tipos a la vez
+ex:Lucia
+    a ex:Persona , ex:Responsable ;
+    ex:nombre "Lucía" .
+
+# ---------------------------------------------------------------------
+# 2. Literales con tipo de dato
+#    Los números y booleanos sin comillas son atajos de Turtle:
+#      12500  -> xsd:integer      0.97 -> xsd:decimal
+#      3.2E-1 -> xsd:double       false -> xsd:boolean
+# ---------------------------------------------------------------------
+ex:DatasetClientes
+    a ex:Dataset ;
+    ex:numeroRegistros 12500 ;
+    ex:completitud 0.97 ;
+    ex:desviacion 3.2E-1 ;
+    ex:esPublico false ;
+    ex:fechaCreacion "2026-09-01"^^xsd:date ;
+    ex:ultimaActualizacion "2026-09-30T10:15:00Z"^^xsd:dateTime ;
+    ex:version "1.2"^^xsd:string .
+
+# ---------------------------------------------------------------------
+# 3. Literales con etiqueta de idioma
+#    Mismo predicado, un valor por idioma.
+# ---------------------------------------------------------------------
+ex:DatasetClientes
+    ex:titulo "Clientes"@es , "Customers"@en , "Kunden"@de .
+
+# ---------------------------------------------------------------------
+# 4. Nodos anónimos (blank nodes)
+#    Recursos sin IRI propia: existen solo dentro del grafo.
+# ---------------------------------------------------------------------
+
+# 4.a Sintaxis anidada con corchetes [ ... ]
+ex:DatasetClientes ex:licencia [
+    a ex:Licencia ;
+    ex:nombre "CC-BY 4.0" ;
+    ex:url <https://creativecommons.org/licenses/by/4.0/>
+] .
+
+# 4.b Nodo anónimo con etiqueta local (_:) para poder referenciarlo
+#     desde varios sitios dentro del mismo documento.
+_:auditoria1
+    a ex:Auditoria ;
+    ex:realizadaSobre ex:DatasetClientes ;
+    ex:resultado "aprobada" ;
+    ex:fecha "2026-09-15"^^xsd:date .
+
+ex:Lucia    ex:participaEn _:auditoria1 .
+ex:Gonzalo  ex:participaEn _:auditoria1 .
+
+# ---------------------------------------------------------------------
+# 5. Colecciones ordenadas ( ... )
+#    Turtle las expande internamente a una lista enlazada con
+#    rdf:first / rdf:rest / rdf:nil (se ve en el nivel avanzado).
+# ---------------------------------------------------------------------
+ex:DatasetClientes ex:columnas ( "id" "nombre" "email" "fecha_alta" ) .
+
+# Una colección vacía es rdf:nil
+ex:DatasetVentas ex:etiquetas () .
+
+# ---------------------------------------------------------------------
+# 6. Literales largos (triple comilla) y caracteres escapados
+# ---------------------------------------------------------------------
+ex:DatasetClientes ex:descripcion """Listado de clientes activos.
+Incluye datos de contacto y fecha de alta.
+Se actualiza a diario.""" .
+
+ex:Nota ex:texto "Dijo: \"hola\"\ty cerró con una ñ y un acento: é" .
+
+# ---------------------------------------------------------------------
+# 7. IRIs relativas (resueltas contra @base)
+#    <Lucia> == <http://example.org/lab/Lucia> == ex:Lucia
+# ---------------------------------------------------------------------
+<Lucia> ex:apodo "Lu" .

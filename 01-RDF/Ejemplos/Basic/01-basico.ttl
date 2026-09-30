@@ -1,0 +1,42 @@
+# =====================================================================
+# 01-RDF · NIVEL BÁSICO
+# ---------------------------------------------------------------------
+# Objetivo: entender la unidad mínima de RDF, la TRIPLE:
+#
+#       sujeto  ──predicado──▶  objeto
+#
+# Solo se usa RDF puro (rdf:type). No hay RDFS ni OWL:
+# las clases (ex:Persona, ex:Dataset...) NO se declaran, simplemente
+# se usan como IRIs. Declararlas sería vocabulario RDFS.
+#
+# Regla de este nivel: UNA triple por línea, sin abreviaturas.
+# =====================================================================
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ex:  <http://example.org/lab/> .
+
+# ---------------------------------------------------------------------
+# 1. Tipos: "X es un Y"  (rdf:type)
+# ---------------------------------------------------------------------
+ex:Gonzalo         rdf:type ex:Persona .
+ex:Lucia           rdf:type ex:Persona .
+ex:DatasetClientes rdf:type ex:Dataset .
+ex:DatasetVentas   rdf:type ex:Dataset .
+
+# ---------------------------------------------------------------------
+# 2. Relaciones entre recursos (objeto = otro recurso IRI)
+# ---------------------------------------------------------------------
+ex:Gonzalo       ex:trabajaCon       ex:Lucia .
+ex:Gonzalo       ex:haCreado         ex:DatasetClientes .
+ex:Lucia         ex:esResponsableDe  ex:DatasetVentas .
+ex:DatasetVentas ex:derivadoDe       ex:DatasetClientes .
+
+# ---------------------------------------------------------------------
+# 3. Propiedades con valores literales (objeto = texto o número simple)
+# ---------------------------------------------------------------------
+ex:Gonzalo         ex:nombre  "Gonzalo" .
+ex:Lucia           ex:nombre  "Lucía" .
+ex:DatasetClientes ex:formato "CSV" .
+ex:DatasetVentas   ex:formato "JSON" .
+ex:DatasetClientes ex:titulo  "Clientes" .
+ex:DatasetVentas   ex:titulo  "Ventas" .
