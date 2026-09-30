@@ -1,0 +1,110 @@
+{
+  "@context": {
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "ex": "http://example.org/universidad/",
+    "label": "rdfs:label",
+    "comment": "rdfs:comment",
+    "type": "rdf:type",
+    "subClassOf": "rdfs:subClassOf",
+    "subPropertyOf": "rdfs:subPropertyOf",
+    "domain": "rdfs:domain",
+    "range": "rdfs:range",
+    "Persona": "ex:Persona",
+    "Estudiante": "ex:Estudiante",
+    "Profesor": "ex:Profesor",
+    "Asignatura": "ex:Asignatura",
+    "Universidad": "ex:Universidad",
+    "estudia": "ex:estudia",
+    "imparte": "ex:imparte",
+    "perteneceA": "ex:perteneceA",
+    "estudiaAsignatura": "ex:estudiaAsignatura",
+    "RDFyRDFS": "ex:RDFyRDFS",
+    "UCLM": "ex:UCLM"
+  },
+  "@graph": [
+    {
+      "@id": "ex:Persona",
+      "@type": "rdfs:Class",
+      "label": {"@value": "Persona", "@language": "es"},
+      "comment": {"@value": "Persona relacionada con la universidad.", "@language": "es"}
+    },
+    {
+      "@id": "ex:Estudiante",
+      "@type": "rdfs:Class",
+      "subClassOf": {"@id": "ex:Persona"},
+      "label": {"@value": "Estudiante", "@language": "es"}
+    },
+    {
+      "@id": "ex:Profesor",
+      "@type": "rdfs:Class",
+      "subClassOf": {"@id": "ex:Persona"},
+      "label": {"@value": "Profesor", "@language": "es"}
+    },
+    {
+      "@id": "ex:Asignatura",
+      "@type": "rdfs:Class",
+      "label": {"@value": "Asignatura", "@language": "es"}
+    },
+    {
+      "@id": "ex:Universidad",
+      "@type": "rdfs:Class",
+      "label": {"@value": "Universidad", "@language": "es"}
+    },
+    {
+      "@id": "ex:estudia",
+      "@type": "rdf:Property",
+      "domain": {"@id": "ex:Estudiante"},
+      "range": {"@id": "ex:Asignatura"},
+      "label": {"@value": "estudia", "@language": "es"},
+      "comment": {"@value": "Relaciona un estudiante con una asignatura.", "@language": "es"}
+    },
+    {
+      "@id": "ex:imparte",
+      "@type": "rdf:Property",
+      "domain": {"@id": "ex:Profesor"},
+      "range": {"@id": "ex:Asignatura"},
+      "label": {"@value": "imparte", "@language": "es"},
+      "comment": {"@value": "Relaciona un profesor con una asignatura que imparte.", "@language": "es"}
+    },
+    {
+      "@id": "ex:perteneceA",
+      "@type": "rdf:Property",
+      "domain": {"@id": "ex:Persona"},
+      "range": {"@id": "ex:Universidad"},
+      "label": {"@value": "pertenece a", "@language": "es"}
+    },
+    {
+      "@id": "ex:estudiaAsignatura",
+      "@type": "rdf:Property",
+      "subPropertyOf": {"@id": "ex:estudia"},
+      "domain": {"@id": "ex:Estudiante"},
+      "range": {"@id": "ex:Asignatura"},
+      "label": {"@value": "estudia una asignatura", "@language": "es"}
+    },
+    {
+      "@id": "ex:Gonzalo",
+      "@type": "ex:Estudiante",
+      "label": {"@value": "Gonzalo", "@language": "es"},
+      "ex:estudiaAsignatura": {"@id": "ex:RDFyRDFS"},
+      "ex:perteneceA": {"@id": "ex:UCLM"}
+    },
+    {
+      "@id": "ex:Ana",
+      "@type": "ex:Profesor",
+      "label": {"@value": "Ana", "@language": "es"},
+      "ex:imparte": {"@id": "ex:RDFyRDFS"},
+      "ex:perteneceA": {"@id": "ex:UCLM"}
+    },
+    {
+      "@id": "ex:RDFyRDFS",
+      "@type": "ex:Asignatura",
+      "label": {"@value": "RDF y RDFS", "@language": "es"}
+    },
+    {
+      "@id": "ex:UCLM",
+      "@type": "ex:Universidad",
+      "label": {"@value": "Universidad de Castilla-La Mancha", "@language": "es"}
+    }
+  ]
+}

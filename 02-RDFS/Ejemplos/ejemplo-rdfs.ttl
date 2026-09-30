@@ -1,0 +1,86 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex:   <http://example.org/universidad/> .
+
+# -------------------------
+# Clases
+# -------------------------
+
+ex:Persona
+    a rdfs:Class ;
+    rdfs:label "Persona"@es ;
+    rdfs:comment "Persona relacionada con la universidad."@es .
+
+ex:Estudiante
+    a rdfs:Class ;
+    rdfs:subClassOf ex:Persona ;
+    rdfs:label "Estudiante"@es .
+
+ex:Profesor
+    a rdfs:Class ;
+    rdfs:subClassOf ex:Persona ;
+    rdfs:label "Profesor"@es .
+
+ex:Asignatura
+    a rdfs:Class ;
+    rdfs:label "Asignatura"@es .
+
+ex:Universidad
+    a rdfs:Class ;
+    rdfs:label "Universidad"@es .
+
+# -------------------------
+# Propiedades
+# -------------------------
+
+ex:estudia
+    a rdf:Property ;
+    rdfs:domain ex:Estudiante ;
+    rdfs:range ex:Asignatura ;
+    rdfs:label "estudia"@es ;
+    rdfs:comment "Relaciona un estudiante con una asignatura."@es .
+
+ex:imparte
+    a rdf:Property ;
+    rdfs:domain ex:Profesor ;
+    rdfs:range ex:Asignatura ;
+    rdfs:label "imparte"@es ;
+    rdfs:comment "Relaciona un profesor con una asignatura que imparte."@es .
+
+ex:perteneceA
+    a rdf:Property ;
+    rdfs:domain ex:Persona ;
+    rdfs:range ex:Universidad ;
+    rdfs:label "pertenece a"@es .
+
+ex:estudiaAsignatura
+    a rdf:Property ;
+    rdfs:subPropertyOf ex:estudia ;
+    rdfs:domain ex:Estudiante ;
+    rdfs:range ex:Asignatura ;
+    rdfs:label "estudia una asignatura"@es .
+
+# -------------------------
+# Instancias
+# -------------------------
+
+ex:Gonzalo
+    a ex:Estudiante ;
+    rdfs:label "Gonzalo"@es ;
+    ex:estudiaAsignatura ex:RDFyRDFS ;
+    ex:perteneceA ex:UCLM .
+
+ex:Ana
+    a ex:Profesor ;
+    rdfs:label "Ana"@es ;
+    ex:imparte ex:RDFyRDFS ;
+    ex:perteneceA ex:UCLM .
+
+ex:RDFyRDFS
+    a ex:Asignatura ;
+    rdfs:label "RDF y RDFS"@es .
+
+ex:UCLM
+    a ex:Universidad ;
+    rdfs:label "Universidad de Castilla-La Mancha"@es .

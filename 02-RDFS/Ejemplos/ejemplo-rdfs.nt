@@ -1,0 +1,44 @@
+<http://example.org/universidad/Persona> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://example.org/universidad/Persona> <http://www.w3.org/2000/01/rdf-schema#label> "Persona"@es .
+<http://example.org/universidad/Persona> <http://www.w3.org/2000/01/rdf-schema#comment> "Persona relacionada con la universidad."@es .
+<http://example.org/universidad/Estudiante> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://example.org/universidad/Estudiante> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://example.org/universidad/Persona> .
+<http://example.org/universidad/Estudiante> <http://www.w3.org/2000/01/rdf-schema#label> "Estudiante"@es .
+<http://example.org/universidad/Profesor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://example.org/universidad/Profesor> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://example.org/universidad/Persona> .
+<http://example.org/universidad/Profesor> <http://www.w3.org/2000/01/rdf-schema#label> "Profesor"@es .
+<http://example.org/universidad/Asignatura> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://example.org/universidad/Asignatura> <http://www.w3.org/2000/01/rdf-schema#label> "Asignatura"@es .
+<http://example.org/universidad/Universidad> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://example.org/universidad/Universidad> <http://www.w3.org/2000/01/rdf-schema#label> "Universidad"@es .
+<http://example.org/universidad/estudia> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://example.org/universidad/estudia> <http://www.w3.org/2000/01/rdf-schema#domain> <http://example.org/universidad/Estudiante> .
+<http://example.org/universidad/estudia> <http://www.w3.org/2000/01/rdf-schema#range> <http://example.org/universidad/Asignatura> .
+<http://example.org/universidad/estudia> <http://www.w3.org/2000/01/rdf-schema#label> "estudia"@es .
+<http://example.org/universidad/estudia> <http://www.w3.org/2000/01/rdf-schema#comment> "Relaciona un estudiante con una asignatura."@es .
+<http://example.org/universidad/imparte> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://example.org/universidad/imparte> <http://www.w3.org/2000/01/rdf-schema#domain> <http://example.org/universidad/Profesor> .
+<http://example.org/universidad/imparte> <http://www.w3.org/2000/01/rdf-schema#range> <http://example.org/universidad/Asignatura> .
+<http://example.org/universidad/imparte> <http://www.w3.org/2000/01/rdf-schema#label> "imparte"@es .
+<http://example.org/universidad/imparte> <http://www.w3.org/2000/01/rdf-schema#comment> "Relaciona un profesor con una asignatura que imparte."@es .
+<http://example.org/universidad/perteneceA> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Property> .
+<http://example.org/universidad/perteneceA> <http://www.w3.org/2000/01/rdf-schema#domain> <http://example.org/universidad/Persona> .
+<http://example.org/universidad/perteneceA> <http://www.w3.org/2000/01/rdf-schema#range> <http://example.org/universidad/Universidad> .
+<http://example.org/universidad/perteneceA> <http://www.w3.org/2000/01/rdf-schema#label> "pertenece a"@es .
+<http://example.org/universidad/estudiaAsignatura> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Property> .
+<http://example.org/universidad/estudiaAsignatura> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://example.org/universidad/estudia> .
+<http://example.org/universidad/estudiaAsignatura> <http://www.w3.org/2000/01/rdf-schema#domain> <http://example.org/universidad/Estudiante> .
+<http://example.org/universidad/estudiaAsignatura> <http://www.w3.org/2000/01/rdf-schema#range> <http://example.org/universidad/Asignatura> .
+<http://example.org/universidad/estudiaAsignatura> <http://www.w3.org/2000/01/rdf-schema#label> "estudia una asignatura"@es .
+<http://example.org/universidad/Gonzalo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/universidad/Estudiante> .
+<http://example.org/universidad/Gonzalo> <http://www.w3.org/2000/01/rdf-schema#label> "Gonzalo"@es .
+<http://example.org/universidad/Gonzalo> <http://example.org/universidad/estudiaAsignatura> <http://example.org/universidad/RDFyRDFS> .
+<http://example.org/universidad/Gonzalo> <http://example.org/universidad/perteneceA> <http://example.org/universidad/UCLM> .
+<http://example.org/universidad/Ana> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/universidad/Profesor> .
+<http://example.org/universidad/Ana> <http://www.w3.org/2000/01/rdf-schema#label> "Ana"@es .
+<http://example.org/universidad/Ana> <http://example.org/universidad/imparte> <http://example.org/universidad/RDFyRDFS> .
+<http://example.org/universidad/Ana> <http://example.org/universidad/perteneceA> <http://example.org/universidad/UCLM> .
+<http://example.org/universidad/RDFyRDFS> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/universidad/Asignatura> .
+<http://example.org/universidad/RDFyRDFS> <http://www.w3.org/2000/01/rdf-schema#label> "RDF y RDFS"@es .
+<http://example.org/universidad/UCLM> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/universidad/Universidad> .
+<http://example.org/universidad/UCLM> <http://www.w3.org/2000/01/rdf-schema#label> "Universidad de Castilla-La Mancha"@es .
