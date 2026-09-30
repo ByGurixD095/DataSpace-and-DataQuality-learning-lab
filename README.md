@@ -124,7 +124,7 @@ flowchart LR
 
 | # | Área | Estado |
 |:-:|:-----|:------:|
-| 01 | RDF | 🚧 |
+| 01 | RDF | ✅ |
 | 02 | RDFS | 🚧 |
 | 03 | OWL | 🚧 |
 | 04 | SPARQL | 🔜 |
