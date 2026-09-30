@@ -90,31 +90,6 @@ Gonzalo ──trabajaCon──▶ Lucia ──esResponsableDe──▶ DatasetVe
 
 **Enlace con calidad del dato:** la reificación de este nivel es la base de anotar mediciones de calidad (valor medido, herramienta, fecha, confianza), algo que se retoma en `08-Data-Quality`.
 
----
-
-## Cómo validar y explorar los grafos
-
-**Con Python (rdflib):**
-
-```bash
-pip install rdflib
-```
-
-```python
-from rdflib import Graph
-
-g = Graph()
-g.parse("01-basico.ttl", format="turtle")
-print(len(g), "triples")
-
-for s, p, o in g:
-    print(s, p, o)
-```
-
-**Otras opciones**
-- `rapper -i turtle -c 01-basico.ttl` (Raptor) para comprobar la sintaxis desde terminal.
-- Visualizadores online de grafos RDF, pegando el contenido del `.ttl`, para ver los nodos y aristas.
-- Serializar a otro formato: `g.serialize(format="xml")` para ver el mismo grafo en RDF/XML.
 
 ## Ejercicios propuestos
 
