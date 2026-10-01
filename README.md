@@ -126,8 +126,8 @@ flowchart LR
 |:-:|:-----|:------:|
 | 01 | RDF | ✅ |
 | 02 | RDFS | ✅ |
-| 03 | OWL | 🚧 |
-| 04 | SPARQL | 🔜 |
+| 03 | OWL | ✅ |
+| 04 | SPARQL | 🚧 |
 | 05 | SHACL | 🔜 |
 | 06 | JSON-LD | 🔜 |
 | 07 | DCAT | 🔜 |
