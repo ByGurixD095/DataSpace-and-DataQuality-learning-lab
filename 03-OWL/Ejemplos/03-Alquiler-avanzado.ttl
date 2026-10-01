@@ -1,0 +1,268 @@
+# =====================================================================
+# NIVEL AVANZADO · ALQUILER DE COCHES (≈ ESPACIO DE DATOS)
+# Analogía: alquilar un coche entre particulares/empresas es lo mismo
+#           que compartir datos en un Espacio de Datos:
+#
+#   Propietario   ≈ Data Provider        Vehículo   ≈ Data Asset (dcat:Dataset)
+#   Arrendatario  ≈ Data Consumer        Oferta     ≈ Oferta en el catálogo (odrl:Offer)
+#   Política      ≈ odrl:Policy          Contrato   ≈ Contract Agreement (EDC)
+#   Permiso/Prohibición/Obligación ≈ odrl:Permission / Prohibition / Duty
+#
+# Se aprende: cadenas de propiedades, cardinalidad cualificada,
+#   unión disjunta, complemento, hasValue, enumeraciones, claves,
+#   datatypes restringidos, propiedades asimétricas/irreflexivas y
+#   propiedades disjuntas.
+# =====================================================================
+
+@prefix :     <http://example.org/alquiler#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+
+<http://example.org/alquiler> a owl:Ontology ;
+    rdfs:label "Alquiler de coches (nivel avanzado)"@es ;
+    rdfs:comment "Ontología avanzada con razonamiento: modela el ciclo oferta → política → contrato como en un Espacio de Datos."@es ;
+    owl:versionInfo "1.0" .
+
+# ---------------------------------------------------------------------
+# PARTICIPANTES  (tipos vs. roles)
+# ---------------------------------------------------------------------
+
+:PersonaFisica a owl:Class ; rdfs:label "Persona física"@es .
+:Empresa       a owl:Class ; rdfs:label "Empresa"@es .
+
+[] a owl:AllDisjointClasses ; owl:members ( :PersonaFisica :Empresa ) .
+
+# Participante = unión de los dos tipos posibles (clase cubierta)
+:Participante a owl:Class ;
+    rdfs:label "Participante"@es ;
+    owl:equivalentClass [ a owl:Class ; owl:unionOf ( :PersonaFisica :Empresa ) ] .
+
+# Los ROLES no son disjuntos: una empresa puede alquilar y ser alquilada.
+:Propietario a owl:Class ;
+    rdfs:subClassOf :Participante ;
+    rdfs:label "Propietario"@es ;
+    rdfs:seeAlso <http://www.w3.org/ns/odrl/2/Party> ;
+    rdfs:comment "Rol de quien ofrece el vehículo (≈ Data Provider)."@es .
+
+:Arrendatario a owl:Class ;
+    rdfs:subClassOf :Participante ;
+    rdfs:label "Arrendatario"@es ;
+    rdfs:seeAlso <http://www.w3.org/ns/odrl/2/Party> ;
+    rdfs:comment "Rol de quien usa el vehículo (≈ Data Consumer)."@es .
+
+# ---------------------------------------------------------------------
+# VEHÍCULOS  (≈ activos de datos)
+# ---------------------------------------------------------------------
+
+# Unión disjunta: todo vehículo es EXACTAMENTE uno de estos tipos.
+:Vehiculo a owl:Class ;
+    rdfs:label "Vehículo"@es ;
+    rdfs:seeAlso dcat:Dataset ;
+    owl:hasKey ( :matricula ) ;                        # la matrícula identifica al vehículo
+    owl:disjointUnionOf ( :Turismo :Furgoneta :Moto ) .
+
+:Turismo   a owl:Class ; rdfs:label "Turismo"@es .
+:Furgoneta a owl:Class ; rdfs:label "Furgoneta"@es .
+:Moto      a owl:Class ; rdfs:label "Moto"@es .
+
+# ---------------------------------------------------------------------
+# POLÍTICAS Y REGLAS  (≈ ODRL)
+# ---------------------------------------------------------------------
+
+:Politica a owl:Class ;
+    rdfs:label "Política de uso"@es ;
+    rdfs:seeAlso odrl:Policy ;
+    rdfs:comment "Condiciones del alquiler: lo que se puede, no se puede y se debe hacer."@es ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty :tieneRegla ; owl:someValuesFrom :Regla ] .
+
+:Regla a owl:Class ;
+    rdfs:label "Regla"@es ;
+    owl:disjointUnionOf ( :Permiso :Prohibicion :Obligacion ) .
+
+:Permiso     a owl:Class ; rdfs:label "Permiso"@es     ; rdfs:seeAlso odrl:Permission .
+:Prohibicion a owl:Class ; rdfs:label "Prohibición"@es ; rdfs:seeAlso odrl:Prohibition .
+:Obligacion  a owl:Class ; rdfs:label "Obligación"@es  ; rdfs:seeAlso odrl:Duty .
+
+# ---------------------------------------------------------------------
+# OFERTA Y CONTRATO
+# ---------------------------------------------------------------------
+
+:Oferta a owl:Class ;
+    rdfs:label "Oferta"@es ;
+    rdfs:seeAlso odrl:Offer ;
+    rdfs:comment "Un vehículo + una política + un precio, publicados por un propietario."@es ;
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty :ofertaSobreVehiculo ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass :Vehiculo ] ,   # exactamente 1 vehículo
+        [ a owl:Restriction ; owl:onProperty :tienePolitica ; owl:someValuesFrom :Politica ] ,
+        [ a owl:Restriction ; owl:onProperty :ofrecidaPor ;   owl:someValuesFrom :Propietario ] .
+
+:EstadoContrato a owl:Class ;
+    rdfs:label "Estado del contrato"@es ;
+    owl:equivalentClass [ a owl:Class ; owl:oneOf ( :Borrador :Vigente :Finalizado ) ] .
+
+:ContratoAlquiler a owl:Class ;
+    rdfs:label "Contrato de alquiler"@es ;
+    rdfs:seeAlso odrl:Agreement ;
+    rdfs:comment "Acuerdo firmado: un propietario, un arrendatario y una oferta (≈ Contract Agreement)."@es ;
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty :tienePropietario ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass :Propietario ] ,
+        [ a owl:Restriction ; owl:onProperty :tieneArrendatario ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass :Arrendatario ] ,
+        [ a owl:Restriction ; owl:onProperty :contratoDeOferta ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ; owl:onClass :Oferta ] .
+
+# Clase definida con hasValue: contrato cuyo estado ES "Vigente"
+:ContratoVigente a owl:Class ;
+    rdfs:label "Contrato vigente"@es ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :ContratoAlquiler
+            [ a owl:Restriction ; owl:onProperty :estado ; owl:hasValue :Vigente ]
+        )
+    ] .
+
+# Clase definida con complemento: vehículo que NO está en ningún contrato vigente.
+# (Con mundo abierto, el razonador solo la deduce si se "cierra" el conocimiento.)
+:VehiculoDisponible a owl:Class ;
+    rdfs:label "Vehículo disponible"@es ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Vehiculo
+            [ a owl:Class ;
+              owl:complementOf [ a owl:Restriction ; owl:onProperty :alquiladoEn ;
+                                 owl:someValuesFrom :ContratoVigente ] ]
+        )
+    ] .
+
+# ---------------------------------------------------------------------
+# PROPIEDADES DE OBJETO BÁSICAS
+# ---------------------------------------------------------------------
+
+:ofrece a owl:ObjectProperty ;
+    rdfs:domain :Propietario ; rdfs:range :Oferta ; owl:inverseOf :ofrecidaPor .
+:ofrecidaPor a owl:ObjectProperty ;
+    rdfs:domain :Oferta ; rdfs:range :Propietario .
+
+:ofertaSobreVehiculo a owl:ObjectProperty ;
+    rdfs:domain :Oferta ; rdfs:range :Vehiculo .
+
+:tienePolitica a owl:ObjectProperty ;
+    rdfs:domain :Oferta ; rdfs:range :Politica .
+
+:tieneRegla a owl:ObjectProperty ;
+    rdfs:domain :Politica ; rdfs:range :Regla .
+
+:contratoDeOferta a owl:ObjectProperty ;
+    rdfs:domain :ContratoAlquiler ; rdfs:range :Oferta .
+
+:tienePropietario a owl:ObjectProperty ;
+    rdfs:domain :ContratoAlquiler ; rdfs:range :Propietario ;
+    owl:propertyDisjointWith :tieneArrendatario .       # propietario y arrendatario son roles distintos dentro del mismo contrato
+
+:tieneArrendatario a owl:ObjectProperty ;
+    rdfs:domain :ContratoAlquiler ; rdfs:range :Arrendatario .
+
+:firmaContrato a owl:ObjectProperty ;
+    rdfs:domain :Arrendatario ; rdfs:range :ContratoAlquiler ;
+    owl:inverseOf :tieneArrendatario .
+
+:estado a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain :ContratoAlquiler ; rdfs:range :EstadoContrato .
+
+# Un contrato renueva a otro anterior: nunca a sí mismo, nunca en ambos sentidos.
+:renuevaA a owl:ObjectProperty , owl:AsymmetricProperty , owl:IrreflexiveProperty ;
+    rdfs:domain :ContratoAlquiler ; rdfs:range :ContratoAlquiler .
+
+# ---------------------------------------------------------------------
+# CADENAS DE PROPIEDADES  (el razonador "camina" por el grafo)
+# ---------------------------------------------------------------------
+
+# Arrendatario → (firma) Contrato → (de) Oferta → (sobre) Vehículo  ⟹  puedeUsar
+:puedeUsar a owl:ObjectProperty ;
+    rdfs:label "puede usar"@es ;
+    rdfs:domain :Arrendatario ; rdfs:range :Vehiculo ;
+    owl:propertyChainAxiom ( :firmaContrato :contratoDeOferta :ofertaSobreVehiculo ) .
+
+# Arrendatario → (firma) Contrato → (tiene propietario) Propietario  ⟹  contrataCon
+:contrataCon a owl:ObjectProperty ;
+    rdfs:label "contrata con"@es ;
+    rdfs:domain :Arrendatario ; rdfs:range :Propietario ;
+    owl:propertyChainAxiom ( :firmaContrato :tienePropietario ) .
+
+# Vehículo → (inverso de oferta-sobre) Oferta → (inverso de contrato-de) Contrato  ⟹  alquiladoEn
+:alquiladoEn a owl:ObjectProperty ;
+    rdfs:label "alquilado en"@es ;
+    rdfs:domain :Vehiculo ; rdfs:range :ContratoAlquiler ;
+    owl:propertyChainAxiom ( [ owl:inverseOf :ofertaSobreVehiculo ] [ owl:inverseOf :contratoDeOferta ] ) .
+
+# ---------------------------------------------------------------------
+# PROPIEDADES DE DATO Y DATATYPE RESTRINGIDO
+# ---------------------------------------------------------------------
+
+# Datatype propio: decimal estrictamente mayor que 0
+:PrecioPositivo a rdfs:Datatype ;
+    owl:onDatatype xsd:decimal ;
+    owl:withRestrictions ( [ xsd:minExclusive "0"^^xsd:decimal ] ) .
+
+:precioDiario a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain :Oferta ; rdfs:range :PrecioPositivo .
+
+:matricula a owl:DatatypeProperty ;
+    rdfs:domain :Vehiculo ; rdfs:range xsd:string .
+
+:descripcion a owl:DatatypeProperty ;
+    rdfs:domain :Regla ; rdfs:range xsd:string .
+
+:fechaInicio a owl:DatatypeProperty ;
+    rdfs:domain :ContratoAlquiler ; rdfs:range xsd:date .
+
+# ---------------------------------------------------------------------
+# INDIVIDUOS
+# ---------------------------------------------------------------------
+
+:Borrador   a :EstadoContrato .
+:Vigente    a :EstadoContrato .
+:Finalizado a :EstadoContrato .
+
+:Lucia a :PersonaFisica , :Propietario .
+:Marco a :PersonaFisica , :Arrendatario .
+
+:SeatIbiza a :Turismo ; :matricula "1234ABC" .
+
+:Politica001 a :Politica ;
+    :tieneRegla :ReglaUso , :ReglaNoSubarrendar , :ReglaDevolverLleno .
+
+:ReglaUso            a :Permiso     ; :descripcion "Conducir dentro de la UE." .
+:ReglaNoSubarrendar  a :Prohibicion ; :descripcion "No subarrendar el vehículo." .
+:ReglaDevolverLleno  a :Obligacion  ; :descripcion "Devolver con el depósito lleno." .
+
+:Oferta001 a :Oferta ;
+    :ofrecidaPor :Lucia ;
+    :ofertaSobreVehiculo :SeatIbiza ;
+    :tienePolitica :Politica001 ;
+    :precioDiario "35.00"^^xsd:decimal .
+
+:Contrato001 a :ContratoAlquiler ;
+    :tienePropietario :Lucia ;
+    :tieneArrendatario :Marco ;
+    :contratoDeOferta :Oferta001 ;
+    :estado :Vigente ;
+    :fechaInicio "2026-10-01"^^xsd:date .
+
+# Un razonador debería inferir:
+#   :Marco :puedeUsar :SeatIbiza          (cadena puedeUsar)
+#   :Marco :contrataCon :Lucia            (cadena contrataCon)
+#   :SeatIbiza :alquiladoEn :Contrato001  (cadena alquiladoEn)
+#   :Contrato001 a :ContratoVigente       (hasValue)
+#   :Lucia :ofrece :Oferta001             (inversa)
+
+[] a owl:AllDifferent ;
+   owl:distinctMembers ( :Borrador :Vigente :Finalizado :Lucia :Marco :SeatIbiza ) .

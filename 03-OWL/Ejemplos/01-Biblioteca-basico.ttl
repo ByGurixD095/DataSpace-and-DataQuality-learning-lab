@@ -1,0 +1,99 @@
+# =====================================================================
+# NIVEL BÁSICO · BIBLIOTECA
+# Analogía: la biblioteca del barrio (libros, autores, socios, préstamos).
+# Se aprende: clases, subclases, propiedades de objeto y de dato,
+#             domain/range, inversas, disjunción e individuos.
+# =====================================================================
+
+@prefix :     <http://example.org/biblioteca#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/biblioteca> a owl:Ontology ;
+    rdfs:label "Biblioteca (nivel básico)"@es ;
+    rdfs:comment "Ontología mínima para entender qué es una clase, una propiedad y un individuo."@es ;
+    owl:versionInfo "1.0" .
+
+# ---------------------------------------------------------------------
+# CLASES  (≈ los tipos de fichas del archivo de la biblioteca)
+# ---------------------------------------------------------------------
+
+:Persona a owl:Class ;
+    rdfs:label "Persona"@es ;
+    rdfs:comment "Cualquier persona que aparece en la biblioteca."@es .
+
+:Autor a owl:Class ;
+    rdfs:subClassOf :Persona ;                      # todo Autor ES una Persona
+    rdfs:label "Autor"@es ;
+    rdfs:comment "Persona que ha escrito libros."@es .
+
+:Socio a owl:Class ;
+    rdfs:subClassOf :Persona ;
+    rdfs:label "Socio"@es ;
+    rdfs:comment "Persona con carné de la biblioteca."@es .
+
+:Libro a owl:Class ;
+    rdfs:label "Libro"@es ;
+    rdfs:comment "Obra publicada que se puede prestar."@es ;
+    owl:disjointWith :Persona .                     # un Libro nunca es una Persona
+
+# ---------------------------------------------------------------------
+# PROPIEDADES DE OBJETO  (≈ verbos que unen dos cosas)
+# ---------------------------------------------------------------------
+
+:escribio a owl:ObjectProperty ;
+    rdfs:label "escribió"@es ;
+    rdfs:domain :Autor ;                            # sale de un Autor...
+    rdfs:range  :Libro ;                            # ...y llega a un Libro
+    owl:inverseOf :escritoPor .
+
+:escritoPor a owl:ObjectProperty ;
+    rdfs:label "escrito por"@es ;
+    rdfs:domain :Libro ;
+    rdfs:range  :Autor .
+
+:tomaPrestado a owl:ObjectProperty ;
+    rdfs:label "toma prestado"@es ;
+    rdfs:domain :Socio ;
+    rdfs:range  :Libro .
+
+# ---------------------------------------------------------------------
+# PROPIEDADES DE DATO  (≈ los campos rellenos en la ficha)
+# ---------------------------------------------------------------------
+
+:nombre a owl:DatatypeProperty ;
+    rdfs:domain :Persona ;
+    rdfs:range  xsd:string .
+
+:titulo a owl:DatatypeProperty ;
+    rdfs:domain :Libro ;
+    rdfs:range  xsd:string .
+
+:anioPublicacion a owl:DatatypeProperty ;
+    rdfs:domain :Libro ;
+    rdfs:range  xsd:gYear .
+
+:numeroSocio a owl:DatatypeProperty ;
+    rdfs:domain :Socio ;
+    rdfs:range  xsd:integer .
+
+# ---------------------------------------------------------------------
+# INDIVIDUOS  (≈ las fichas reales: este libro, esta persona)
+# ---------------------------------------------------------------------
+
+:Cervantes a :Autor ;
+    :nombre "Miguel de Cervantes" ;
+    :escribio :DonQuijote .
+
+:DonQuijote a :Libro ;
+    :titulo "Don Quijote de la Mancha" ;
+    :anioPublicacion "1605"^^xsd:gYear .
+    # Inferencia: :DonQuijote :escritoPor :Cervantes (por la inversa).
+
+:Ana a :Socio ;
+    :nombre "Ana" ;
+    :numeroSocio 1 ;
+    :tomaPrestado :DonQuijote .
+    # Inferencia: :Ana también es :Persona (por subClassOf).

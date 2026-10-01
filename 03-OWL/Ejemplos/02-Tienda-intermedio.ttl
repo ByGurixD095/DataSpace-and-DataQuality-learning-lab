@@ -1,0 +1,172 @@
+# =====================================================================
+# NIVEL INTERMEDIO · TIENDA ONLINE
+# Analogía: un pedido de e-commerce (cliente, ticket con líneas,
+#           productos, categorías, estado del envío).
+# Se aprende: características de propiedades (funcional, transitiva,
+#             simétrica), restricciones (some, cardinalidad), clases
+#             definidas, enumeraciones, claves y N-arias (LineaPedido).
+# =====================================================================
+
+@prefix :     <http://example.org/tienda#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/tienda> a owl:Ontology ;
+    rdfs:label "Tienda online (nivel intermedio)"@es ;
+    rdfs:comment "Ontología para aprender restricciones, características de propiedades y clases definidas."@es ;
+    owl:versionInfo "1.0" .
+
+# ---------------------------------------------------------------------
+# CLASES
+# ---------------------------------------------------------------------
+
+:Cliente a owl:Class ;
+    rdfs:label "Cliente"@es ;
+    rdfs:comment "Quien compra. Se identifica por su email (ver owl:hasKey)."@es ;
+    owl:hasKey ( :email ) .                         # ≈ el email es único, como un DNI
+
+:Producto a owl:Class ;
+    rdfs:label "Producto"@es .
+
+:ProductoFisico a owl:Class ;
+    rdfs:subClassOf :Producto ;
+    rdfs:label "Producto físico"@es ;
+    owl:disjointWith :ProductoDigital .             # o es físico o es digital, no ambos
+
+:ProductoDigital a owl:Class ;
+    rdfs:subClassOf :Producto ;
+    rdfs:label "Producto digital"@es .
+
+:Categoria a owl:Class ;
+    rdfs:label "Categoría"@es ;
+    rdfs:comment "Como las secciones de unos grandes almacenes: Tecnología > Informática > Portátiles."@es .
+
+# Pedido = el ticket completo. Restricciones con cardinalidad:
+:Pedido a owl:Class ;
+    rdfs:label "Pedido"@es ;
+    rdfs:comment "Un pedido sin líneas no es un pedido; tiene un cliente y exactamente un estado."@es ;
+    rdfs:subClassOf
+        [ a owl:Restriction ; owl:onProperty :tieneLinea ;   owl:someValuesFrom :LineaPedido ] ,   # ≥ 1 línea
+        [ a owl:Restriction ; owl:onProperty :realizadoPor ; owl:someValuesFrom :Cliente ] ,       # alguien lo hizo
+        [ a owl:Restriction ; owl:onProperty :tieneEstado ;  owl:cardinality "1"^^xsd:nonNegativeInteger ] .  # exactamente 1
+
+# LineaPedido = cada renglón del ticket (reifica la relación Pedido–Producto–cantidad)
+:LineaPedido a owl:Class ;
+    rdfs:label "Línea de pedido"@es ;
+    rdfs:comment "Un renglón del ticket: qué producto y cuántas unidades."@es .
+
+# Enumeración: la clase ES exactamente estos individuos (≈ un desplegable cerrado)
+:EstadoPedido a owl:Class ;
+    rdfs:label "Estado del pedido"@es ;
+    owl:equivalentClass [ a owl:Class ; owl:oneOf ( :Pendiente :Enviado :Entregado ) ] .
+
+# Clase definida: no se asigna a mano, se INFIERE por cumplir la condición
+:ClienteFrecuente a owl:Class ;
+    rdfs:label "Cliente frecuente"@es ;
+    rdfs:comment "Cliente con 5 pedidos o más (como una tarjeta de fidelidad)."@es ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            :Cliente
+            [ a owl:Restriction ; owl:onProperty :realizaPedido ;
+              owl:minCardinality "5"^^xsd:nonNegativeInteger ]
+        )
+    ] .
+
+# ---------------------------------------------------------------------
+# PROPIEDADES DE OBJETO
+# ---------------------------------------------------------------------
+
+:realizaPedido a owl:ObjectProperty ;
+    rdfs:label "realiza pedido"@es ;
+    rdfs:domain :Cliente ; rdfs:range :Pedido ;
+    owl:inverseOf :realizadoPor .
+
+:realizadoPor a owl:ObjectProperty , owl:FunctionalProperty ;    # un pedido, UN solo cliente
+    rdfs:label "realizado por"@es ;
+    rdfs:domain :Pedido ; rdfs:range :Cliente .
+
+:tieneLinea a owl:ObjectProperty ;
+    rdfs:label "tiene línea"@es ;
+    rdfs:domain :Pedido ; rdfs:range :LineaPedido ;
+    owl:inverseOf :lineaDe .
+
+:lineaDe a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:label "línea de"@es ;
+    rdfs:domain :LineaPedido ; rdfs:range :Pedido .
+
+:refiereA a owl:ObjectProperty , owl:FunctionalProperty ;       # cada línea apunta a un producto
+    rdfs:label "se refiere a"@es ;
+    rdfs:domain :LineaPedido ; rdfs:range :Producto .
+
+:tieneEstado a owl:ObjectProperty ;
+    rdfs:label "tiene estado"@es ;
+    rdfs:domain :Pedido ; rdfs:range :EstadoPedido .
+
+:perteneceACategoria a owl:ObjectProperty ;
+    rdfs:label "pertenece a categoría"@es ;
+    rdfs:domain :Producto ; rdfs:range :Categoria .
+
+# Transitiva: si A está dentro de B y B dentro de C, A está dentro de C
+:subcategoriaDe a owl:ObjectProperty , owl:TransitiveProperty ;
+    rdfs:label "subcategoría de"@es ;
+    rdfs:domain :Categoria ; rdfs:range :Categoria .
+
+# Simétrica: si A complementa a B, B complementa a A ("también te puede interesar")
+:complementaA a owl:ObjectProperty , owl:SymmetricProperty ;
+    rdfs:label "complementa a"@es ;
+    rdfs:domain :Producto ; rdfs:range :Producto .
+
+# ---------------------------------------------------------------------
+# PROPIEDADES DE DATO
+# ---------------------------------------------------------------------
+
+:nombre a owl:DatatypeProperty ; rdfs:range xsd:string .        # sin domain: la usan varias clases
+:email  a owl:DatatypeProperty ; rdfs:domain :Cliente ; rdfs:range xsd:string .
+:precioUnitario a owl:DatatypeProperty ; rdfs:domain :Producto ; rdfs:range xsd:decimal .
+:cantidad a owl:DatatypeProperty ; rdfs:domain :LineaPedido ; rdfs:range xsd:positiveInteger .
+:fechaPedido a owl:DatatypeProperty ; rdfs:domain :Pedido ; rdfs:range xsd:date .
+
+# ---------------------------------------------------------------------
+# INDIVIDUOS
+# ---------------------------------------------------------------------
+
+:Pendiente a :EstadoPedido .
+:Enviado   a :EstadoPedido .
+:Entregado a :EstadoPedido .
+
+# OWL no asume que nombres distintos son cosas distintas: hay que decirlo.
+[] a owl:AllDifferent ;
+   owl:distinctMembers ( :Pendiente :Enviado :Entregado ) .
+
+:Marta a :Cliente ;
+    :nombre "Marta" ;
+    :email "marta@example.org" .
+    # Inferencia: :Marta :realizaPedido :Pedido001 (inversa de realizadoPor).
+
+:Pedido001 a :Pedido ;
+    :realizadoPor :Marta ;
+    :tieneEstado :Enviado ;
+    :fechaPedido "2026-09-15"^^xsd:date ;
+    :tieneLinea :Linea001 , :Linea002 .
+
+:Linea001 a :LineaPedido ; :refiereA :PortatilAcme ; :cantidad "1"^^xsd:positiveInteger .
+:Linea002 a :LineaPedido ; :refiereA :AntivirusPro ;  :cantidad "1"^^xsd:positiveInteger .
+
+:PortatilAcme a :ProductoFisico ;
+    :nombre "Portátil Acme 14" ;
+    :precioUnitario "799.00"^^xsd:decimal ;
+    :perteneceACategoria :Portatiles ;
+    :complementaA :AntivirusPro .
+    # Inferencia (simetría): :AntivirusPro :complementaA :PortatilAcme.
+
+:AntivirusPro a :ProductoDigital ;
+    :nombre "Antivirus Pro" ;
+    :precioUnitario "29.90"^^xsd:decimal .
+
+:Portatiles   a :Categoria ; :nombre "Portátiles" ;  :subcategoriaDe :Informatica .
+:Informatica  a :Categoria ; :nombre "Informática" ; :subcategoriaDe :Tecnologia .
+:Tecnologia   a :Categoria ; :nombre "Tecnología" .
+    # Inferencia (transitiva): :Portatiles :subcategoriaDe :Tecnologia.
