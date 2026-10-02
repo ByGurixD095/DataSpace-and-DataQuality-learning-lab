@@ -1,0 +1,9 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?genero (COUNT(?libro) AS ?total) (SUM(?paginas) AS ?totalPaginas)
+WHERE {
+    ?libro a ex:Libro ;
+           ex:genero ?genero ;
+           ex:paginas ?paginas .
+}
+GROUP BY ?genero

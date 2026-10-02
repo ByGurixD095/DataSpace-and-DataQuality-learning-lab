@@ -1,0 +1,10 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombreCiudad
+WHERE {
+    ?persona a ex:Persona ;
+             ex:viveEn ?ciudad .
+    ?ciudad ex:nombre ?nombreCiudad .
+}
+GROUP BY ?nombreCiudad
+HAVING(COUNT(?persona) > 3)

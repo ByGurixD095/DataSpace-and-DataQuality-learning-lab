@@ -1,0 +1,7 @@
+PREFIX ex: <http://example.org/>
+
+SELECT (MIN(?edad) AS ?minima) (MAX(?edad) AS ?maxima) (AVG(?edad) AS ?media)
+WHERE {
+    ?persona a ex:Persona ;
+             ex:edad ?edad .
+}

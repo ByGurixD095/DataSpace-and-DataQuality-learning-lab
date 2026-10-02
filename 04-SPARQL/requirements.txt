@@ -1,0 +1,3 @@
+#Lista de dependencias en python para el las consultas SPARQL.
+
+rdflib>=7.0   

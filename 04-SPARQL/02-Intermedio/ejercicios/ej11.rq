@@ -1,0 +1,11 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombre
+WHERE {
+    ?persona a ex:Persona ;
+             ex:nombre ?nombre .
+    OPTIONAL { ?persona ex:telefono ?telefono . }
+    OPTIONAL { ?persona ex:email ?email . }
+    FILTER(!BOUND(?telefono) && !BOUND(?email))
+}
+ORDER BY ASC(?nombre)

@@ -1,0 +1,11 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombreCiudad (COUNT(?persona) AS ?total)
+WHERE {
+    ?persona a ex:Persona ;
+             ex:viveEn ?ciudad .
+    ?ciudad ex:nombre ?nombreCiudad .
+}
+GROUP BY ?nombreCiudad
+ORDER BY DESC(?total)
+LIMIT 1

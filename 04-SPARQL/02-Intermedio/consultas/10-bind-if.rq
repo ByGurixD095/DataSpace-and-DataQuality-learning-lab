@@ -1,0 +1,9 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombre ?categoria
+WHERE {
+    ?persona a ex:Persona ;
+             ex:nombre ?nombre ;
+             ex:edad ?edad .
+    BIND(IF(?edad >= 18, "Adulto", "Menor") AS ?categoria)
+}

@@ -1,0 +1,10 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombre ?contacto
+WHERE {
+    ?persona a ex:Persona ;
+             ex:nombre ?nombre .
+    { ?persona ex:telefono ?contacto . }
+    UNION
+    { ?persona ex:email ?contacto . }
+}

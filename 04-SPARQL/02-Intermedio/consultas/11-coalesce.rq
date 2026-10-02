@@ -1,0 +1,10 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombre ?contacto
+WHERE {
+    ?persona a ex:Persona ;
+             ex:nombre ?nombre .
+    OPTIONAL { ?persona ex:telefono ?telefono . }
+    OPTIONAL { ?persona ex:email ?email . }
+    BIND(COALESCE(?telefono, ?email, "Sin contacto") AS ?contacto)
+}

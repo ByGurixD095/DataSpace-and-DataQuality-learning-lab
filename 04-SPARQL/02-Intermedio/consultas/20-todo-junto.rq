@@ -1,0 +1,24 @@
+# 20 — Todo junto: múltiples patrones + OPTIONAL + agregaciones + GROUP BY + HAVING
+# Concepto: COUNT(?telefono) solo cuenta las filas donde ?telefono tiene valor,
+#           así que gracias a OPTIONAL sabemos cuántas personas tienen teléfono.
+# Resultado esperado: 4 filas (Barcelona queda fuera por HAVING)
+#   Madrid       5 personas · edad media 28 · 3 con teléfono
+#   Sevilla      3 personas · edad media 36 · 1 con teléfono
+#   Valencia     3 personas · edad media 33 · 0 con teléfono
+#   Ciudad Real  3 personas · edad media 31 · 1 con teléfono
+
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombreCiudad
+       (COUNT(?persona)    AS ?total)
+       (ROUND(AVG(?edad))  AS ?edadMedia)
+       (COUNT(?telefono)   AS ?conTelefono)
+WHERE {
+    ?persona ex:viveEn ?ciudad ;
+             ex:edad   ?edad .
+    ?ciudad  ex:nombre ?nombreCiudad .
+    OPTIONAL { ?persona ex:telefono ?telefono . }
+}
+GROUP BY ?nombreCiudad
+HAVING (COUNT(?persona) >= 3)
+ORDER BY DESC(?total) ?nombreCiudad

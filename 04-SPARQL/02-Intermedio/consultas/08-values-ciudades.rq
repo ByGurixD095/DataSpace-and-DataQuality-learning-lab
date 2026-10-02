@@ -1,0 +1,7 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombreCiudad
+WHERE {
+    VALUES ?ciudad { ex:Madrid ex:Valencia }
+    ?ciudad ex:nombre ?nombreCiudad .
+}

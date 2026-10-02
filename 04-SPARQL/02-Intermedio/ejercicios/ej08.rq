@@ -1,0 +1,10 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombreCiudad (MAX(?edad) AS ?edadMaxima)
+WHERE {
+    ?persona a ex:Persona ;
+             ex:edad ?edad ;
+             ex:viveEn ?ciudad .
+    ?ciudad ex:nombre ?nombreCiudad .
+}
+GROUP BY ?nombreCiudad

@@ -1,0 +1,11 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?ciudad (COUNT(?persona) AS ?mayoresDeEdad)
+WHERE {
+    ?persona a ex:Persona ;
+             ex:viveEn ?ciudad ;
+             ex:edad ?edad .
+    FILTER(?edad >= 18)
+}
+GROUP BY ?ciudad
+HAVING(COUNT(?persona) >= 2)

@@ -1,0 +1,8 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombre_o_titulo
+WHERE {
+    { ?persona a ex:Persona ; ex:nombre ?nombre_o_titulo . }
+    UNION
+    { ?libro a ex:Libro ; ex:titulo ?nombre_o_titulo . }
+}

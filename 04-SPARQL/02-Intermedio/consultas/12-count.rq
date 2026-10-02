@@ -1,0 +1,6 @@
+PREFIX ex: <http://example.org/>
+
+SELECT (COUNT(?persona) AS ?totalPersonas)
+WHERE {
+    ?persona a ex:Persona .
+}
