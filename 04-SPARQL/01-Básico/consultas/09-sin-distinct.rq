@@ -1,0 +1,6 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?ciudad
+WHERE {
+    ?persona ex:viveEn ?ciudad .
+}

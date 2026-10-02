@@ -1,0 +1,7 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombre
+WHERE {
+    ?persona ex:nombre ?nombre .
+    FILTER(CONTAINS(LCASE(?nombre), "garcía"))
+}

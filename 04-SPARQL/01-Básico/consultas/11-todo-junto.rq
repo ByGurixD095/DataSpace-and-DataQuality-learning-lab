@@ -1,0 +1,17 @@
+# Uso de todo junto: PREFIX + SELECT + WHERE + FILTER + ORDER BY + LIMIT
+# Concepto: seguir un enlace entre recursos (?persona → ?ciudad → nombre de la ciudad)
+# Resultado esperado: las 3 personas más jóvenes de 18+ años:
+#   Javier 18 (Madrid), Elena 19 (Ciudad Real), Diego 23 (Barcelona)
+
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombre ?edad ?nombreCiudad
+WHERE {
+    ?persona ex:nombre ?nombre ;
+             ex:edad   ?edad ;
+             ex:viveEn ?ciudad .
+    ?ciudad  ex:nombre ?nombreCiudad .
+    FILTER(?edad >= 18)
+}
+ORDER BY ASC(?edad)
+LIMIT 3

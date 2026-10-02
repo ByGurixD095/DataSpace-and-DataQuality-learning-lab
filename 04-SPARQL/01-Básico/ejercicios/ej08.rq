@@ -1,0 +1,12 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombre ?nombreCiudad
+WHERE {
+    ?persona a ex:Persona ;
+             ex:nombre ?nombre ;
+             ex:edad ?edad ;
+             ex:viveEn ?ciudad .
+    ?ciudad ex:nombre ?nombreCiudad .
+    FILTER(?edad >= 20 && ?edad <= 50)
+}
+ORDER BY ASC(?nombre)

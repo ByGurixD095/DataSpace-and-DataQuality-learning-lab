@@ -1,0 +1,10 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombre ?edad
+WHERE {
+    ?persona ex:nombre ?nombre ;
+             ex:edad ?edad .
+}
+ORDER BY DESC(?edad)
+LIMIT 5
+OFFSET 5

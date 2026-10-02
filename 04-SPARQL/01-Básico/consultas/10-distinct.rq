@@ -1,0 +1,6 @@
+PREFIX ex: <http://example.org/>
+
+SELECT DISTINCT ?ciudad
+WHERE {
+    ?persona ex:viveEn ?ciudad .
+}

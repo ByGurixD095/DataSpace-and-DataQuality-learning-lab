@@ -1,0 +1,76 @@
+@prefix ex:   <http://example.org/> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# ---------------------------------------------------------
+# Grafo de ejemplo para el nivel básico de SPARQL
+# 10 personas, 5 ciudades. RDF puro (sin RDFS ni OWL).
+# ---------------------------------------------------------
+
+# ----- Ciudades -----
+ex:Madrid     a ex:Ciudad ; ex:nombre "Madrid" .
+ex:Sevilla    a ex:Ciudad ; ex:nombre "Sevilla" .
+ex:Valencia   a ex:Ciudad ; ex:nombre "Valencia" .
+ex:Barcelona  a ex:Ciudad ; ex:nombre "Barcelona" .
+ex:CiudadReal a ex:Ciudad ; ex:nombre "Ciudad Real" .
+
+# ----- Personas -----
+ex:ana a ex:Persona ;
+    ex:nombre   "Ana García" ;
+    ex:edad     "34"^^xsd:integer ;
+    ex:viveEn   ex:Madrid ;
+    ex:profesion "Ingeniera" .
+
+ex:luis a ex:Persona ;
+    ex:nombre   "Luis Martín" ;
+    ex:edad     "17"^^xsd:integer ;
+    ex:viveEn   ex:Sevilla ;
+    ex:profesion "Estudiante" .
+
+ex:marta a ex:Persona ;
+    ex:nombre   "Marta López" ;
+    ex:edad     "28"^^xsd:integer ;
+    ex:viveEn   ex:Madrid ;
+    ex:profesion "Diseñadora" .
+
+ex:carlos a ex:Persona ;
+    ex:nombre   "Carlos Ruiz" ;
+    ex:edad     "45"^^xsd:integer ;
+    ex:viveEn   ex:CiudadReal ;
+    ex:profesion "Profesor" .
+
+ex:lucia a ex:Persona ;
+    ex:nombre   "Lucía Fernández" ;
+    ex:edad     "16"^^xsd:integer ;
+    ex:viveEn   ex:Valencia ;
+    ex:profesion "Estudiante" .
+
+ex:pablo a ex:Persona ;
+    ex:nombre   "Pablo Sánchez" ;
+    ex:edad     "52"^^xsd:integer ;
+    ex:viveEn   ex:Sevilla ;
+    ex:profesion "Médico" .
+
+ex:elena a ex:Persona ;
+    ex:nombre   "Elena Torres" ;
+    ex:edad     "19"^^xsd:integer ;
+    ex:viveEn   ex:CiudadReal ;
+    ex:profesion "Estudiante" .
+
+ex:javier a ex:Persona ;
+    ex:nombre   "Javier Gómez" ;
+    ex:edad     "18"^^xsd:integer ;
+    ex:viveEn   ex:Madrid ;
+    ex:profesion "Cocinero" .
+
+ex:sofia a ex:Persona ;
+    ex:nombre   "Sofía Navarro" ;
+    ex:edad     "61"^^xsd:integer ;
+    ex:viveEn   ex:Valencia ;
+    ex:profesion "Arquitecta" .
+
+ex:diego a ex:Persona ;
+    ex:nombre   "Diego Romero" ;
+    ex:edad     "23"^^xsd:integer ;
+    ex:viveEn   ex:Barcelona ;
+    ex:profesion "Periodista" .
