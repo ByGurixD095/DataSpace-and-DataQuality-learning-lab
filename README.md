@@ -24,12 +24,18 @@ Más que una colección de teoría, es un espacio de trabajo donde cada idea se 
 
 ## 📑 Tabla de contenidos
 
-- [🎯 Objetivos](#-objetivos)
-- [🗂️ Estructura del repositorio](#️-estructura-del-repositorio)
-- [🧩 Tecnologías y estándares](#-tecnologías-y-estándares)
-- [🔬 Enfoque de trabajo](#-enfoque-de-trabajo)
-- [🗺️ Hoja de ruta](#️-hoja-de-ruta)
-- [🚀 Evolución](#-evolución)
+- [🧪 DataSpace \& DataQuality Learning Lab](#-dataspace--dataquality-learning-lab)
+  - [📖 Sobre este repositorio](#-sobre-este-repositorio)
+  - [📑 Tabla de contenidos](#-tabla-de-contenidos)
+  - [🎯 Objetivos](#-objetivos)
+  - [🗂️ Estructura del repositorio](#️-estructura-del-repositorio)
+  - [🧩 Tecnologías y estándares](#-tecnologías-y-estándares)
+    - [🌐 Web Semántica y datos enlazados](#-web-semántica-y-datos-enlazados)
+    - [🛠️ Infraestructura y herramientas](#️-infraestructura-y-herramientas)
+    - [📏 Calidad y Gobierno del Dato](#-calidad-y-gobierno-del-dato)
+  - [🔬 Enfoque de trabajo](#-enfoque-de-trabajo)
+  - [🗺️ Hoja de ruta](#️-hoja-de-ruta)
+  - [🚀 Evolución](#-evolución)
 
 ---
 
@@ -127,9 +133,9 @@ flowchart LR
 | 01 | RDF | ✅ |
 | 02 | RDFS | ✅ |
 | 03 | OWL | ✅ |
-| 04 | SPARQL | 🚧 |
-| 05 | SHACL | 🔜 |
-| 06 | JSON-LD | 🔜 |
+| 04 | SPARQL | ✅ |
+| 05 | SHACL | 🚧 |
+| 06 | JSON-LD | 🚧 |
 | 07 | DCAT | 🔜 |
 | 08 | Data Quality | 🔜 |
 | 09 | Data Governance | 🔜 |
