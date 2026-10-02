@@ -1,0 +1,5 @@
+@prefix ex: <http://example.org/> .
+
+# Datos RDF "mínimos": nadie está declarado como ex:Persona ni ex:Ciudad.
+ex:ana  a ex:Estudiante ; ex:viveEn ex:Madrid  ; ex:esAmigoDe ex:luis .
+ex:luis a ex:Profesor   ; ex:viveEn ex:Sevilla .

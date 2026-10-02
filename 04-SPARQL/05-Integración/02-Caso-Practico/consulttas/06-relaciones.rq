@@ -1,0 +1,15 @@
+# ¿Qué relaciones existen entre entidades? Parejas de estudiantes que comparten asignatura.
+# Resultado esperado: 3 filas (Ana–Luis en BD, Ana–Diego en SW, Luis–Sofía en PROG)
+
+PREFIX ex: <http://example.org/>
+
+SELECT ?estudiante1 ?estudiante2 ?asignatura
+WHERE {
+    ?a ex:matriculadoEn ?s ;
+       ex:nombre ?estudiante1 .
+    ?b ex:matriculadoEn ?s ;
+       ex:nombre ?estudiante2 .
+    ?s ex:nombre ?asignatura .
+    FILTER(STR(?a) < STR(?b))
+}
+ORDER BY ?asignatura

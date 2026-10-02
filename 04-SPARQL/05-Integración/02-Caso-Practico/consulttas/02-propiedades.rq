@@ -1,0 +1,12 @@
+# ¿Qué propiedades tiene un recurso?
+# Con inferencia aparecen además triples deducidos (rdf:type ex:Persona, companeroDe inverso…).
+
+PREFIX ex: <http://example.org/>
+
+SELECT ?propiedad ?valor
+WHERE {
+    ex:ana ?propiedad ?valor .
+    FILTER(STRSTARTS(STR(?propiedad), "http://example.org/")
+        || ?propiedad = <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>)
+}
+ORDER BY ?propiedad ?valor

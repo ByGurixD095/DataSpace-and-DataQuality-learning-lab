@@ -1,0 +1,14 @@
+# ¿Qué recursos cumplen determinadas condiciones?
+# Todos los requisitos (directos e indirectos) de "Calidad del Dato".
+# Con inferencia: 3 filas (SW, BD, PROG) por owl:TransitiveProperty.
+# Sin inferencia: 1 fila (SW). Alternativa sin razonador: ex:requiere+ (property path).
+
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombre ?creditos
+WHERE {
+    ex:CAL ex:requiere ?req .
+    ?req   ex:nombre   ?nombre ;
+           ex:creditos ?creditos .
+}
+ORDER BY DESC(?creditos)

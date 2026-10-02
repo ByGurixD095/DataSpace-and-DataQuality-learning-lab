@@ -1,0 +1,12 @@
+# ¿Qué recursos pertenecen a una clase?
+# Con inferencia: 7 filas (4 estudiantes + 3 profesores, por rdfs:subClassOf).
+# Con --sin-inferencia: 0 filas, porque nadie está declarado como ex:Persona.
+
+PREFIX ex: <http://example.org/>
+
+SELECT ?persona ?nombre
+WHERE {
+    ?persona a ex:Persona ;
+             ex:nombre ?nombre .
+}
+ORDER BY ?nombre

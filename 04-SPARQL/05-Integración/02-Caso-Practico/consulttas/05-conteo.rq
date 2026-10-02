@@ -1,0 +1,14 @@
+# ¿Cuántos recursos existen de cada tipo?
+# Con inferencia: Persona 7 · Estudiante 4 · Profesor 3 · Asignatura 5 · Departamento 2
+# (Persona y Departamento nunca se declararon: salen de subClassOf y de rdfs:range)
+
+PREFIX ex: <http://example.org/>
+
+SELECT ?tipo (COUNT(DISTINCT ?recurso) AS ?total)
+WHERE {
+    ?recurso a ?tipo .
+    FILTER(STRSTARTS(STR(?tipo), "http://example.org/")
+        && ?recurso != ?tipo)
+}
+GROUP BY ?tipo
+ORDER BY DESC(?total)

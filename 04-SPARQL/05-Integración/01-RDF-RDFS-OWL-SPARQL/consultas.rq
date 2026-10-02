@@ -1,0 +1,21 @@
+# Personas y la ciudad donde viven.
+#
+#   python ejecutar.py 01-RDF-RDFS-OWL-SPARQL --sin-inferencia   →  0 filas
+#   python ejecutar.py 01-RDF-RDFS-OWL-SPARQL                    →  2 filas
+#
+# En los datos nadie es ex:Persona ni ninguna ciudad es ex:Ciudad: lo deducen
+#   · RDFS subClassOf (Estudiante/Profesor ⊂ Persona)
+#   · RDFS range      (lo que está en el objeto de viveEn es una Ciudad)
+# SPARQL solo consulta; el "conocimiento extra" lo aporta el razonador sobre RDFS/OWL.
+#
+# Prueba otras: ¿quién es amigo de Ana?   →  ?x ex:esAmigoDe ex:ana   (simétrica: Luis)
+#               ¿quién es amigo de Luis?  →  ?x ex:esAmigoDe ex:luis  (Ana: está declarado, no hace falta inferir)
+
+PREFIX ex: <http://example.org/>
+
+SELECT ?persona ?ciudad
+WHERE {
+    ?persona a ex:Persona ;
+             ex:viveEn ?ciudad .
+    ?ciudad  a ex:Ciudad .
+}

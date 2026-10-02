@@ -1,0 +1,11 @@
+# ¿Podemos comprobar si existe determinada información?
+# ¿Hay algún estudiante en una asignatura impartida por alguien de Matemáticas?
+# Resultado esperado: true (Diego cursa Estadística, que imparte Elena, de Matemáticas)
+
+PREFIX ex: <http://example.org/>
+
+ASK {
+    ?estudiante ex:matriculadoEn ?asignatura .
+    ?profesor   ex:imparte ?asignatura ;
+                ex:perteneceA ex:Matematicas .
+}

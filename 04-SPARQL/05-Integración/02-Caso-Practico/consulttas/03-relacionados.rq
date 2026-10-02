@@ -1,0 +1,11 @@
+# ¿Qué recursos están relacionados con otro?
+# Luis tiene como compañeros a Ana y a Sofía. Solo uno está declarado en cada sentido:
+# el otro lo deduce OWL (SymmetricProperty).
+# Con inferencia: 2 filas. Sin inferencia: 1 (Sofía).
+
+PREFIX ex: <http://example.org/>
+
+SELECT ?companero
+WHERE {
+    ex:luis ex:companeroDe ?companero .
+}

@@ -1,0 +1,14 @@
+# ¿Podemos construir un subconjunto del grafo?
+# Un grafo solo con los matriculados en "Web Semántica" (nombre + matrícula).
+# Resultado esperado: 4 triples (Ana y Diego: nombre y matriculadoEn ex:SW)
+
+PREFIX ex: <http://example.org/>
+
+CONSTRUCT {
+    ?estudiante ex:nombre ?nombre ;
+                ex:matriculadoEn ex:SW .
+}
+WHERE {
+    ?estudiante ex:matriculadoEn ex:SW ;
+                ex:nombre ?nombre .
+}
