@@ -1,0 +1,60 @@
+@prefix ex:   <http://example.org/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# ---------------------------------------------------------
+# Grafo de ejemplo para el nivel intermedio de SPARQL
+# 16 personas, 5 ciudades y 6 libros. RDF puro.
+#
+# Claves del diseño:
+#   * ex:telefono y ex:email son OPCIONALES (no todas las personas los tienen)
+#     → para practicar OPTIONAL
+#   * Personas y ciudades usan ex:nombre, los libros usan ex:titulo
+#     → para practicar UNION
+#   * Hay varias personas por ciudad y edades variadas
+#     → para practicar COUNT / AVG / GROUP BY / HAVING
+#   * Los libros tienen ex:paginas y ex:genero → para SUM / agrupar
+# ---------------------------------------------------------
+
+# ----- Ciudades -----
+ex:Madrid     a ex:Ciudad ; ex:nombre "Madrid" .
+ex:Sevilla    a ex:Ciudad ; ex:nombre "Sevilla" .
+ex:Valencia   a ex:Ciudad ; ex:nombre "Valencia" .
+ex:Barcelona  a ex:Ciudad ; ex:nombre "Barcelona" .
+ex:CiudadReal a ex:Ciudad ; ex:nombre "Ciudad Real" .
+
+# ----- Personas -----
+ex:ana    a ex:Persona ; ex:nombre "Ana García"      ; ex:edad 34 ; ex:viveEn ex:Madrid     ;
+          ex:telefono "600 111 001" ; ex:email "ana@example.org" .
+ex:luis   a ex:Persona ; ex:nombre "Luis Martín"     ; ex:edad 17 ; ex:viveEn ex:Sevilla    ;
+          ex:email "luis@example.org" .
+ex:marta  a ex:Persona ; ex:nombre "Marta López"     ; ex:edad 28 ; ex:viveEn ex:Madrid     ;
+          ex:telefono "600 111 003" .
+ex:carlos a ex:Persona ; ex:nombre "Carlos Ruiz"     ; ex:edad 45 ; ex:viveEn ex:CiudadReal ;
+          ex:telefono "600 111 004" ; ex:email "carlos@example.org" .
+ex:lucia  a ex:Persona ; ex:nombre "Lucía Fernández" ; ex:edad 16 ; ex:viveEn ex:Valencia   .
+ex:pablo  a ex:Persona ; ex:nombre "Pablo Sánchez"   ; ex:edad 52 ; ex:viveEn ex:Sevilla    ;
+          ex:telefono "600 111 006" .
+ex:elena  a ex:Persona ; ex:nombre "Elena Torres"    ; ex:edad 19 ; ex:viveEn ex:CiudadReal .
+ex:javier a ex:Persona ; ex:nombre "Javier Gómez"    ; ex:edad 18 ; ex:viveEn ex:Madrid     .
+ex:sofia  a ex:Persona ; ex:nombre "Sofía Navarro"   ; ex:edad 61 ; ex:viveEn ex:Valencia   ;
+          ex:email "sofia@example.org" .
+ex:diego  a ex:Persona ; ex:nombre "Diego Romero"    ; ex:edad 23 ; ex:viveEn ex:Barcelona  ;
+          ex:telefono "600 111 010" .
+ex:raul   a ex:Persona ; ex:nombre "Raúl Díaz"       ; ex:edad 31 ; ex:viveEn ex:Madrid     ;
+          ex:telefono "600 111 011" .
+ex:carmen a ex:Persona ; ex:nombre "Carmen Ortega"   ; ex:edad 27 ; ex:viveEn ex:Madrid     .
+ex:alvaro a ex:Persona ; ex:nombre "Álvaro Molina"   ; ex:edad 39 ; ex:viveEn ex:Sevilla    .
+ex:paula  a ex:Persona ; ex:nombre "Paula Vega"      ; ex:edad 22 ; ex:viveEn ex:Valencia   ;
+          ex:email "paula@example.org" .
+ex:hugo   a ex:Persona ; ex:nombre "Hugo Castro"     ; ex:edad 35 ; ex:viveEn ex:Barcelona  ;
+          ex:telefono "600 111 015" .
+ex:irene  a ex:Persona ; ex:nombre "Irene Prieto"    ; ex:edad 29 ; ex:viveEn ex:CiudadReal ;
+          ex:email "irene@example.org" .
+
+# ----- Libros -----
+ex:quijote a ex:Libro ; ex:titulo "Don Quijote de la Mancha" ; ex:paginas 1100 ; ex:genero "Novela" .
+ex:cien    a ex:Libro ; ex:titulo "Cien años de soledad"     ; ex:paginas 471  ; ex:genero "Novela" .
+ex:platero a ex:Libro ; ex:titulo "Platero y yo"              ; ex:paginas 150  ; ex:genero "Poesía" .
+ex:sapiens a ex:Libro ; ex:titulo "Sapiens"                   ; ex:paginas 496  ; ex:genero "Ensayo" .
+ex:rayuela a ex:Libro ; ex:titulo "Rayuela"                   ; ex:paginas 600  ; ex:genero "Novela" .
+ex:sombra  a ex:Libro ; ex:titulo "La sombra del viento"      ; ex:paginas 576  ; ex:genero "Novela" .
