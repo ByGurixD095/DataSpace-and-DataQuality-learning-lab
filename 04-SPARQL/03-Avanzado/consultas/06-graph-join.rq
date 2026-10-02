@@ -1,0 +1,12 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombre ?email
+WHERE {
+    GRAPH ex:personas {
+        ?persona a ex:Persona ;
+                 ex:nombre ?nombre .
+    }
+    GRAPH ex:perfiles {
+        ?persona ex:email ?email .
+    }
+}

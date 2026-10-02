@@ -1,0 +1,12 @@
+PREFIX ex: <http://example.org/>
+
+WITH ex:personas
+DELETE {
+    ?persona ex:viveEn ex:Sevilla .
+}
+INSERT {
+    ?persona ex:viveEn ex:Madrid .
+}
+WHERE {
+    ?persona ex:viveEn ex:Sevilla .
+}

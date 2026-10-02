@@ -1,0 +1,7 @@
+PREFIX ex: <http://example.org/>
+
+DELETE DATA {
+    GRAPH ex:perfiles {
+        ex:diego ex:email "diego@example.org" .
+    }
+}

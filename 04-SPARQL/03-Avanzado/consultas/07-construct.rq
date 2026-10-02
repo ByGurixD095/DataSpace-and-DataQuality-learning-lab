@@ -1,0 +1,10 @@
+PREFIX ex: <http://example.org/>
+
+CONSTRUCT {
+    ?amigo ex:conocidoPor ?persona .
+}
+WHERE {
+    GRAPH ex:personas {
+        ?persona ex:conoce ?amigo .
+    }
+}

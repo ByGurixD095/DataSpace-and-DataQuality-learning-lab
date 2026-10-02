@@ -1,0 +1,15 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?persona ?totalConocidos
+WHERE {
+    {
+        SELECT ?persona (COUNT(?amigo) AS ?totalConocidos)
+        WHERE {
+            GRAPH ex:personas {
+                ?persona ex:conoce ?amigo .
+            }
+        }
+        GROUP BY ?persona
+    }
+    FILTER(?totalConocidos >= 2)
+}

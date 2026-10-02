@@ -1,0 +1,7 @@
+PREFIX ex: <http://example.org/>
+
+ASK {
+    GRAPH ex:personas {
+        ex:diego ex:conoce+ ex:carlos .
+    }
+}

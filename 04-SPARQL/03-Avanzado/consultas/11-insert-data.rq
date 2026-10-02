@@ -1,0 +1,9 @@
+PREFIX ex: <http://example.org/>
+
+INSERT DATA {
+    GRAPH ex:personas {
+        ex:nuevo a ex:Persona ;
+                 ex:nombre "Usuario Nuevo" ;
+                 ex:viveEn ex:Madrid .
+    }
+}

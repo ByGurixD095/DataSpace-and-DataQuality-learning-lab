@@ -1,0 +1,31 @@
+@prefix ex: <http://example.org/> .
+
+# Dataset con DOS grafos nombrados (formato TriG):
+#   ex:personas → personas, ciudades, países y relaciones ex:conoce / ex:colaboraCon
+#   ex:perfiles → emails de algunas personas
+
+ex:personas {
+    ex:ana    a ex:Persona ; ex:nombre "Ana García"      ; ex:viveEn ex:Madrid ;     ex:conoce ex:luis, ex:pablo ; ex:colaboraCon ex:elena .
+    ex:luis   a ex:Persona ; ex:nombre "Luis Martín"     ; ex:viveEn ex:Sevilla ;    ex:conoce ex:marta .
+    ex:pablo  a ex:Persona ; ex:nombre "Pablo Sánchez"   ; ex:viveEn ex:Sevilla ;    ex:conoce ex:marta .
+    ex:marta  a ex:Persona ; ex:nombre "Marta López"     ; ex:viveEn ex:Madrid ;     ex:conoce ex:carlos .
+    ex:carlos a ex:Persona ; ex:nombre "Carlos Ruiz"     ; ex:viveEn ex:CiudadReal ; ex:conoce ex:elena .
+    ex:elena  a ex:Persona ; ex:nombre "Elena Torres"    ; ex:viveEn ex:CiudadReal .
+    ex:diego  a ex:Persona ; ex:nombre "Diego Romero"    ; ex:viveEn ex:Barcelona ;  ex:conoce ex:ana ; ex:colaboraCon ex:carlos .
+    ex:ines   a ex:Persona ; ex:nombre "Inés Pereira"    ; ex:viveEn ex:Lisboa ;     ex:conoce ex:diego .
+
+    ex:Madrid     a ex:Ciudad ; ex:nombre "Madrid"      ; ex:enPais ex:Espana .
+    ex:Sevilla    a ex:Ciudad ; ex:nombre "Sevilla"     ; ex:enPais ex:Espana .
+    ex:CiudadReal a ex:Ciudad ; ex:nombre "Ciudad Real" ; ex:enPais ex:Espana .
+    ex:Barcelona  a ex:Ciudad ; ex:nombre "Barcelona"   ; ex:enPais ex:Espana .
+    ex:Lisboa     a ex:Ciudad ; ex:nombre "Lisboa"      ; ex:enPais ex:Portugal .
+    ex:Espana     ex:nombre "España" .
+    ex:Portugal   ex:nombre "Portugal" .
+}
+
+ex:perfiles {
+    ex:ana    ex:email "ana@example.org" .
+    ex:marta  ex:email "marta@example.org" .
+    ex:carlos ex:email "carlos@example.org" .
+    ex:diego  ex:email "diego@example.org" .
+}

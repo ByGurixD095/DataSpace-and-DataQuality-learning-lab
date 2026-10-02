@@ -1,0 +1,9 @@
+PREFIX ex: <http://example.org/>
+
+SELECT ?nombre
+WHERE {
+    GRAPH ex:personas {
+        ex:carlos ^ex:conoce/ex:viveEn ?ciudad .
+        ?ciudad ex:nombre ?nombre .
+    }
+}

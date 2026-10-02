@@ -1,0 +1,15 @@
+PREFIX ex: <http://example.org/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?nombrePais ?capital
+WHERE {
+    GRAPH ex:personas {
+        ?pais ex:nombre ?nombrePais .
+    }
+    SERVICE <http://dbpedia.org/sparql> {
+        ?dbpediaPais a dbo:Country ;
+                     rdfs:label ?nombrePais ;
+                     dbo:capital ?capital .
+        FILTER(LANG(?nombrePais) = "es")
+    }
+} LIMIT 5
