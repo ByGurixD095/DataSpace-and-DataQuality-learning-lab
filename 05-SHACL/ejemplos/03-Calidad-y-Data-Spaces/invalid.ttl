@@ -1,0 +1,23 @@
+@prefix ex:  <http://example.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:rec2                                       # Violations: coordenadas, tipo de vehículo, fecha
+    a ex:MobilityRecord ;
+    ex:recordId "R-002" ;
+    ex:timestamp "ayer por la tarde" ;
+    ex:lat 138.9 ; ex:lon -3.9 ;
+    ex:vehicleType "helicopter" ;
+    ex:sensorNote "ok" .
+
+ex:rec3                                       # solo Warning + Info (el registro sigue siendo utilizable)
+    a ex:MobilityRecord ;
+    ex:recordId "R-003" ;
+    ex:timestamp "2026-09-01T09:00:00"^^xsd:dateTime ;
+    ex:lat 38.98 ; ex:lon -3.92 ;
+    ex:vehicleType "scooter" ;
+    ex:speedKmh 180 .
+
+ex:trip2
+    a ex:Trip ;
+    ex:start "2026-09-01T10:00:00"^^xsd:dateTime ;
+    ex:end   "2026-09-01T09:15:00"^^xsd:dateTime .   # termina antes de empezar

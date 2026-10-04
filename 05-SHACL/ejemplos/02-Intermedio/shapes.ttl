@@ -1,0 +1,71 @@
+@prefix ex:  <http://example.com/> .
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Solución del ejercicio recomendado del README: ex:Dataset
+
+ex:DatasetShape
+    a sh:NodeShape ;
+    sh:targetClass ex:Dataset ;
+
+    sh:property [
+        sh:path ex:title ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "El dataset debe tener al menos un título." ;
+    ] ;
+
+    sh:property [
+        sh:path ex:identifier ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^DS-[0-9]{4}$" ;
+        sh:message "Exactamente un identificador con formato DS-0000." ;
+    ] ;
+
+    sh:property [                       # opcional: sin minCount
+        sh:path ex:description ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    sh:property [
+        sh:path ex:created ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+        sh:message "La fecha de creación debe ser un xsd:date." ;
+    ] ;
+
+    sh:property [
+        sh:path ex:format ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in ( "CSV" "JSON" "RDF" "PARQUET" ) ;
+        sh:message "Formato no permitido (CSV, JSON, RDF o PARQUET)." ;
+    ] ;
+
+    # La licencia, si existe, es una IRI o un texto  -> sh:or
+    sh:property [
+        sh:path ex:license ;
+        sh:or ( [ sh:nodeKind sh:IRI ] [ sh:datatype xsd:string ] ) ;
+        sh:message "La licencia debe ser una IRI o un texto." ;
+    ] ;
+
+    # El publicador se valida con otra shape -> sh:node (reutilización)
+    sh:property [
+        sh:path ex:publisher ;
+        sh:minCount 1 ;
+        sh:node ex:PublisherShape ;
+        sh:message "El dataset necesita un publicador válido." ;
+    ] .
+
+ex:PublisherShape
+    a sh:NodeShape ;
+    sh:property [
+        sh:path ex:name ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "El publicador debe tener nombre." ;
+    ] .

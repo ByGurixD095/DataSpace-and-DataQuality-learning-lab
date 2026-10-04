@@ -63,7 +63,7 @@ DataSpace-and-DataQuality-learning-lab/
 ├── 03-OWL/                 # Ontologías y razonamiento
 ├── 04-SPARQL/              # Consulta de grafos RDF
 ├── 05-SHACL/               # Validación de datos mediante shapes
-├── 06-JSON-LD/             # Datos enlazados sobre JSON
+├── 06-ODRL/                # Validación de uso y permisos
 ├── 07-DCAT/                # Catálogos de datos y metadatos
 ├── 08-Data-Quality/        # Modelos, métricas y metodologías de calidad
 ├── 09-Data-Governance/     # Gobierno y gobernanza del dato
@@ -85,7 +85,7 @@ DataSpace-and-DataQuality-learning-lab/
 | **OWL** | Web Ontology Language |
 | **SPARQL** | Lenguaje de consulta para RDF |
 | **SHACL** | Shapes Constraint Language |
-| **JSON-LD** | JSON for Linked Data |
+| **ODRL** | Open Digital Rigths Language |
 | **DCAT** | Data Catalog Vocabulary |
 
 ### 🛠️ Infraestructura y herramientas
@@ -134,8 +134,8 @@ flowchart LR
 | 02 | RDFS | ✅ |
 | 03 | OWL | ✅ |
 | 04 | SPARQL | ✅ |
-| 05 | SHACL | 🚧 |
-| 06 | JSON-LD | 🚧 |
+| 05 | SHACL | ✅ |
+| 06 | ODRL | 🚧 |
 | 07 | DCAT | 🔜 |
 | 08 | Data Quality | 🔜 |
 | 09 | Data Governance | 🔜 |

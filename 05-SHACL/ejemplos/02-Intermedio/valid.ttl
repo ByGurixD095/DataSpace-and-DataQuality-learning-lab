@@ -1,0 +1,22 @@
+@prefix ex:  <http://example.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:Movilidad2026
+    a ex:Dataset ;
+    ex:title "Movilidad urbana 2026" ;
+    ex:identifier "DS-0001" ;
+    ex:description "Viajes anonimizados en bicicleta compartida." ;
+    ex:created "2026-03-15"^^xsd:date ;
+    ex:format "CSV" ;
+    ex:license <https://creativecommons.org/licenses/by/4.0/> ;
+    ex:publisher ex:Ayuntamiento .
+
+ex:Minimo                                   # sin descripción ni licencia: sigue siendo válido
+    a ex:Dataset ;
+    ex:title "Dataset mínimo" ;
+    ex:identifier "DS-0002" ;
+    ex:created "2026-01-01"^^xsd:date ;
+    ex:format "RDF" ;
+    ex:publisher ex:Ayuntamiento .
+
+ex:Ayuntamiento ex:name "Ayuntamiento" .

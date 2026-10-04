@@ -1,0 +1,87 @@
+@prefix ex:   <http://example.com/> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+
+# Perfil de calidad que un proveedor debe cumplir para compartir
+# datos de movilidad en un Data Space.
+# El texto entre [corchetes] indica la dimensión ISO/IEC 25012 que
+# se comprueba; validate.py lo usa para resumir los resultados.
+
+ex: a owl:Ontology ;
+    sh:declare [ sh:prefix "ex" ; sh:namespace "http://example.com/"^^xsd:anyURI ] .
+
+ex:MobilityRecordShape
+    a sh:NodeShape ;
+    sh:targetClass ex:MobilityRecord ;
+
+    sh:property [
+        sh:path ex:recordId ;
+        sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "[Completitud] Cada registro necesita un único recordId." ;
+    ] ;
+
+    sh:property [
+        sh:path ex:timestamp ;
+        sh:minCount 1 ;
+        sh:datatype xsd:dateTime ;
+        sh:message "[Precisión sintáctica] timestamp debe ser un xsd:dateTime." ;
+    ] ;
+
+    sh:property [
+        sh:path ex:lat ;
+        sh:minCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive -90 ; sh:maxInclusive 90 ;
+        sh:message "[Precisión semántica] La latitud debe estar entre -90 y 90." ;
+    ] ;
+
+    sh:property [
+        sh:path ex:lon ;
+        sh:minCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive -180 ; sh:maxInclusive 180 ;
+        sh:message "[Precisión semántica] La longitud debe estar entre -180 y 180." ;
+    ] ;
+
+    sh:property [
+        sh:path ex:vehicleType ;
+        sh:minCount 1 ;
+        sh:in ( "bike" "scooter" "car" "bus" ) ;
+        sh:message "[Consistencia] vehicleType fuera del vocabulario acordado." ;
+    ] ;
+
+    # Warning: el dato es utilizable, pero sospechoso
+    sh:property [
+        sh:path ex:speedKmh ;
+        sh:maxInclusive 120 ;
+        sh:severity sh:Warning ;
+        sh:message "[Credibilidad] Velocidad sospechosamente alta (>120 km/h)." ;
+    ] ;
+
+    # Info: recomendación, no bloquea nada
+    sh:property [
+        sh:path ex:sensorNote ;
+        sh:minCount 1 ;
+        sh:severity sh:Info ;
+        sh:message "[Comprensibilidad] Se recomienda documentar el sensor en sensorNote." ;
+    ] .
+
+# Regla entre dos propiedades: SHACL Core no puede, SHACL-SPARQL sí.
+# (Aquí se conecta con la carpeta 04-SPARQL.)
+ex:TripShape
+    a sh:NodeShape ;
+    sh:targetClass ex:Trip ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "[Consistencia] El fin del viaje no puede ser anterior a su inicio." ;
+        sh:prefixes ex: ;
+        sh:select """
+            SELECT $this ?start ?end
+            WHERE {
+                $this ex:start ?start ;
+                      ex:end   ?end .
+                FILTER (?end < ?start)
+            }
+        """ ;
+    ] .

@@ -1,0 +1,5 @@
+@prefix ex: <http://example.com/> .
+
+ex:Alice  a ex:Person ; ex:name "Alice"  ; ex:age 23 ; ex:email "alice@example.com" .
+ex:Carlos a ex:Person ; ex:name "Carlos" .                 # edad y email son opcionales
+ex:Limite a ex:Person ; ex:name "Límite" ; ex:age 120 .    # caso límite: justo en el máximo

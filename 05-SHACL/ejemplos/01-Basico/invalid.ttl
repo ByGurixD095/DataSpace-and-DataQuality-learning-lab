@@ -1,0 +1,5 @@
+@prefix ex: <http://example.com/> .
+
+ex:Bob    a ex:Person ; ex:age "twenty" ; ex:email "not-an-email" .       # sin nombre, tipo erróneo, patrón
+ex:Clara  a ex:Person ; ex:name "Clara", "Clarita" ; ex:age 150 .         # 2 nombres y fuera de rango
+ex:Dani   a ex:Person ; ex:name 42 .                                      # nombre con datatype incorrecto

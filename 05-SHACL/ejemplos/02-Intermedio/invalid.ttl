@@ -1,0 +1,20 @@
+@prefix ex:  <http://example.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:Roto
+    a ex:Dataset ;
+    # falta ex:title
+    ex:identifier "123" ;                    # no cumple DS-0000
+    ex:created "ayer" ;                      # no es xsd:date
+    ex:format "XLSX" ;                       # fuera de la lista
+    ex:license 42 ;                          # ni IRI ni texto
+    ex:publisher ex:SinNombre .
+
+ex:SinNombre a ex:Organization .             # publicador sin ex:name
+
+ex:DosIds
+    a ex:Dataset ;
+    ex:title "Dataset con dos ids" ;
+    ex:identifier "DS-0003", "DS-0004" ;     # maxCount 1
+    ex:created "2026-02-02"^^xsd:date ;
+    ex:format "JSON" .                       # y sin publisher

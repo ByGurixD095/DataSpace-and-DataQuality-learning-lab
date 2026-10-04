@@ -1,0 +1,16 @@
+@prefix ex:  <http://example.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:rec1
+    a ex:MobilityRecord ;
+    ex:recordId "R-001" ;
+    ex:timestamp "2026-09-01T08:30:00"^^xsd:dateTime ;
+    ex:lat 38.9863 ; ex:lon -3.9291 ;
+    ex:vehicleType "bike" ;
+    ex:speedKmh 18 ;
+    ex:sensorNote "GPS del manillar, precisión ~5 m" .
+
+ex:trip1
+    a ex:Trip ;
+    ex:start "2026-09-01T08:30:00"^^xsd:dateTime ;
+    ex:end   "2026-09-01T08:52:00"^^xsd:dateTime .
