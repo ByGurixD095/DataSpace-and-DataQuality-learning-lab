@@ -135,8 +135,8 @@ flowchart LR
 | 03 | OWL | ✅ |
 | 04 | SPARQL | ✅ |
 | 05 | SHACL | ✅ |
-| 06 | ODRL | 🚧 |
-| 07 | DCAT | 🔜 |
+| 06 | ODRL | ✅ |
+| 07 | DCAT | 🚧 |
 | 08 | Data Quality | 🔜 |
 | 09 | Data Governance | 🔜 |
 | 10 | Data Spaces | 🔜 |
