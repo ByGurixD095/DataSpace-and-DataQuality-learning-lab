@@ -1,0 +1,64 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex:   <http://example.org/> .
+
+# ============================================================
+# 🟢 NIVEL 1 — DCAT (W3C)
+# Casi todo es opcional: el vocabulario te da las piezas,
+# pero no te obliga a usar ninguna.
+# Dataset del hilo conductor: calidad del aire de un ayuntamiento.
+# ============================================================
+
+# 📚 El catálogo
+ex:catalogo
+    a dcat:Catalog ;
+    dct:title "Catálogo de datos abiertos del Ayuntamiento"@es ;
+    dcat:dataset ex:dataset-calidad-aire ;
+    dcat:service ex:api-calidad-aire .
+
+# 🏢 Quien publica (en DCAT básico basta con un agente sencillo)
+ex:ayuntamiento
+    a foaf:Agent ;
+    foaf:name "Ayuntamiento de Ejemplo" .
+
+# 🗃️ El dataset: la IDEA ("los datos de calidad del aire")
+ex:dataset-calidad-aire
+    a dcat:Dataset ;
+    dct:title "Calidad del aire"@es ;
+    dct:description "Mediciones horarias de contaminantes atmosféricos (NO2, PM10, PM2.5, O3) de la red de estaciones municipal."@es ;
+    dct:publisher ex:ayuntamiento ;
+    dcat:keyword "aire"@es , "contaminación"@es ;
+    dcat:distribution ex:distribucion-calidad-aire-csv .
+
+# 📄 La distribución: UNA FORMA CONCRETA de obtenerlo (un CSV)
+ex:distribucion-calidad-aire-csv
+    a dcat:Distribution ;
+    dct:title "Calidad del aire (CSV)"@es ;
+    dcat:downloadURL <http://example.org/files/calidad-aire.csv> ;
+    dcat:mediaType <https://www.iana.org/assignments/media-types/text/csv> ;
+    # En DCAT básico, incluso un literal libre sería aceptable:
+    dct:format "CSV" .
+
+# 🔌 El servicio: OTRA FORMA de acceder (una API)
+ex:api-calidad-aire
+    a dcat:DataService ;
+    dct:title "API de calidad del aire"@es ;
+    dcat:endpointURL <http://example.org/api/calidad-aire> ;
+    dcat:servesDataset ex:dataset-calidad-aire .
+
+
+# ============================================================
+# 🆕 EXTRA DCAT 3 — Series de datasets
+# Un dataset por año agrupado en una serie.
+# (DatasetSeries y inSeries llegaron con DCAT 3)
+# ============================================================
+
+ex:serie-calidad-aire
+    a dcat:DatasetSeries ;
+    dct:title "Serie histórica de calidad del aire"@es .
+
+ex:dataset-calidad-aire
+    dcat:inSeries ex:serie-calidad-aire ;
+    dcat:version "1.0" .

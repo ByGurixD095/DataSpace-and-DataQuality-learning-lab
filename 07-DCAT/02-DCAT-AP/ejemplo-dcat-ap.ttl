@@ -1,0 +1,93 @@
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex:    <http://example.org/> .
+
+# ============================================================
+# 🟡 NIVEL 2 — DCAT-AP (perfil europeo)
+# Mismo dataset que en 01-DCAT, ahora cumpliendo el perfil.
+#
+# Leyenda de los comentarios:
+#   [M] obligatoria      [R] recomendada
+# Lo que no lleva etiqueta es opcional o depende de la versión
+# del perfil. Consulta siempre la especificación vigente.
+# ============================================================
+
+# 📚 El catálogo
+ex:catalogo
+    a dcat:Catalog ;
+    dct:title "Catálogo de datos abiertos del Ayuntamiento"@es ,
+              "Open data catalogue of the City Council"@en ;                 # [M]
+    dct:description "Catálogo de datos abiertos del Ayuntamiento de Ejemplo."@es ,
+                    "Open data catalogue of the Example City Council."@en ;  # [M]
+    dct:publisher ex:ayuntamiento ;                                          # [M]
+    dct:language <http://publications.europa.eu/resource/authority/language/SPA> ,
+                 <http://publications.europa.eu/resource/authority/language/ENG> ;
+    dct:issued "2026-01-15"^^xsd:date ;
+    dct:modified "2026-10-01"^^xsd:date ;
+    dcat:dataset ex:dataset-calidad-aire ;
+    dcat:service ex:api-calidad-aire .
+
+# 🏢 El agente que publica
+ex:ayuntamiento
+    a foaf:Agent ;
+    foaf:name "Ayuntamiento de Ejemplo"@es .                                 # [M]
+
+# 🗃️ El dataset
+ex:dataset-calidad-aire
+    a dcat:Dataset ;
+    dct:identifier "http://example.org/dataset-calidad-aire" ;
+    dct:title "Calidad del aire"@es , "Air quality"@en ;                     # [M]
+    dct:description "Mediciones horarias de contaminantes atmosféricos (NO2, PM10, PM2.5, O3) de la red de estaciones municipal."@es ,
+                    "Hourly measurements of air pollutants (NO2, PM10, PM2.5, O3) from the municipal station network."@en ;  # [M]
+    dct:publisher ex:ayuntamiento ;                                          # [R]
+
+    # 🔑 Vocabularios controlados europeos (en lugar de texto libre)
+    dcat:theme <http://publications.europa.eu/resource/authority/data-theme/ENVI> ;   # [R]
+    dct:language <http://publications.europa.eu/resource/authority/language/SPA> ;
+    dct:accrualPeriodicity <http://publications.europa.eu/resource/authority/frequency/DAILY> ;
+
+    dcat:keyword "calidad del aire"@es , "air quality"@en ;                  # [R]
+
+    # 🗺️ Cobertura
+    dct:spatial <http://publications.europa.eu/resource/authority/country/ESP> ;      # [R]
+    dct:temporal [
+        a dct:PeriodOfTime ;
+        dcat:startDate "2021-01-01"^^xsd:date ;
+        dcat:endDate   "2025-12-31"^^xsd:date
+    ] ;                                                                      # [R]
+
+    dct:issued "2026-01-15"^^xsd:date ;
+    dct:modified "2026-10-01"^^xsd:date ;
+
+    dcat:contactPoint ex:contacto ;                                          # [R]
+    dcat:distribution ex:distribucion-calidad-aire-csv .                     # [R]
+
+# ☎️ El punto de contacto (vCard)
+ex:contacto
+    a vcard:Organization ;
+    vcard:fn "Oficina del dato"@es ;
+    vcard:hasEmail <mailto:datos@example.org> .
+
+# 📄 La distribución
+ex:distribucion-calidad-aire-csv
+    a dcat:Distribution ;
+    dcat:accessURL <http://example.org/dataset-calidad-aire/descarga> ;      # [M]
+    dcat:downloadURL <http://example.org/files/calidad-aire.csv> ;
+    dct:title "Calidad del aire (CSV)"@es ;
+    dct:description "Fichero CSV con las mediciones horarias."@es ;          # [R]
+    dct:format <http://publications.europa.eu/resource/authority/file-type/CSV> ;     # [R]
+    dcat:mediaType <https://www.iana.org/assignments/media-types/text/csv> ; # IANA
+    dct:license <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> ;  # [R]
+    dcat:byteSize "1024"^^xsd:nonNegativeInteger ;
+    dcat:accessService ex:api-calidad-aire .
+
+# 🔌 El servicio de datos
+ex:api-calidad-aire
+    a dcat:DataService ;
+    dct:title "API de calidad del aire"@es ;
+    dcat:endpointURL <http://example.org/api/calidad-aire> ;
+    dcat:endpointDescription <http://example.org/api/calidad-aire/docs> ;
+    dcat:servesDataset ex:dataset-calidad-aire .
