@@ -1,0 +1,84 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix ex:   <http://example.org/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# ============================================================
+# 🎮 Ejemplo 1 — Le presto la consola a mi primo
+# Agreement: tiene assigner, assignee y target.
+# ============================================================
+
+ex:prestamo-consola
+    a odrl:Agreement ;
+    odrl:uid ex:prestamo-consola ;
+    odrl:target ex:mi-consola ;
+    odrl:assigner ex:yo ;
+    odrl:assignee ex:mi-primo ;
+
+    # Puede usarla, pero con condiciones
+    odrl:permission [
+        odrl:action odrl:use ;
+
+        # Dos constraints = AND implícito
+        odrl:constraint [
+            # puede usarla como máximo 3 veces
+            odrl:leftOperand  odrl:count ;
+            odrl:operator     odrl:lteq ;
+            odrl:rightOperand 3
+        ] , [
+            # Antes del 24 de diciembre tiene que devolverla
+            odrl:leftOperand  odrl:dateTime ;
+            odrl:operator     odrl:lt ;
+            odrl:rightOperand "2026-12-24"^^xsd:date
+        ] ;
+
+        # OJO: ex:devolver es una acción PROPIA (no existe en ODRL core),
+        # así que un conector real necesitaría un perfil que la defina.
+        odrl:duty [
+            odrl:action ex:devolver ;
+            odrl:consequence [
+                odrl:action odrl:compensate ;
+                odrl:compensatedParty ex:yo ;
+                odrl:constraint [
+                    # Si no cumple te debe una pizza
+                    odrl:leftOperand  odrl:payAmount ;
+                    odrl:operator     odrl:eq ;
+                    odrl:rightOperand "1 pizza"
+                ]
+            ]
+        ]
+    ] ;
+
+    # No se puede compartir
+    odrl:prohibition [
+        odrl:action odrl:distribute
+    ] .
+
+
+# ============================================================
+# 👵 Ejemplo 2 — La receta secreta de la abuela
+# Set: política genérica, sin partes concretas.
+# ============================================================
+
+ex:receta-abuela
+    a odrl:Set ;
+    odrl:uid ex:receta-abuela ;
+
+    # Se puede leer y cocinar
+    odrl:permission [
+        odrl:target ex:receta-croquetas ;
+        odrl:action odrl:read
+    ] , [
+        odrl:target ex:receta-croquetas ;
+        odrl:action odrl:use ;
+        odrl:duty [
+            odrl:action odrl:attribute ;
+            odrl:attributedParty ex:la-abuela
+        ]
+    ] ;
+
+    # Pero no se puede compartir, solo usar
+    odrl:prohibition [
+        odrl:target ex:receta-croquetas ;
+        odrl:action odrl:distribute ;
+        odrl:assignee ex:el-vecino
+    ] .
