@@ -1,0 +1,308 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcatap: <http://data.europa.eu/r5r/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dq: <http://example.org/dq#> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix ex: <http://example.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:catalogo a dcat:Catalog ;
+    dct:description "Open data catalogue of the Example City Council."@en,
+        "Catálogo de datos abiertos del Ayuntamiento de Ejemplo."@es ;
+    dct:issued "2026-01-15T09:00:00+01:00"^^xsd:dateTime ;
+    dct:language <http://publications.europa.eu/resource/authority/language/ENG>,
+        <http://publications.europa.eu/resource/authority/language/SPA> ;
+    dct:license <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> ;
+    dct:modified "2026-10-01T12:00:00+02:00"^^xsd:dateTime ;
+    dct:publisher <http://datos.gob.es/recurso/sector-publico/org/Organismo/E0DAT0001> ;
+    dct:spatial <http://datos.gob.es/recurso/sector-publico/territorio/Pais/España> ;
+    dct:title "Open data catalogue of the City Council"@en,
+        "Catálogo de datos abiertos del Ayuntamiento"@es ;
+    dcat:dataset ex:dataset-calidad-aire ;
+    dcat:service ex:api-calidad-aire ;
+    dcat:themeTaxonomy <http://datos.gob.es/kos/sector-publico/sector> ;
+    foaf:homepage <http://example.org> .
+
+dq:dim-accessibility a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Puede acceder a él quien lo necesita, incluidas personas con necesidades especiales."@es ;
+    skos:prefLabel "Accessibility"@en,
+        "Accesibilidad"@es ;
+    dqv:inCategory dq:cat-inherente,
+        dq:cat-sistema .
+
+dq:dim-availability a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Está disponible y se puede recuperar cuando se necesita."@es ;
+    skos:prefLabel "Availability"@en,
+        "Disponibilidad"@es ;
+    dqv:inCategory dq:cat-sistema .
+
+dq:dim-compliance a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Cumple las normas, convenciones y regulaciones aplicables."@es ;
+    skos:prefLabel "Compliance"@en,
+        "Conformidad"@es ;
+    dqv:inCategory dq:cat-inherente,
+        dq:cat-sistema .
+
+dq:dim-confidentiality a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Solo accede a él quien está autorizado."@es ;
+    skos:prefLabel "Confidentiality"@en,
+        "Confidencialidad"@es ;
+    dqv:inCategory dq:cat-inherente,
+        dq:cat-sistema .
+
+dq:dim-credibility a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Quienes lo usan lo consideran cierto y creíble."@es ;
+    skos:prefLabel "Credibility"@en,
+        "Credibilidad"@es ;
+    dqv:inCategory dq:cat-inherente .
+
+dq:dim-efficiency a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Se puede procesar con las prestaciones adecuadas y recursos razonables."@es ;
+    skos:prefLabel "Efficiency"@en,
+        "Eficiencia"@es ;
+    dqv:inCategory dq:cat-inherente,
+        dq:cat-sistema .
+
+dq:dim-portability a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Se puede instalar, sustituir o mover entre sistemas conservando su calidad."@es ;
+    skos:prefLabel "Portability"@en,
+        "Portabilidad"@es ;
+    dqv:inCategory dq:cat-sistema .
+
+dq:dim-recoverability a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Mantiene el nivel de calidad incluso ante fallos."@es ;
+    skos:prefLabel "Recoverability"@en,
+        "Recuperabilidad"@es ;
+    dqv:inCategory dq:cat-sistema .
+
+dq:dim-traceability a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Se puede auditar quién lo accedió o modificó y de dónde procede."@es ;
+    skos:prefLabel "Traceability"@en,
+        "Trazabilidad"@es ;
+    dqv:inCategory dq:cat-inherente,
+        dq:cat-sistema .
+
+dq:dim-understandability a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Los usuarios pueden leerlo e interpretarlo (lenguaje, símbolos, unidades)."@es ;
+    skos:prefLabel "Understandability"@en,
+        "Comprensibilidad"@es ;
+    dqv:inCategory dq:cat-inherente,
+        dq:cat-sistema .
+
+dq:dim-completeness a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Existen valores para todos los atributos y entidades esperados."@es ;
+    skos:prefLabel "Completeness"@en,
+        "Completitud"@es ;
+    dqv:inCategory dq:cat-inherente .
+
+dq:dim-precision a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Tiene el nivel de detalle que requiere su uso."@es ;
+    skos:prefLabel "Precision"@en,
+        "Precisión"@es ;
+    dqv:inCategory dq:cat-inherente,
+        dq:cat-sistema .
+
+dq:medicion-actualidad_24h a dqv:QualityMeasurement ;
+    dqv:computedOn ex:distribucion-calidad-aire-csv ;
+    dqv:isMeasurementOf dq:metrica-actualidad_24h ;
+    dqv:value 1.0000 ;
+    prov:generatedAtTime "2026-10-06T00:30:00"^^xsd:dateTime .
+
+dq:medicion-actualidad_3h a dqv:QualityMeasurement ;
+    dqv:computedOn ex:distribucion-calidad-aire-csv ;
+    dqv:isMeasurementOf dq:metrica-actualidad_3h ;
+    dqv:value 1.0000 ;
+    prov:generatedAtTime "2026-10-06T00:30:00"^^xsd:dateTime .
+
+dq:medicion-completitud_no2 a dqv:QualityMeasurement ;
+    dqv:computedOn ex:distribucion-calidad-aire-csv ;
+    dqv:isMeasurementOf dq:metrica-completitud_no2 ;
+    dqv:value 0.9400 ;
+    prov:generatedAtTime "2026-10-06T00:30:00"^^xsd:dateTime .
+
+dq:medicion-conformidad_shacl a dqv:QualityMeasurement ;
+    dqv:computedOn ex:distribucion-calidad-aire-csv ;
+    dqv:isMeasurementOf dq:metrica-conformidad_shacl ;
+    dqv:value 0.8600 ;
+    prov:generatedAtTime "2026-10-06T00:30:00"^^xsd:dateTime .
+
+dq:medicion-consistencia_pm a dqv:QualityMeasurement ;
+    dqv:computedOn ex:distribucion-calidad-aire-csv ;
+    dqv:isMeasurementOf dq:metrica-consistencia_pm ;
+    dqv:value 0.9600 ;
+    prov:generatedAtTime "2026-10-06T00:30:00"^^xsd:dateTime .
+
+dq:medicion-precision_no2 a dqv:QualityMeasurement ;
+    dqv:computedOn ex:distribucion-calidad-aire-csv ;
+    dqv:isMeasurementOf dq:metrica-precision_no2 ;
+    dqv:value 0.9362 ;
+    prov:generatedAtTime "2026-10-06T00:30:00"^^xsd:dateTime .
+
+dq:medicion-unicidad_clave a dqv:QualityMeasurement ;
+    dqv:computedOn ex:distribucion-calidad-aire-csv ;
+    dqv:isMeasurementOf dq:metrica-unicidad_clave ;
+    dqv:value 0.9600 ;
+    prov:generatedAtTime "2026-10-06T00:30:00"^^xsd:dateTime .
+
+dq:medicion-validez_no2 a dqv:QualityMeasurement ;
+    dqv:computedOn ex:distribucion-calidad-aire-csv ;
+    dqv:isMeasurementOf dq:metrica-validez_no2 ;
+    dqv:value 0.9000 ;
+    prov:generatedAtTime "2026-10-06T00:30:00"^^xsd:dateTime .
+
+dq:metrica-actualidad_24h a dqv:Metric ;
+    skos:definition "¿La última lectura tiene ≤ 24 h? (edad actual: 1.5 h)"@es ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension dq:dim-currentness .
+
+dq:metrica-actualidad_3h a dqv:Metric ;
+    skos:definition "¿La última lectura tiene ≤ 3 h? (edad actual: 1.5 h)"@es ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension dq:dim-currentness .
+
+dq:metrica-completitud_no2 a dqv:Metric ;
+    skos:definition "Valores de no2 presentes / filas esperadas"@es ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension dq:dim-completeness .
+
+dq:metrica-conformidad_shacl a dqv:Metric ;
+    skos:definition "Registros sin violaciones SHACL / registros"@es ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension dq:dim-accuracy .
+
+dq:metrica-consistencia_pm a dqv:Metric ;
+    skos:definition "Filas con PM2,5 ≤ PM10 / filas"@es ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension dq:dim-consistency .
+
+dq:metrica-precision_no2 a dqv:Metric ;
+    skos:definition "Valores con al menos 1 decimal / valores presentes"@es ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension dq:dim-precision .
+
+dq:metrica-unicidad_clave a dqv:Metric ;
+    skos:definition "Filas no duplicadas / filas (mapeo habitual a consistencia)"@es ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension dq:dim-consistency .
+
+dq:metrica-validez_no2 a dqv:Metric ;
+    skos:definition "Valores de no2 presentes y dentro de [0, 1000] / filas"@es ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension dq:dim-accuracy .
+
+ex:api-calidad-aire a dcat:DataService ;
+    dct:publisher <http://datos.gob.es/recurso/sector-publico/org/Organismo/E0DAT0001> ;
+    dct:title "API de calidad del aire"@es ;
+    dcat:contactPoint ex:contacto ;
+    dcat:endpointDescription <http://example.org/api/calidad-aire/docs> ;
+    dcat:endpointURL <http://example.org/api/calidad-aire> ;
+    dcat:keyword "calidad del aire"@es ;
+    dcat:servesDataset ex:dataset-calidad-aire ;
+    dcat:theme <http://datos.gob.es/kos/sector-publico/sector/medio-ambiente> .
+
+ex:contacto a vcard:Organization ;
+    vcard:fn "Oficina del dato"@es ;
+    vcard:hasEmail <mailto:datos@example.org> ;
+    vcard:hasUID <http://datos.gob.es/recurso/sector-publico/org/Organismo/E0DAT0001> ;
+    vcard:hasURL ex: ;
+    vcard:organization-name "Ayuntamiento de Ejemplo"@es .
+
+dq:dim-accuracy a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "El dato representa correctamente el valor real del atributo que describe."@es ;
+    skos:prefLabel "Accuracy"@en,
+        "Exactitud"@es ;
+    dqv:inCategory dq:cat-inherente .
+
+dq:dim-consistency a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "El dato no se contradice y es coherente con otros datos de su contexto."@es ;
+    skos:prefLabel "Consistency"@en,
+        "Consistencia"@es ;
+    dqv:inCategory dq:cat-inherente .
+
+dq:dim-currentness a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "El dato tiene la edad adecuada para el uso previsto."@es ;
+    skos:prefLabel "Currentness"@en,
+        "Actualidad"@es ;
+    dqv:inCategory dq:cat-inherente .
+
+ex:oferta-calidad-aire a odrl:Offer ;
+    odrl:assigner <http://datos.gob.es/recurso/sector-publico/org/Organismo/E0DAT0001> ;
+    odrl:permission [ odrl:action odrl:use ;
+            odrl:target ex:dataset-calidad-aire ] ;
+    odrl:uid ex:oferta-calidad-aire .
+
+ex:dataset-calidad-aire a dcat:Dataset ;
+    dct:accessRights <http://publications.europa.eu/resource/authority/access-right/PUBLIC> ;
+    dct:accrualPeriodicity <http://publications.europa.eu/resource/authority/frequency/DAILY> ;
+    dct:description "Hourly measurements of air pollutants (NO2, PM10, PM2.5, O3) from the municipal station network."@en,
+        "Mediciones horarias de contaminantes atmosféricos (NO2, PM10, PM2.5, O3) de la red de estaciones municipal."@es ;
+    dct:identifier "http://example.org/dataset-calidad-aire" ;
+    dct:language <http://publications.europa.eu/resource/authority/language/SPA> ;
+    dct:publisher <http://datos.gob.es/recurso/sector-publico/org/Organismo/E0DAT0001> ;
+    dct:spatial <http://datos.gob.es/recurso/sector-publico/territorio/Pais/España> ;
+    dct:temporal [ a dct:PeriodOfTime ;
+            dcat:endDate "2025-12-31T00:00:00+00:00"^^xsd:dateTime ;
+            dcat:startDate "2021-01-01T00:00:00+00:00"^^xsd:dateTime ] ;
+    dct:title "Air quality"@en,
+        "Calidad del aire"@es ;
+    dcat:contactPoint ex:contacto ;
+    dcat:distribution ex:distribucion-calidad-aire-csv ;
+    dcat:keyword "air quality"@en,
+        "calidad del aire"@es ;
+    dcat:landingPage <http://example.org/datos/calidad-aire> ;
+    dcat:temporalResolution "PT1H"^^xsd:duration ;
+    dcat:theme <http://datos.gob.es/kos/sector-publico/sector/medio-ambiente> ;
+    dcat:version "1.0" .
+
+ex:distribucion-calidad-aire-csv a dcat:Distribution ;
+    dcatap:availability <http://publications.europa.eu/resource/authority/planned-availability/STABLE> ;
+    dct:description "Fichero CSV con las mediciones horarias."@es ;
+    dct:format <http://publications.europa.eu/resource/authority/file-type/CSV> ;
+    dct:license <http://publications.europa.eu/resource/authority/licence/CC_BY_4_0> ;
+    dct:title "Air quality (CSV)"@en,
+        "Calidad del aire (CSV)"@es ;
+    dcat:accessService ex:api-calidad-aire ;
+    dcat:accessURL <http://example.org/files/calidad-aire.csv> ;
+    dcat:byteSize "1024"^^xsd:nonNegativeInteger ;
+    dcat:downloadURL <http://example.org/files/calidad-aire.csv> ;
+    dcat:mediaType <https://www.iana.org/assignments/media-types/text/csv> ;
+    dqv:hasQualityMeasurement dq:medicion-actualidad_24h,
+        dq:medicion-actualidad_3h,
+        dq:medicion-completitud_no2,
+        dq:medicion-conformidad_shacl,
+        dq:medicion-consistencia_pm,
+        dq:medicion-precision_no2,
+        dq:medicion-unicidad_clave,
+        dq:medicion-validez_no2 ;
+    odrl:hasPolicy ex:oferta-calidad-aire .
+
+dq:cat-sistema a skos:Concept,
+        dqv:Category ;
+    skos:prefLabel "System-dependent data quality (ISO/IEC 25012)"@en,
+        "Calidad dependiente del sistema"@es .
+
+dq:cat-inherente a skos:Concept,
+        dqv:Category ;
+    skos:prefLabel "Inherent data quality (ISO/IEC 25012)"@en,
+        "Calidad inherente al dato"@es .
+

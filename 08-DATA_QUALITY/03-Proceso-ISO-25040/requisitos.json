@@ -1,0 +1,16 @@
+{
+  "_comentario": "Actividad 1 de ISO/IEC 25040: requisitos de la evaluación. Edita este fichero y vuelve a ejecutar evaluacion_25040.py.",
+  "proposito": "Decidir si el dataset de calidad del aire sirve para un informe oficial de cumplimiento normativo",
+  "interesados": ["Responsable de medio ambiente (adquirente)", "Equipo de datos (proveedor)", "Evaluador independiente"],
+  "contexto": "informe_oficial",
+  "rigor": "alto",
+  "caracteristicas_priorizadas": ["completeness", "accuracy", "consistency", "currentness", "precision"],
+  "umbrales": {
+    "completitud_no2": 0.95,
+    "validez_no2": 0.98,
+    "consistencia_pm": 0.99,
+    "unicidad_clave": 1.0,
+    "precision_no2": 0.90,
+    "actualidad_24h": 1.0
+  }
+}

@@ -1,0 +1,3 @@
+# Solo hacen falta para las carpetas 1, 6 y 7
+rdflib>=6.0
+pyshacl>=0.25

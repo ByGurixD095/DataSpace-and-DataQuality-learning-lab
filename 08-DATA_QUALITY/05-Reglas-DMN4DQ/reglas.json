@@ -1,0 +1,64 @@
+{
+  "_comentario": "Reglas de calidad en cuatro niveles al estilo DMN4DQ. Los umbrales son ILUSTRATIVOS: los fijas tú según tu contexto.",
+
+  "br_dv": [
+    {"id": "DV1", "descripcion": "El NO2 existe y está entre 0 y 1000 µg/m³",
+     "tipo": "rango", "campo": "no2", "min": 0, "max": 1000},
+    {"id": "DV2", "descripcion": "PM2,5 no puede superar a PM10",
+     "tipo": "menor_igual", "campo": "pm25", "contra": "pm10"},
+    {"id": "DV3", "descripcion": "No hay dos lecturas de la misma estación y hora",
+     "tipo": "unico", "claves": ["estacion", "fecha_hora"]}
+  ],
+
+  "br_dqm": [
+    {"id": "completitud_no2",   "descripcion": "Valores de NO2 presentes / filas"},
+    {"id": "validez_no2",       "descripcion": "Valores de NO2 presentes y en rango / filas"},
+    {"id": "registros_validos", "descripcion": "Registros que cumplen TODAS las reglas BR.DV / registros"},
+    {"id": "unicidad_clave",    "descripcion": "Filas no duplicadas / filas"},
+    {"id": "actualidad_3h",     "descripcion": "¿La última lectura tiene ≤ 3 h?"}
+  ],
+
+  "contextos": {
+    "informe_oficial": {
+      "descripcion": "Informe de cumplimiento normativo: se exige rigor",
+      "br_dqa": [
+        {"nivel": "Alto",  "si": {"registros_validos": ">=0.95", "unicidad_clave": ">=1.0"}},
+        {"nivel": "Medio", "si": {"registros_validos": ">=0.80", "completitud_no2": ">=0.90"}},
+        {"nivel": "Bajo",  "si": {}}
+      ],
+      "br_dud": {
+        "Alto":  "✅ Utilizable para informes oficiales",
+        "Medio": "⚠️ Utilizable solo con aviso y revisión manual",
+        "Bajo":  "❌ No utilizable"
+      }
+    },
+
+    "analisis_exploratorio": {
+      "descripcion": "Análisis interno: se tolera algo de ruido",
+      "br_dqa": [
+        {"nivel": "Alto",  "si": {"validez_no2": ">=0.90", "completitud_no2": ">=0.90"}},
+        {"nivel": "Medio", "si": {"validez_no2": ">=0.75", "completitud_no2": ">=0.70"}},
+        {"nivel": "Bajo",  "si": {}}
+      ],
+      "br_dud": {
+        "Alto":  "✅ Utilizable para análisis",
+        "Medio": "⚠️ Utilizable con cautela",
+        "Bajo":  "❌ No utilizable"
+      }
+    },
+
+    "alerta_tiempo_real": {
+      "descripcion": "Alertas a la población: lo importante es que sea reciente y fiable",
+      "br_dqa": [
+        {"nivel": "Alto",  "si": {"actualidad_3h": ">=1", "validez_no2": ">=0.95"}},
+        {"nivel": "Medio", "si": {"actualidad_3h": ">=1", "validez_no2": ">=0.85"}},
+        {"nivel": "Bajo",  "si": {}}
+      ],
+      "br_dud": {
+        "Alto":  "✅ Apto para disparar alertas automáticas",
+        "Medio": "⚠️ Alertas solo con confirmación humana",
+        "Bajo":  "❌ No apto para alertas"
+      }
+    }
+  }
+}

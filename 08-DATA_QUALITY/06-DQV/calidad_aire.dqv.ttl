@@ -1,0 +1,213 @@
+@prefix dq: <http://example.org/dq#> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dq:dim-accessibility a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Puede acceder a él quien lo necesita, incluidas personas con necesidades especiales."@es ;
+    skos:prefLabel "Accessibility"@en,
+        "Accesibilidad"@es ;
+    dqv:inCategory dq:cat-inherente,
+        dq:cat-sistema .
+
+dq:dim-availability a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Está disponible y se puede recuperar cuando se necesita."@es ;
+    skos:prefLabel "Availability"@en,
+        "Disponibilidad"@es ;
+    dqv:inCategory dq:cat-sistema .
+
+dq:dim-compliance a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Cumple las normas, convenciones y regulaciones aplicables."@es ;
+    skos:prefLabel "Compliance"@en,
+        "Conformidad"@es ;
+    dqv:inCategory dq:cat-inherente,
+        dq:cat-sistema .
+
+dq:dim-confidentiality a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Solo accede a él quien está autorizado."@es ;
+    skos:prefLabel "Confidentiality"@en,
+        "Confidencialidad"@es ;
+    dqv:inCategory dq:cat-inherente,
+        dq:cat-sistema .
+
+dq:dim-credibility a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Quienes lo usan lo consideran cierto y creíble."@es ;
+    skos:prefLabel "Credibility"@en,
+        "Credibilidad"@es ;
+    dqv:inCategory dq:cat-inherente .
+
+dq:dim-efficiency a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Se puede procesar con las prestaciones adecuadas y recursos razonables."@es ;
+    skos:prefLabel "Efficiency"@en,
+        "Eficiencia"@es ;
+    dqv:inCategory dq:cat-inherente,
+        dq:cat-sistema .
+
+dq:dim-portability a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Se puede instalar, sustituir o mover entre sistemas conservando su calidad."@es ;
+    skos:prefLabel "Portability"@en,
+        "Portabilidad"@es ;
+    dqv:inCategory dq:cat-sistema .
+
+dq:dim-recoverability a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Mantiene el nivel de calidad incluso ante fallos."@es ;
+    skos:prefLabel "Recoverability"@en,
+        "Recuperabilidad"@es ;
+    dqv:inCategory dq:cat-sistema .
+
+dq:dim-traceability a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Se puede auditar quién lo accedió o modificó y de dónde procede."@es ;
+    skos:prefLabel "Traceability"@en,
+        "Trazabilidad"@es ;
+    dqv:inCategory dq:cat-inherente,
+        dq:cat-sistema .
+
+dq:dim-understandability a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Los usuarios pueden leerlo e interpretarlo (lenguaje, símbolos, unidades)."@es ;
+    skos:prefLabel "Understandability"@en,
+        "Comprensibilidad"@es ;
+    dqv:inCategory dq:cat-inherente,
+        dq:cat-sistema .
+
+dq:dim-accuracy a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "El dato representa correctamente el valor real del atributo que describe."@es ;
+    skos:prefLabel "Accuracy"@en,
+        "Exactitud"@es ;
+    dqv:inCategory dq:cat-inherente .
+
+dq:dim-completeness a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Existen valores para todos los atributos y entidades esperados."@es ;
+    skos:prefLabel "Completeness"@en,
+        "Completitud"@es ;
+    dqv:inCategory dq:cat-inherente .
+
+dq:dim-precision a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "Tiene el nivel de detalle que requiere su uso."@es ;
+    skos:prefLabel "Precision"@en,
+        "Precisión"@es ;
+    dqv:inCategory dq:cat-inherente,
+        dq:cat-sistema .
+
+dq:medicion-actualidad_24h a dqv:QualityMeasurement ;
+    dqv:computedOn <http://example.org/distribucion-calidad-aire-csv> ;
+    dqv:isMeasurementOf dq:metrica-actualidad_24h ;
+    dqv:value 1.0000 ;
+    prov:generatedAtTime "2026-10-06T00:30:00"^^xsd:dateTime .
+
+dq:medicion-actualidad_3h a dqv:QualityMeasurement ;
+    dqv:computedOn <http://example.org/distribucion-calidad-aire-csv> ;
+    dqv:isMeasurementOf dq:metrica-actualidad_3h ;
+    dqv:value 1.0000 ;
+    prov:generatedAtTime "2026-10-06T00:30:00"^^xsd:dateTime .
+
+dq:medicion-completitud_no2 a dqv:QualityMeasurement ;
+    dqv:computedOn <http://example.org/distribucion-calidad-aire-csv> ;
+    dqv:isMeasurementOf dq:metrica-completitud_no2 ;
+    dqv:value 0.9400 ;
+    prov:generatedAtTime "2026-10-06T00:30:00"^^xsd:dateTime .
+
+dq:medicion-consistencia_pm a dqv:QualityMeasurement ;
+    dqv:computedOn <http://example.org/distribucion-calidad-aire-csv> ;
+    dqv:isMeasurementOf dq:metrica-consistencia_pm ;
+    dqv:value 0.9600 ;
+    prov:generatedAtTime "2026-10-06T00:30:00"^^xsd:dateTime .
+
+dq:medicion-precision_no2 a dqv:QualityMeasurement ;
+    dqv:computedOn <http://example.org/distribucion-calidad-aire-csv> ;
+    dqv:isMeasurementOf dq:metrica-precision_no2 ;
+    dqv:value 0.9362 ;
+    prov:generatedAtTime "2026-10-06T00:30:00"^^xsd:dateTime .
+
+dq:medicion-unicidad_clave a dqv:QualityMeasurement ;
+    dqv:computedOn <http://example.org/distribucion-calidad-aire-csv> ;
+    dqv:isMeasurementOf dq:metrica-unicidad_clave ;
+    dqv:value 0.9600 ;
+    prov:generatedAtTime "2026-10-06T00:30:00"^^xsd:dateTime .
+
+dq:medicion-validez_no2 a dqv:QualityMeasurement ;
+    dqv:computedOn <http://example.org/distribucion-calidad-aire-csv> ;
+    dqv:isMeasurementOf dq:metrica-validez_no2 ;
+    dqv:value 0.9000 ;
+    prov:generatedAtTime "2026-10-06T00:30:00"^^xsd:dateTime .
+
+dq:metrica-actualidad_24h a dqv:Metric ;
+    skos:definition "¿La última lectura tiene ≤ 24 h? (edad actual: 1.5 h)"@es ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension dq:dim-currentness .
+
+dq:metrica-actualidad_3h a dqv:Metric ;
+    skos:definition "¿La última lectura tiene ≤ 3 h? (edad actual: 1.5 h)"@es ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension dq:dim-currentness .
+
+dq:metrica-completitud_no2 a dqv:Metric ;
+    skos:definition "Valores de no2 presentes / filas esperadas"@es ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension dq:dim-completeness .
+
+dq:metrica-consistencia_pm a dqv:Metric ;
+    skos:definition "Filas con PM2,5 ≤ PM10 / filas"@es ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension dq:dim-consistency .
+
+dq:metrica-precision_no2 a dqv:Metric ;
+    skos:definition "Valores con al menos 1 decimal / valores presentes"@es ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension dq:dim-precision .
+
+dq:metrica-unicidad_clave a dqv:Metric ;
+    skos:definition "Filas no duplicadas / filas (mapeo habitual a consistencia)"@es ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension dq:dim-consistency .
+
+dq:metrica-validez_no2 a dqv:Metric ;
+    skos:definition "Valores de no2 presentes y dentro de [0, 1000] / filas"@es ;
+    dqv:expectedDataType xsd:decimal ;
+    dqv:inDimension dq:dim-accuracy .
+
+dq:dim-consistency a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "El dato no se contradice y es coherente con otros datos de su contexto."@es ;
+    skos:prefLabel "Consistency"@en,
+        "Consistencia"@es ;
+    dqv:inCategory dq:cat-inherente .
+
+dq:dim-currentness a skos:Concept,
+        dqv:Dimension ;
+    skos:definition "El dato tiene la edad adecuada para el uso previsto."@es ;
+    skos:prefLabel "Currentness"@en,
+        "Actualidad"@es ;
+    dqv:inCategory dq:cat-inherente .
+
+<http://example.org/distribucion-calidad-aire-csv> dqv:hasQualityMeasurement dq:medicion-actualidad_24h,
+        dq:medicion-actualidad_3h,
+        dq:medicion-completitud_no2,
+        dq:medicion-consistencia_pm,
+        dq:medicion-precision_no2,
+        dq:medicion-unicidad_clave,
+        dq:medicion-validez_no2 .
+
+dq:cat-sistema a skos:Concept,
+        dqv:Category ;
+    skos:prefLabel "System-dependent data quality (ISO/IEC 25012)"@en,
+        "Calidad dependiente del sistema"@es .
+
+dq:cat-inherente a skos:Concept,
+        dqv:Category ;
+    skos:prefLabel "Inherent data quality (ISO/IEC 25012)"@en,
+        "Calidad inherente al dato"@es .
+

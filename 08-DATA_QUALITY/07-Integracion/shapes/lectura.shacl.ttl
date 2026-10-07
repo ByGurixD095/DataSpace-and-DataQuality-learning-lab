@@ -1,0 +1,39 @@
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex:  <http://example.org/> .
+
+# Reglas BR.DV expresadas como shapes SHACL (ver carpeta 05 para las mismas reglas en JSON).
+# DV3 (unicidad de la clave) NO se puede expresar con shapes de propiedad: se comprueba con SPARQL.
+
+ex:LecturaShape
+    a sh:NodeShape ;
+    sh:targetClass ex:Lectura ;
+
+    # DV1 · El NO2 existe y está entre 0 y 1000 (completitud + exactitud sintáctica)
+    sh:property [
+        sh:path ex:no2 ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 1000 ;
+        sh:message "NO2 ausente o fuera del rango [0, 1000]" ;
+    ] ;
+
+    # DV2 · PM2,5 no puede superar a PM10 (consistencia entre atributos)
+    sh:property [
+        sh:path ex:pm25 ;
+        sh:lessThanOrEquals ex:pm10 ;
+        sh:message "PM2,5 no puede superar a PM10" ;
+    ] ;
+
+    # La fecha y la estación deben existir con su tipo
+    sh:property [
+        sh:path ex:fechaHora ;
+        sh:minCount 1 ;
+        sh:datatype xsd:dateTime ;
+    ] ;
+    sh:property [
+        sh:path ex:estacion ;
+        sh:minCount 1 ;
+    ] .

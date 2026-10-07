@@ -1,0 +1,12 @@
+caracteristica,prioridad,metrica,medida_id,umbral,como_se_obtiene
+completeness,alta,Ratio de valores de NO2 presentes,completitud_no2,0.95,automática (comun/dq.py)
+accuracy,alta,Ratio de valores de NO2 dentro de su dominio,validez_no2,0.98,automática
+consistency,alta,Ratio de filas con PM2.5 <= PM10,consistencia_pm,0.99,automática
+consistency,media,Ratio de filas no duplicadas,unicidad_clave,1.0,automática
+currentness,alta,Última lectura con menos de 24 h,actualidad_24h,1.0,automática
+precision,media,Ratio de valores con al menos un decimal,precision_no2,0.90,automática
+credibility,media,Estaciones acreditadas por el organismo competente,,,inspección documental
+traceability,media,Se registra sensor y calibración de cada lectura,,,revisión de metadatos de procedencia
+understandability,media,Existe diccionario de datos con unidades,,,revisión manual
+accessibility,alta,La URL de descarga responde y el formato es abierto,,,prueba de acceso
+availability,baja,Disponibilidad mensual de la API,,,monitorización del servicio
