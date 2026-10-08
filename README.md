@@ -137,8 +137,8 @@ flowchart LR
 | 05 | SHACL | ✅ |
 | 06 | ODRL | ✅ |
 | 07 | DCAT | ✅ |
-| 08 | Data Quality | 🚧 |
-| 09 | Data Governance | 🔜 |
+| 08 | Data Quality | ✅ |
+| 09 | Data Governance | 🚧 |
 | 10 | Data Spaces | 🔜 |
 | 11 | Eclipse EDC | 🔜 |
 
