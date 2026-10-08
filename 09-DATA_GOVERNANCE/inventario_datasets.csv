@@ -1,0 +1,11 @@
+id,titulo,dominio,propietario,steward,custodio,clasificacion,proxima_revision,politica_uso,calidad_evaluada
+calidad-aire,Calidad del aire,Medio Ambiente,Dirección de Medio Ambiente,Oficina del Dato,Servicio de Informática,Público,2027-10-01,si,si
+ruido-urbano,Ruido urbano,Medio Ambiente,Dirección de Medio Ambiente,,Servicio de Informática,Público,2027-04-01,si,no
+zonas-verdes,Zonas verdes,Medio Ambiente,Dirección de Medio Ambiente,Oficina del Dato,Servicio de Informática,Público,2026-09-01,no,no
+trafico-horario,Tráfico horario,Movilidad,Dirección de Movilidad,Equipo de Datos de Movilidad,Servicio de Informática,Interno,2026-06-30,si,no
+aparcamientos,Aparcamientos públicos,Movilidad,,Equipo de Datos de Movilidad,Servicio de Informática,Público,2027-03-01,no,no
+sensores-iot,Sensores IoT de la vía pública,Movilidad,Dirección de Movilidad,Equipo de Datos de Movilidad,,Interno,2027-02-01,no,si
+licencias-obra,Licencias de obra,Urbanismo,Dirección de Urbanismo,Oficina del Dato,Servicio de Informática,Interno,2027-05-01,si,no
+padron-resumen,Resumen del padrón,Población,Secretaría General,Oficina del Dato,Servicio de Informática,Confidencial,2027-01-15,si,si
+presupuesto,Presupuesto municipal,Hacienda,Intervención,Oficina del Dato,Servicio de Informática,Público,2026-12-01,si,no
+contratos-menores,Contratos menores,Hacienda,,,Servicio de Informática,,,no,no

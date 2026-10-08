@@ -1,0 +1,33 @@
+@prefix gov: <http://example.org/gobierno#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+gov:confidencial a skos:Concept ;
+    skos:inScheme gov:esquema-clasificacion ;
+    skos:prefLabel "Confidential"@en,
+        "Confidencial"@es .
+
+gov:interno a skos:Concept ;
+    skos:inScheme gov:esquema-clasificacion ;
+    skos:prefLabel "Internal"@en,
+        "Interno"@es .
+
+gov:publico a skos:Concept ;
+    skos:inScheme gov:esquema-clasificacion ;
+    skos:prefLabel "Public"@en,
+        "Público"@es .
+
+gov:rol-custodio a skos:Concept ;
+    skos:prefLabel "Data custodian"@en,
+        "Custodio técnico"@es .
+
+gov:rol-propietario a skos:Concept ;
+    skos:prefLabel "Data owner"@en,
+        "Propietario del dato"@es .
+
+gov:rol-steward a skos:Concept ;
+    skos:prefLabel "Data steward"@en,
+        "Responsable de dominio (steward)"@es .
+
+gov:esquema-clasificacion a skos:ConceptScheme ;
+    skos:prefLabel "Clasificación de la información"@es .
+

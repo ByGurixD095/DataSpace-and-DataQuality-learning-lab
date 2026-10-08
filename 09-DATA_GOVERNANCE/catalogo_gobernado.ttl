@@ -1,0 +1,244 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix ex: <http://example.org/> .
+@prefix gov: <http://example.org/gobierno#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:catalogo-municipal a dcat:Catalog ;
+    dct:title "Catálogo de datos del Ayuntamiento"@es ;
+    dcat:dataset ex:dataset-aparcamientos,
+        ex:dataset-calidad-aire,
+        ex:dataset-contratos-menores,
+        ex:dataset-licencias-obra,
+        ex:dataset-padron-resumen,
+        ex:dataset-presupuesto,
+        ex:dataset-ruido-urbano,
+        ex:dataset-sensores-iot,
+        ex:dataset-trafico-horario,
+        ex:dataset-zonas-verdes .
+
+ex:dataset-aparcamientos a dcat:Dataset ;
+    gov:dominio "Movilidad"@es ;
+    gov:nivelClasificacion gov:publico ;
+    gov:proximaRevision "2027-03-01"^^xsd:date ;
+    dct:publisher ex:ayuntamiento ;
+    dct:title "Aparcamientos públicos"@es ;
+    dcat:distribution ex:distribucion-aparcamientos ;
+    prov:qualifiedAttribution [ a prov:Attribution ;
+            dcat:hadRole gov:rol-custodio ;
+            prov:agent ex:unidad-servicio-de-informatica ],
+        [ a prov:Attribution ;
+            dcat:hadRole gov:rol-steward ;
+            prov:agent ex:unidad-equipo-de-datos-de-movilidad ] .
+
+ex:dataset-calidad-aire a dcat:Dataset ;
+    gov:dominio "Medio Ambiente"@es ;
+    gov:nivelClasificacion gov:publico ;
+    gov:proximaRevision "2027-10-01"^^xsd:date ;
+    dct:publisher ex:ayuntamiento ;
+    dct:title "Calidad del aire"@es ;
+    dcat:distribution ex:distribucion-calidad-aire ;
+    odrl:hasPolicy ex:politica-calidad-aire ;
+    prov:qualifiedAttribution [ a prov:Attribution ;
+            dcat:hadRole gov:rol-propietario ;
+            prov:agent ex:unidad-direccion-de-medio-ambiente ],
+        [ a prov:Attribution ;
+            dcat:hadRole gov:rol-custodio ;
+            prov:agent ex:unidad-servicio-de-informatica ],
+        [ a prov:Attribution ;
+            dcat:hadRole gov:rol-steward ;
+            prov:agent ex:unidad-oficina-del-dato ] .
+
+ex:dataset-contratos-menores a dcat:Dataset ;
+    gov:dominio "Hacienda"@es ;
+    dct:publisher ex:ayuntamiento ;
+    dct:title "Contratos menores"@es ;
+    dcat:distribution ex:distribucion-contratos-menores ;
+    prov:qualifiedAttribution [ a prov:Attribution ;
+            dcat:hadRole gov:rol-custodio ;
+            prov:agent ex:unidad-servicio-de-informatica ] .
+
+ex:dataset-licencias-obra a dcat:Dataset ;
+    gov:dominio "Urbanismo"@es ;
+    gov:nivelClasificacion gov:interno ;
+    gov:proximaRevision "2027-05-01"^^xsd:date ;
+    dct:publisher ex:ayuntamiento ;
+    dct:title "Licencias de obra"@es ;
+    dcat:distribution ex:distribucion-licencias-obra ;
+    odrl:hasPolicy ex:politica-licencias-obra ;
+    prov:qualifiedAttribution [ a prov:Attribution ;
+            dcat:hadRole gov:rol-custodio ;
+            prov:agent ex:unidad-servicio-de-informatica ],
+        [ a prov:Attribution ;
+            dcat:hadRole gov:rol-propietario ;
+            prov:agent ex:unidad-direccion-de-urbanismo ],
+        [ a prov:Attribution ;
+            dcat:hadRole gov:rol-steward ;
+            prov:agent ex:unidad-oficina-del-dato ] .
+
+ex:dataset-padron-resumen a dcat:Dataset ;
+    gov:dominio "Población"@es ;
+    gov:nivelClasificacion gov:confidencial ;
+    gov:proximaRevision "2027-01-15"^^xsd:date ;
+    dct:publisher ex:ayuntamiento ;
+    dct:title "Resumen del padrón"@es ;
+    dcat:distribution ex:distribucion-padron-resumen ;
+    odrl:hasPolicy ex:politica-padron-resumen ;
+    prov:qualifiedAttribution [ a prov:Attribution ;
+            dcat:hadRole gov:rol-propietario ;
+            prov:agent ex:unidad-secretaria-general ],
+        [ a prov:Attribution ;
+            dcat:hadRole gov:rol-steward ;
+            prov:agent ex:unidad-oficina-del-dato ],
+        [ a prov:Attribution ;
+            dcat:hadRole gov:rol-custodio ;
+            prov:agent ex:unidad-servicio-de-informatica ] .
+
+ex:dataset-presupuesto a dcat:Dataset ;
+    gov:dominio "Hacienda"@es ;
+    gov:nivelClasificacion gov:publico ;
+    gov:proximaRevision "2026-12-01"^^xsd:date ;
+    dct:publisher ex:ayuntamiento ;
+    dct:title "Presupuesto municipal"@es ;
+    dcat:distribution ex:distribucion-presupuesto ;
+    odrl:hasPolicy ex:politica-presupuesto ;
+    prov:qualifiedAttribution [ a prov:Attribution ;
+            dcat:hadRole gov:rol-propietario ;
+            prov:agent ex:unidad-intervencion ],
+        [ a prov:Attribution ;
+            dcat:hadRole gov:rol-custodio ;
+            prov:agent ex:unidad-servicio-de-informatica ],
+        [ a prov:Attribution ;
+            dcat:hadRole gov:rol-steward ;
+            prov:agent ex:unidad-oficina-del-dato ] .
+
+ex:dataset-ruido-urbano a dcat:Dataset ;
+    gov:dominio "Medio Ambiente"@es ;
+    gov:nivelClasificacion gov:publico ;
+    gov:proximaRevision "2027-04-01"^^xsd:date ;
+    dct:publisher ex:ayuntamiento ;
+    dct:title "Ruido urbano"@es ;
+    dcat:distribution ex:distribucion-ruido-urbano ;
+    odrl:hasPolicy ex:politica-ruido-urbano ;
+    prov:qualifiedAttribution [ a prov:Attribution ;
+            dcat:hadRole gov:rol-custodio ;
+            prov:agent ex:unidad-servicio-de-informatica ],
+        [ a prov:Attribution ;
+            dcat:hadRole gov:rol-propietario ;
+            prov:agent ex:unidad-direccion-de-medio-ambiente ] .
+
+ex:dataset-sensores-iot a dcat:Dataset ;
+    gov:dominio "Movilidad"@es ;
+    gov:nivelClasificacion gov:interno ;
+    gov:proximaRevision "2027-02-01"^^xsd:date ;
+    dct:publisher ex:ayuntamiento ;
+    dct:title "Sensores IoT de la vía pública"@es ;
+    dcat:distribution ex:distribucion-sensores-iot ;
+    prov:qualifiedAttribution [ a prov:Attribution ;
+            dcat:hadRole gov:rol-steward ;
+            prov:agent ex:unidad-equipo-de-datos-de-movilidad ],
+        [ a prov:Attribution ;
+            dcat:hadRole gov:rol-propietario ;
+            prov:agent ex:unidad-direccion-de-movilidad ] .
+
+ex:dataset-trafico-horario a dcat:Dataset ;
+    gov:dominio "Movilidad"@es ;
+    gov:nivelClasificacion gov:interno ;
+    gov:proximaRevision "2026-06-30"^^xsd:date ;
+    dct:publisher ex:ayuntamiento ;
+    dct:title "Tráfico horario"@es ;
+    dcat:distribution ex:distribucion-trafico-horario ;
+    odrl:hasPolicy ex:politica-trafico-horario ;
+    prov:qualifiedAttribution [ a prov:Attribution ;
+            dcat:hadRole gov:rol-propietario ;
+            prov:agent ex:unidad-direccion-de-movilidad ],
+        [ a prov:Attribution ;
+            dcat:hadRole gov:rol-steward ;
+            prov:agent ex:unidad-equipo-de-datos-de-movilidad ],
+        [ a prov:Attribution ;
+            dcat:hadRole gov:rol-custodio ;
+            prov:agent ex:unidad-servicio-de-informatica ] .
+
+ex:dataset-zonas-verdes a dcat:Dataset ;
+    gov:dominio "Medio Ambiente"@es ;
+    gov:nivelClasificacion gov:publico ;
+    gov:proximaRevision "2026-09-01"^^xsd:date ;
+    dct:publisher ex:ayuntamiento ;
+    dct:title "Zonas verdes"@es ;
+    dcat:distribution ex:distribucion-zonas-verdes ;
+    prov:qualifiedAttribution [ a prov:Attribution ;
+            dcat:hadRole gov:rol-steward ;
+            prov:agent ex:unidad-oficina-del-dato ],
+        [ a prov:Attribution ;
+            dcat:hadRole gov:rol-custodio ;
+            prov:agent ex:unidad-servicio-de-informatica ],
+        [ a prov:Attribution ;
+            dcat:hadRole gov:rol-propietario ;
+            prov:agent ex:unidad-direccion-de-medio-ambiente ] .
+
+ex:distribucion-aparcamientos a dcat:Distribution .
+
+ex:distribucion-contratos-menores a dcat:Distribution .
+
+ex:distribucion-licencias-obra a dcat:Distribution .
+
+ex:distribucion-presupuesto a dcat:Distribution .
+
+ex:distribucion-ruido-urbano a dcat:Distribution .
+
+ex:distribucion-trafico-horario a dcat:Distribution .
+
+ex:distribucion-zonas-verdes a dcat:Distribution .
+
+gov:confidencial a skos:Concept ;
+    skos:inScheme gov:esquema-clasificacion ;
+    skos:prefLabel "Confidential"@en,
+        "Confidencial"@es .
+
+ex:medicion-calidad-aire-completitud a dqv:QualityMeasurement ;
+    dqv:computedOn ex:distribucion-calidad-aire .
+
+ex:medicion-padron-resumen-completitud a dqv:QualityMeasurement ;
+    dqv:computedOn ex:distribucion-padron-resumen .
+
+ex:medicion-sensores-iot-completitud a dqv:QualityMeasurement ;
+    dqv:computedOn ex:distribucion-sensores-iot .
+
+ex:distribucion-calidad-aire a dcat:Distribution ;
+    dqv:hasQualityMeasurement ex:medicion-calidad-aire-completitud .
+
+ex:distribucion-padron-resumen a dcat:Distribution ;
+    dqv:hasQualityMeasurement ex:medicion-padron-resumen-completitud .
+
+ex:distribucion-sensores-iot a dcat:Distribution ;
+    dqv:hasQualityMeasurement ex:medicion-sensores-iot-completitud .
+
+gov:esquema-clasificacion a skos:ConceptScheme ;
+    skos:prefLabel "Clasificación de la información"@es .
+
+gov:interno a skos:Concept ;
+    skos:inScheme gov:esquema-clasificacion ;
+    skos:prefLabel "Internal"@en,
+        "Interno"@es .
+
+gov:publico a skos:Concept ;
+    skos:inScheme gov:esquema-clasificacion ;
+    skos:prefLabel "Public"@en,
+        "Público"@es .
+
+gov:rol-propietario a skos:Concept ;
+    skos:prefLabel "Data owner"@en,
+        "Propietario del dato"@es .
+
+gov:rol-steward a skos:Concept ;
+    skos:prefLabel "Data steward"@en,
+        "Responsable de dominio (steward)"@es .
+
+gov:rol-custodio a skos:Concept ;
+    skos:prefLabel "Data custodian"@en,
+        "Custodio técnico"@es .
+

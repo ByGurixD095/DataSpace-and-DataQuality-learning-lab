@@ -1,0 +1,7 @@
+termino,definicion,dominio,propietario
+NO2,Concentración media horaria de dióxido de nitrógeno en el aire exterior; se expresa en µg/m³,Medio Ambiente,Dirección de Medio Ambiente
+PM10,Concentración media horaria de partículas en suspensión de diámetro inferior a 10 µm; se expresa en µg/m³,Medio Ambiente,Dirección de Medio Ambiente
+Lectura válida,Medición que existe y cumple las reglas de rango y coherencia definidas por el dominio,Medio Ambiente,Dirección de Medio Ambiente
+Estación activa,Estación de medida que ha enviado al menos una lectura en las últimas 24 horas,Medio Ambiente,Dirección de Medio Ambiente
+Estación activa,Estación con sensor operativo y revisión de mantenimiento al día,Movilidad,Dirección de Movilidad
+Dataset publicado,"Conjunto de datos disponible en el catálogo con propietario, clasificación y licencia declarados",Hacienda,Intervención

@@ -1,0 +1,49 @@
+@prefix gov: <http://example.org/gobierno#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://example.org/glosario/dataset-publicado--hacienda> a skos:Concept ;
+    gov:dominio "Hacienda"@es ;
+    skos:definition "Conjunto de datos disponible en el catálogo con propietario, clasificación y licencia declarados"@es ;
+    skos:inScheme gov:glosario ;
+    skos:prefLabel "Dataset publicado"@es ;
+    prov:wasAttributedTo <http://example.org/unidad-intervencion> .
+
+<http://example.org/glosario/estacion-activa--medio-ambiente> a skos:Concept ;
+    gov:dominio "Medio Ambiente"@es ;
+    skos:definition "Estación de medida que ha enviado al menos una lectura en las últimas 24 horas"@es ;
+    skos:inScheme gov:glosario ;
+    skos:prefLabel "Estación activa"@es ;
+    prov:wasAttributedTo <http://example.org/unidad-direccion-de-medio-ambiente> .
+
+<http://example.org/glosario/estacion-activa--movilidad> a skos:Concept ;
+    gov:dominio "Movilidad"@es ;
+    skos:definition "Estación con sensor operativo y revisión de mantenimiento al día"@es ;
+    skos:inScheme gov:glosario ;
+    skos:prefLabel "Estación activa"@es ;
+    prov:wasAttributedTo <http://example.org/unidad-direccion-de-movilidad> .
+
+<http://example.org/glosario/lectura-valida--medio-ambiente> a skos:Concept ;
+    gov:dominio "Medio Ambiente"@es ;
+    skos:definition "Medición que existe y cumple las reglas de rango y coherencia definidas por el dominio"@es ;
+    skos:inScheme gov:glosario ;
+    skos:prefLabel "Lectura válida"@es ;
+    prov:wasAttributedTo <http://example.org/unidad-direccion-de-medio-ambiente> .
+
+<http://example.org/glosario/no2--medio-ambiente> a skos:Concept ;
+    gov:dominio "Medio Ambiente"@es ;
+    skos:definition "Concentración media horaria de dióxido de nitrógeno en el aire exterior; se expresa en µg/m³"@es ;
+    skos:inScheme gov:glosario ;
+    skos:prefLabel "NO2"@es ;
+    prov:wasAttributedTo <http://example.org/unidad-direccion-de-medio-ambiente> .
+
+<http://example.org/glosario/pm10--medio-ambiente> a skos:Concept ;
+    gov:dominio "Medio Ambiente"@es ;
+    skos:definition "Concentración media horaria de partículas en suspensión de diámetro inferior a 10 µm; se expresa en µg/m³"@es ;
+    skos:inScheme gov:glosario ;
+    skos:prefLabel "PM10"@es ;
+    prov:wasAttributedTo <http://example.org/unidad-direccion-de-medio-ambiente> .
+
+gov:glosario a skos:ConceptScheme ;
+    skos:prefLabel "Glosario de datos municipal"@es .
+

@@ -1,0 +1,6 @@
+actividad,propietario,steward,custodio,oficina_del_dato,comite,juridico_dpd
+Dar acceso a un tercero,A,A,R,C,I,C
+Eliminar un dataset,C,R,R,I,,C
+Revisar la política de clasificación,A,C,I,C,C,C
+Corregir un dato erróneo,I,A/R,C,I,,
+Aprobar un cambio de definición,C,,,R,,C

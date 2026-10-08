@@ -1,0 +1,29 @@
+@prefix ex: <http://example.org/> .
+@prefix gov: <http://example.org/gobierno#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+
+ex:politica-nivel-confidencial a odrl:Set ;
+    gov:aplicaANivel gov:confidencial ;
+    odrl:permission [ odrl:action odrl:use ;
+            odrl:constraint [ odrl:leftOperand gov:tipoSolicitante ;
+                    odrl:operator odrl:eq ;
+                    odrl:rightOperand "interno" ] ;
+            odrl:duty [ odrl:action odrl:inform ] ] ;
+    odrl:prohibition [ odrl:action odrl:distribute ] ;
+    odrl:uid ex:politica-nivel-confidencial .
+
+ex:politica-nivel-interno a odrl:Set ;
+    gov:aplicaANivel gov:interno ;
+    odrl:permission [ odrl:action odrl:use ;
+            odrl:constraint [ odrl:leftOperand gov:tipoSolicitante ;
+                    odrl:operator odrl:eq ;
+                    odrl:rightOperand "interno" ] ] ;
+    odrl:prohibition [ odrl:action odrl:distribute ] ;
+    odrl:uid ex:politica-nivel-interno .
+
+ex:politica-nivel-publico a odrl:Set ;
+    gov:aplicaANivel gov:publico ;
+    odrl:permission [ odrl:action odrl:use ],
+        [ odrl:action odrl:distribute ] ;
+    odrl:uid ex:politica-nivel-publico .
+
