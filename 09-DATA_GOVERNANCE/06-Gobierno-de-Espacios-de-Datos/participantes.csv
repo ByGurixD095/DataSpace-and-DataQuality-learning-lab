@@ -1,0 +1,6 @@
+id,nombre,rol,trata_datos_personales,adhesion_firmada,contacto_institucional,dpd,catalogo_dcat,clasificacion_completa,politicas_odrl,calidad_publicada,conector,acepta_politicas,registro_usos
+ayuntamiento,Ayuntamiento de Ejemplo,proveedor,si,si,si,si,si,si,si,si,si,,
+universidad,Universidad de Ejemplo,consumidor,si,si,si,si,,,,,si,si,no
+startup-analitica,Startup Analítica,consumidor,si,si,si,no,,,,,si,si,no
+empresa-movilidad,Empresa de Movilidad,proveedor,no,si,si,,si,no,no,no,si,,
+consorcio-transporte,Consorcio de Transporte,proveedor,no,no,no,,si,si,si,si,no,,

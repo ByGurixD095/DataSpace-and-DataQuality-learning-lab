@@ -1,0 +1,56 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dqv:  <http://www.w3.org/ns/dqv#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix gov:  <http://example.org/gobierno#> .
+@prefix shp:  <http://example.org/shapes/gobierno#> .
+
+# ============================================================
+# Reglas de gobierno mínimas para un dataset del catálogo.
+#   Violation → sin esto el dataset NO está gobernado.
+#   Warning   → deseable; se reporta pero no bloquea.
+# La fecha de revisión (≥ 2026-10-08) está fijada para que el laboratorio sea reproducible.
+# ============================================================
+
+shp:DatasetGobernado
+    a sh:NodeShape ;
+    sh:targetClass dcat:Dataset ;
+
+    # ── Obligatorias ─────────────────────────────────────────
+    sh:property [
+        sh:path gov:nivelClasificacion ; sh:minCount 1 ; sh:severity sh:Violation ;
+        sh:message "Falta la clasificación: lo no clasificado no se puede compartir." ] ;
+
+    sh:property [
+        sh:path prov:qualifiedAttribution ;
+        sh:qualifiedValueShape [ sh:path dcat:hadRole ; sh:hasValue gov:rol-propietario ] ;
+        sh:qualifiedMinCount 1 ; sh:severity sh:Violation ;
+        sh:message "Falta el propietario del dato." ] ;
+
+    sh:property [
+        sh:path prov:qualifiedAttribution ;
+        sh:qualifiedValueShape [ sh:path dcat:hadRole ; sh:hasValue gov:rol-steward ] ;
+        sh:qualifiedMinCount 1 ; sh:severity sh:Violation ;
+        sh:message "Falta el steward (responsable de dominio)." ] ;
+
+    # ── Recomendadas ─────────────────────────────────────────
+    sh:property [
+        sh:path prov:qualifiedAttribution ;
+        sh:qualifiedValueShape [ sh:path dcat:hadRole ; sh:hasValue gov:rol-custodio ] ;
+        sh:qualifiedMinCount 1 ; sh:severity sh:Warning ;
+        sh:message "Falta el custodio técnico." ] ;
+
+    sh:property [
+        sh:path gov:proximaRevision ; sh:minCount 1 ;
+        sh:minInclusive "2026-10-08"^^xsd:date ; sh:severity sh:Warning ;
+        sh:message "Sin fecha de revisión o ya vencida." ] ;
+
+    sh:property [
+        sh:path odrl:hasPolicy ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Sin política de uso (ODRL) asociada." ] ;
+
+    sh:property [
+        sh:path ( dcat:distribution dqv:hasQualityMeasurement ) ; sh:minCount 1 ; sh:severity sh:Warning ;
+        sh:message "Sin calidad evaluada (DQV)." ] .

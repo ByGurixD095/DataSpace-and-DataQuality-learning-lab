@@ -1,0 +1,16 @@
+{
+  "nombre": "Rulebook didáctico del espacio de datos municipal",
+  "aviso": "Ejemplo inventado para aprender. Un rulebook real lo aprueba la autoridad de gobernanza del espacio (ver DSSC Blueprint).",
+  "reglas": [
+    {"id": "R01", "texto": "Tiene firmado el acuerdo de adhesión", "campo": "adhesion_firmada", "aplica_a": ["proveedor", "consumidor"], "nivel": "obligatoria"},
+    {"id": "R02", "texto": "Ha designado un contacto institucional (cargo, no persona)", "campo": "contacto_institucional", "aplica_a": ["proveedor", "consumidor"], "nivel": "obligatoria"},
+    {"id": "R03", "texto": "Cuenta con delegado de protección de datos si trata datos personales", "campo": "dpd", "aplica_a": ["proveedor", "consumidor"], "nivel": "obligatoria", "condicion": "trata_datos_personales"},
+    {"id": "R04", "texto": "Publica un catálogo DCAT conforme", "campo": "catalogo_dcat", "aplica_a": ["proveedor"], "nivel": "obligatoria"},
+    {"id": "R05", "texto": "Tiene sus datasets clasificados", "campo": "clasificacion_completa", "aplica_a": ["proveedor"], "nivel": "obligatoria"},
+    {"id": "R06", "texto": "Asocia políticas ODRL a sus datasets", "campo": "politicas_odrl", "aplica_a": ["proveedor"], "nivel": "obligatoria"},
+    {"id": "R07", "texto": "Publica la calidad de sus datos (DQV)", "campo": "calidad_publicada", "aplica_a": ["proveedor"], "nivel": "recomendada"},
+    {"id": "R08", "texto": "Dispone de un conector compatible", "campo": "conector", "aplica_a": ["proveedor", "consumidor"], "nivel": "obligatoria"},
+    {"id": "R09", "texto": "Acepta las políticas de uso de los proveedores", "campo": "acepta_politicas", "aplica_a": ["consumidor"], "nivel": "obligatoria"},
+    {"id": "R10", "texto": "Mantiene un registro de los usos que hace de los datos", "campo": "registro_usos", "aplica_a": ["consumidor"], "nivel": "recomendada"}
+  ]
+}
