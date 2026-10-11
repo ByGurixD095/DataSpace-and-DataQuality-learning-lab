@@ -1,0 +1,104 @@
+{
+  "nombre": "Rulebook didáctico del espacio ambiental municipal",
+  "aviso": "Ejemplo inventado para aprender, derivado del de 09-Data-Governance/06. Un rulebook real lo aprueba la autoridad de gobernanza del espacio.",
+  "reglas": [
+    {
+      "id": "R01",
+      "texto": "Tiene firmado el acuerdo de adhesión",
+      "campo": "adhesion_firmada",
+      "aplica_a": [
+        "proveedor",
+        "consumidor"
+      ],
+      "nivel": "obligatoria"
+    },
+    {
+      "id": "R02",
+      "texto": "Ha designado un contacto institucional (cargo, no persona)",
+      "campo": "contacto_institucional",
+      "aplica_a": [
+        "proveedor",
+        "consumidor"
+      ],
+      "nivel": "obligatoria"
+    },
+    {
+      "id": "R03",
+      "texto": "Cuenta con delegado de protección de datos si trata datos personales",
+      "campo": "dpd",
+      "aplica_a": [
+        "proveedor",
+        "consumidor"
+      ],
+      "nivel": "obligatoria",
+      "condicion": "trata_datos_personales"
+    },
+    {
+      "id": "R04",
+      "texto": "Publica un catálogo DCAT",
+      "campo": "catalogo_dcat",
+      "aplica_a": [
+        "proveedor"
+      ],
+      "nivel": "obligatoria"
+    },
+    {
+      "id": "R05",
+      "texto": "Todos sus datasets están clasificados",
+      "campo": "clasificacion_completa",
+      "aplica_a": [
+        "proveedor"
+      ],
+      "nivel": "obligatoria",
+      "origen": "derivada"
+    },
+    {
+      "id": "R06",
+      "texto": "Todos sus datasets llevan una oferta ODRL",
+      "campo": "politicas_odrl",
+      "aplica_a": [
+        "proveedor"
+      ],
+      "nivel": "obligatoria",
+      "origen": "derivada"
+    },
+    {
+      "id": "R07",
+      "texto": "Todos sus datasets publican su calidad (DQV)",
+      "campo": "calidad_publicada",
+      "aplica_a": [
+        "proveedor"
+      ],
+      "nivel": "recomendada",
+      "origen": "derivada"
+    },
+    {
+      "id": "R08",
+      "texto": "Dispone de un conector compatible",
+      "campo": "conector",
+      "aplica_a": [
+        "proveedor",
+        "consumidor"
+      ],
+      "nivel": "obligatoria"
+    },
+    {
+      "id": "R09",
+      "texto": "Acepta las políticas de uso de los proveedores",
+      "campo": "acepta_politicas",
+      "aplica_a": [
+        "consumidor"
+      ],
+      "nivel": "obligatoria"
+    },
+    {
+      "id": "R10",
+      "texto": "Mantiene un registro de los usos que hace de los datos",
+      "campo": "registro_usos",
+      "aplica_a": [
+        "consumidor"
+      ],
+      "nivel": "recomendada"
+    }
+  ]
+}

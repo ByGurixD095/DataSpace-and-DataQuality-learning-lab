@@ -1,0 +1,143 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix esp: <http://example.org/espacio#> .
+@prefix ex: <http://example.org/> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:catalogo-ayuntamiento a dcat:Catalog ;
+    dct:publisher ex:ayuntamiento ;
+    dcat:dataset ex:dataset-calidad-aire,
+        ex:dataset-ruido-urbano,
+        ex:dataset-trafico-horario .
+
+ex:catalogo-empresa-movilidad a dcat:Catalog ;
+    dct:publisher ex:empresa-movilidad ;
+    dcat:dataset ex:dataset-flota-bus-posiciones,
+        ex:dataset-rutas-bus .
+
+ex:dataset-rutas-bus a dcat:Dataset ;
+    dct:publisher ex:empresa-movilidad ;
+    dct:title "Rutas de autobús"@es ;
+    dcat:distribution ex:distribucion-rutas-bus .
+
+ex:distribucion-rutas-bus a dcat:Distribution ;
+    dcat:accessService ex:servicio-rutas-bus .
+
+ex:medicion-calidad-aire a dqv:QualityMeasurement ;
+    dqv:computedOn ex:distribucion-calidad-aire ;
+    dqv:value 0.97 .
+
+ex:medicion-flota-bus-posiciones a dqv:QualityMeasurement ;
+    dqv:computedOn ex:distribucion-flota-bus-posiciones ;
+    dqv:value 0.8 .
+
+ex:medicion-ruido-urbano a dqv:QualityMeasurement ;
+    dqv:computedOn ex:distribucion-ruido-urbano ;
+    dqv:value 0.88 .
+
+ex:medicion-trafico-horario a dqv:QualityMeasurement ;
+    dqv:computedOn ex:distribucion-trafico-horario ;
+    dqv:value 0.91 .
+
+ex:servicio-calidad-aire a dcat:DataService ;
+    dcat:endpointURL "http://ayto.example.org/api/calidad-aire"^^xsd:anyURI .
+
+ex:servicio-flota-bus-posiciones a dcat:DataService ;
+    dcat:endpointURL "http://movilidad.example.org/api/flota"^^xsd:anyURI .
+
+ex:servicio-ruido-urbano a dcat:DataService ;
+    dcat:endpointURL "http://ayto.example.org/api/ruido-urbano"^^xsd:anyURI .
+
+ex:servicio-rutas-bus a dcat:DataService ;
+    dcat:endpointURL "http://movilidad.example.org/api/rutas"^^xsd:anyURI .
+
+ex:servicio-trafico-horario a dcat:DataService ;
+    dcat:endpointURL "http://ayto.example.org/api/trafico-horario"^^xsd:anyURI .
+
+ex:dataset-calidad-aire a dcat:Dataset ;
+    esp:nivelClasificacion esp:publico ;
+    dct:publisher ex:ayuntamiento ;
+    dct:title "Calidad del aire"@es ;
+    dcat:distribution ex:distribucion-calidad-aire ;
+    odrl:hasPolicy ex:oferta-calidad-aire .
+
+ex:dataset-flota-bus-posiciones a dcat:Dataset ;
+    esp:nivelClasificacion esp:interno ;
+    dct:publisher ex:empresa-movilidad ;
+    dct:title "Posiciones de la flota de autobuses"@es ;
+    dcat:distribution ex:distribucion-flota-bus-posiciones ;
+    odrl:hasPolicy ex:oferta-flota-bus-posiciones .
+
+ex:dataset-ruido-urbano a dcat:Dataset ;
+    esp:nivelClasificacion esp:publico ;
+    dct:publisher ex:ayuntamiento ;
+    dct:title "Ruido urbano"@es ;
+    dcat:distribution ex:distribucion-ruido-urbano ;
+    odrl:hasPolicy ex:oferta-ruido-urbano .
+
+ex:dataset-trafico-horario a dcat:Dataset ;
+    esp:nivelClasificacion esp:interno ;
+    dct:publisher ex:ayuntamiento ;
+    dct:title "Tráfico horario"@es ;
+    dcat:distribution ex:distribucion-trafico-horario ;
+    odrl:hasPolicy ex:oferta-trafico-horario .
+
+ex:distribucion-calidad-aire a dcat:Distribution ;
+    dcat:accessService ex:servicio-calidad-aire ;
+    dqv:hasQualityMeasurement ex:medicion-calidad-aire .
+
+ex:distribucion-flota-bus-posiciones a dcat:Distribution ;
+    dcat:accessService ex:servicio-flota-bus-posiciones ;
+    dqv:hasQualityMeasurement ex:medicion-flota-bus-posiciones .
+
+ex:distribucion-ruido-urbano a dcat:Distribution ;
+    dcat:accessService ex:servicio-ruido-urbano ;
+    dqv:hasQualityMeasurement ex:medicion-ruido-urbano .
+
+ex:distribucion-trafico-horario a dcat:Distribution ;
+    dcat:accessService ex:servicio-trafico-horario ;
+    dqv:hasQualityMeasurement ex:medicion-trafico-horario .
+
+ex:oferta-calidad-aire a odrl:Offer ;
+    odrl:assigner ex:ayuntamiento ;
+    odrl:permission [ odrl:action odrl:use ;
+            odrl:constraint [ odrl:leftOperand odrl:purpose ;
+                    odrl:operator odrl:isAnyOf ;
+                    odrl:rightOperand "docencia",
+                        "investigacion" ] ;
+            odrl:duty [ odrl:action odrl:inform ] ] ;
+    odrl:target ex:dataset-calidad-aire ;
+    odrl:uid ex:oferta-calidad-aire .
+
+ex:oferta-flota-bus-posiciones a odrl:Offer ;
+    odrl:assigner ex:empresa-movilidad ;
+    odrl:permission [ odrl:action odrl:use ;
+            odrl:constraint [ odrl:leftOperand odrl:purpose ;
+                    odrl:operator odrl:isAnyOf ;
+                    odrl:rightOperand "investigacion" ] ;
+            odrl:duty [ odrl:action odrl:inform ] ] ;
+    odrl:target ex:dataset-flota-bus-posiciones ;
+    odrl:uid ex:oferta-flota-bus-posiciones .
+
+ex:oferta-ruido-urbano a odrl:Offer ;
+    odrl:assigner ex:ayuntamiento ;
+    odrl:permission [ odrl:action odrl:use ;
+            odrl:constraint [ odrl:leftOperand odrl:purpose ;
+                    odrl:operator odrl:isAnyOf ;
+                    odrl:rightOperand "docencia",
+                        "investigacion" ] ] ;
+    odrl:target ex:dataset-ruido-urbano ;
+    odrl:uid ex:oferta-ruido-urbano .
+
+ex:oferta-trafico-horario a odrl:Offer ;
+    odrl:assigner ex:ayuntamiento ;
+    odrl:permission [ odrl:action odrl:use ;
+            odrl:constraint [ odrl:leftOperand odrl:purpose ;
+                    odrl:operator odrl:isAnyOf ;
+                    odrl:rightOperand "investigacion" ] ;
+            odrl:duty [ odrl:action odrl:inform ] ] ;
+    odrl:target ex:dataset-trafico-horario ;
+    odrl:uid ex:oferta-trafico-horario .
+

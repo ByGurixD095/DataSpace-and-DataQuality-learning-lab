@@ -1,0 +1,10 @@
+{
+  "id": "cred-universidad-001",
+  "tipo": "AdhesionCredential",
+  "emisor": "autoridad-espacio",
+  "sujeto": "universidad",
+  "emitida": "2026-10-08",
+  "caduca": "2027-10-08",
+  "rulebook": "v1",
+  "firma": "vLmu5jdIvsLXt5ACHbTFyxD+IjymQFK3pZyquOEIxR8aHnPR8a3iHTQV//xZTn9RcHbNZubzVep8Kvc6V+0gAg=="
+}

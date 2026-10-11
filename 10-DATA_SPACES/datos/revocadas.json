@@ -1,0 +1,6 @@
+{
+  "aviso": "Lista de credenciales revocadas (didáctica). Un espacio real usaría un mecanismo de estado verificable.",
+  "revocadas": [
+    "cred-startup-analitica-antigua"
+  ]
+}

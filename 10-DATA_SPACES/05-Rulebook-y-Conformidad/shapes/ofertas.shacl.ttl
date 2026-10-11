@@ -1,0 +1,35 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix dqv:  <http://www.w3.org/ns/dqv#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix esp:  <http://example.org/espacio#> .
+@prefix shp:  <http://example.org/shapes/ofertas#> .
+
+# Lo que debe cumplir un dataset para publicarse en el espacio.
+#   Violation → no se puede publicar así.   Warning → recomendado.
+
+shp:DatasetPublicable
+    a sh:NodeShape ;
+    sh:targetClass dcat:Dataset ;
+    sh:property [ sh:path dct:publisher ; sh:minCount 1 ; sh:severity sh:Violation ;
+                  sh:message "Falta el publicador del dataset." ] ;
+    sh:property [ sh:path esp:nivelClasificacion ; sh:minCount 1 ; sh:severity sh:Violation ;
+                  sh:message "Falta la clasificación." ] ;
+    sh:property [ sh:path odrl:hasPolicy ; sh:minCount 1 ; sh:severity sh:Violation ;
+                  sh:message "Falta la oferta ODRL." ] ;
+    sh:property [ sh:path ( dcat:distribution dqv:hasQualityMeasurement ) ; sh:minCount 1 ; sh:severity sh:Warning ;
+                  sh:message "Falta la calidad publicada (DQV)." ] .
+
+shp:OfertaBienFormada
+    a sh:NodeShape ;
+    sh:targetClass odrl:Offer ;
+    sh:property [ sh:path odrl:assigner ; sh:minCount 1 ; sh:severity sh:Violation ;
+                  sh:message "La oferta no dice quién la ofrece (assigner)." ] ;
+    sh:property [ sh:path odrl:target ; sh:minCount 1 ; sh:severity sh:Violation ;
+                  sh:message "La oferta no dice sobre qué dataset es (target)." ] ;
+    sh:property [ sh:path odrl:permission ; sh:minCount 1 ; sh:severity sh:Violation ;
+                  sh:message "La oferta no concede ningún permiso." ] ;
+    # Una oferta NO debe tener assignee: eso es un acuerdo.
+    sh:property [ sh:path odrl:assignee ; sh:maxCount 0 ; sh:severity sh:Violation ;
+                  sh:message "Una oferta no puede tener assignee: eso es un acuerdo." ] .

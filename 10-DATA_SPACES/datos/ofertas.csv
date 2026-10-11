@@ -1,0 +1,6 @@
+id,titulo,proveedor,clasificacion,finalidades,deber_informar,calidad_completitud,endpoint
+calidad-aire,Calidad del aire,ayuntamiento,Público,investigacion;docencia,si,0.97,http://ayto.example.org/api/calidad-aire
+ruido-urbano,Ruido urbano,ayuntamiento,Público,investigacion;docencia,no,0.88,http://ayto.example.org/api/ruido-urbano
+trafico-horario,Tráfico horario,ayuntamiento,Interno,investigacion,si,0.91,http://ayto.example.org/api/trafico-horario
+flota-bus-posiciones,Posiciones de la flota de autobuses,empresa-movilidad,Interno,investigacion,si,0.80,http://movilidad.example.org/api/flota
+rutas-bus,Rutas de autobús,empresa-movilidad,,,no,,http://movilidad.example.org/api/rutas

@@ -1,0 +1,39 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix esp:  <http://example.org/espacio#> .
+@prefix shp:  <http://example.org/shapes/participantes#> .
+
+# El rulebook como shapes. El mensaje empieza por el id de la regla (R01…R10).
+# R05, R06 y R07 se calculan a partir del resultado de validar las ofertas (ver cobertura del script).
+
+shp:Todos
+    a sh:NodeShape ; sh:targetClass esp:Participante ;
+    sh:property [ sh:path esp:adhesionFirmada ; sh:hasValue true ; sh:severity sh:Violation ;
+                  sh:message "R01 Falta el acuerdo de adhesión firmado." ] ;
+    sh:property [ sh:path esp:contactoInstitucional ; sh:hasValue true ; sh:severity sh:Violation ;
+                  sh:message "R02 Falta el contacto institucional." ] ;
+    sh:property [ sh:path esp:conector ; sh:hasValue true ; sh:severity sh:Violation ;
+                  sh:message "R08 Falta un conector compatible." ] ;
+    # R03 condicional: si trata datos personales, DPD obligatorio
+    sh:or ( [ sh:path esp:tratamientoDatosPersonales ; sh:hasValue false ]
+            [ sh:path esp:dpd ; sh:hasValue true ] ) ;
+    sh:message "R03 Trata datos personales y no tiene delegado de protección de datos." ;
+    sh:severity sh:Violation .
+
+shp:Proveedores
+    a sh:NodeShape ; sh:targetClass esp:Proveedor ;
+    sh:property [ sh:path esp:catalogoDcat ; sh:hasValue true ; sh:severity sh:Violation ;
+                  sh:message "R04 Falta el catálogo DCAT." ] ;
+    sh:property [ sh:path esp:clasificacionCompleta ; sh:hasValue true ; sh:severity sh:Violation ;
+                  sh:message "R05 Hay datasets sin clasificar." ] ;
+    sh:property [ sh:path esp:politicasOdrl ; sh:hasValue true ; sh:severity sh:Violation ;
+                  sh:message "R06 Hay datasets sin oferta ODRL." ] ;
+    sh:property [ sh:path esp:calidadPublicada ; sh:hasValue true ; sh:severity sh:Warning ;
+                  sh:message "R07 Hay datasets sin calidad publicada." ] .
+
+shp:Consumidores
+    a sh:NodeShape ; sh:targetClass esp:Consumidor ;
+    sh:property [ sh:path esp:aceptaPoliticas ; sh:hasValue true ; sh:severity sh:Violation ;
+                  sh:message "R09 No acepta las políticas de uso de los proveedores." ] ;
+    sh:property [ sh:path esp:registroUsos ; sh:hasValue true ; sh:severity sh:Warning ;
+                  sh:message "R10 No mantiene un registro de usos." ] .

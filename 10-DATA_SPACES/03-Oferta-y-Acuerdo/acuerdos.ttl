@@ -1,0 +1,27 @@
+@prefix esp: <http://example.org/espacio#> .
+@prefix ex: <http://example.org/> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+
+ex:acuerdo-001 a odrl:Agreement ;
+    esp:derivadoDe ex:oferta-calidad-aire ;
+    odrl:assignee ex:universidad ;
+    odrl:assigner ex:ayuntamiento ;
+    odrl:permission [ odrl:action odrl:use ;
+            odrl:constraint [ odrl:leftOperand odrl:purpose ;
+                    odrl:operator odrl:eq ;
+                    odrl:rightOperand "investigacion" ] ;
+            odrl:duty [ odrl:action odrl:inform ] ] ;
+    odrl:target ex:dataset-calidad-aire ;
+    odrl:uid ex:acuerdo-001 .
+
+ex:acuerdo-002 a odrl:Agreement ;
+    esp:derivadoDe ex:oferta-ruido-urbano ;
+    odrl:assignee ex:universidad ;
+    odrl:assigner ex:ayuntamiento ;
+    odrl:permission [ odrl:action odrl:use ;
+            odrl:constraint [ odrl:leftOperand odrl:purpose ;
+                    odrl:operator odrl:eq ;
+                    odrl:rightOperand "docencia" ] ] ;
+    odrl:target ex:dataset-ruido-urbano ;
+    odrl:uid ex:acuerdo-002 .
+
