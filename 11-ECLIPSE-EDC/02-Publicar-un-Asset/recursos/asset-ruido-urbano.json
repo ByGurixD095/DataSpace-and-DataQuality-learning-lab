@@ -1,0 +1,14 @@
+{
+  "@context": { "@vocab": "https://w3id.org/edc/v0.0.1/ns/" },
+  "@id": "ruido-urbano",
+  "properties": {
+    "name": "Ruido urbano",
+    "contenttype": "application/json"
+  },
+  "dataAddress": {
+    "type": "HttpData",
+    "name": "Ruido urbano (backend del ayuntamiento)",
+    "baseUrl": "{{BACKEND_URL}}/ruido-urbano",
+    "proxyPath": "true"
+  }
+}

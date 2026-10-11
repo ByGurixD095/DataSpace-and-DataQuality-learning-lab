@@ -1,0 +1,6 @@
+{
+  "@context": { "@vocab": "https://w3id.org/edc/v0.0.1/ns/" },
+  "counterPartyId": "ayuntamiento",
+  "counterPartyAddress": "{{DSP_AYTO}}",
+  "protocol": "dataspace-protocol-http:2025-1"
+}

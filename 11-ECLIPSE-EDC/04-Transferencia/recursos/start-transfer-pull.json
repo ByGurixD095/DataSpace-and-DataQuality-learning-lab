@@ -1,0 +1,9 @@
+{
+  "@context": { "@vocab": "https://w3id.org/edc/v0.0.1/ns/" },
+  "@type": "TransferRequestDto",
+  "connectorId": "ayuntamiento",
+  "counterPartyAddress": "{{DSP_AYTO}}",
+  "contractId": "{{CONTRATO}}",
+  "protocol": "dataspace-protocol-http:2025-1",
+  "transferType": "HttpData-PULL"
+}

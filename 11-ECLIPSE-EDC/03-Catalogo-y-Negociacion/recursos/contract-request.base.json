@@ -1,0 +1,6 @@
+{
+  "@type": "ContractRequest",
+  "counterPartyId": "ayuntamiento",
+  "counterPartyAddress": "{{DSP_AYTO}}",
+  "protocol": "dataspace-protocol-http:2025-1"
+}

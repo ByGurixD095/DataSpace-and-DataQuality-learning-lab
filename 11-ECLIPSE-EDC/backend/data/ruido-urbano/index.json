@@ -1,0 +1,16 @@
+{
+  "dataset": "ruido-urbano",
+  "fuente": "sonómetros (datos sintéticos)",
+  "mediciones": [
+    {
+      "punto": "S01",
+      "fecha": "2026-10-08T08:00:00Z",
+      "laeq_db": 61.4
+    },
+    {
+      "punto": "S02",
+      "fecha": "2026-10-08T08:00:00Z",
+      "laeq_db": 57.9
+    }
+  ]
+}

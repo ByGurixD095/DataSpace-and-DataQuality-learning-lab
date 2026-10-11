@@ -1,0 +1,14 @@
+{
+  "@context": { "@vocab": "https://w3id.org/edc/v0.0.1/ns/" },
+  "@id": "calidad-aire",
+  "properties": {
+    "name": "Calidad del aire",
+    "contenttype": "application/json"
+  },
+  "dataAddress": {
+    "type": "HttpData",
+    "name": "Calidad del aire (backend del ayuntamiento)",
+    "baseUrl": "{{BACKEND_URL}}/calidad-aire",
+    "proxyPath": "true"
+  }
+}

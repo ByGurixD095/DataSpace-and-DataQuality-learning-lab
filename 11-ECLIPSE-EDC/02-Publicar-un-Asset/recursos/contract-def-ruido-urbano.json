@@ -1,0 +1,14 @@
+{
+  "@context": { "@vocab": "https://w3id.org/edc/v0.0.1/ns/" },
+  "@id": "cd-ruido-urbano",
+  "accessPolicyId": "politica-abierta",
+  "contractPolicyId": "politica-abierta",
+  "assetsSelector": [
+    {
+      "@type": "CriterionDto",
+      "operandLeft": "https://w3id.org/edc/v0.0.1/ns/id",
+      "operator": "=",
+      "operandRight": "ruido-urbano"
+    }
+  ]
+}

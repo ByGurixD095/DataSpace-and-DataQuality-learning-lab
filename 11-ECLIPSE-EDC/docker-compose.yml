@@ -1,0 +1,50 @@
+# Espacio de datos del laboratorio con Docker: 3 conectores EDC + backend + receptor.
+# Antes: ./01-Entorno/generar-claves.sh  y  ./gradlew :runtime:connector:shadowJar :runtime:provider-proxy:shadowJar
+# Después: EDC_LAB_DOCKER=1 y los scripts de cada paso (ver 01-Entorno/README.md).
+#
+# Los jars se MONTAN (no se construye ninguna imagen). Las imágenes base son genéricas.
+# Todo es para aprender: la Management API sin autenticar y claves de usar y tirar.
+
+services:
+  backend:
+    image: python:3.12-slim
+    command: ["python", "/app/servidor.py", "8081"]
+    volumes: ["./backend:/app:ro"]
+    ports: ["8081:8081"]
+
+  receptor:
+    image: python:3.12-slim
+    command: ["python", "/app/receptor.py", "4000"]
+    volumes: ["./receptor:/app"]
+    ports: ["4000:4000"]
+
+  ayuntamiento:                       # PROVEEDOR: conector + proxy de data plane
+    image: eclipse-temurin:17-jre
+    command: ["java", "-Dedc.fs.config=/config/connector.properties", "-jar", "/app/connector.jar"]
+    environment: { LAB_KEYS_DIR: /keys }
+    volumes:
+      - ./runtime/provider-proxy/build/libs/provider.jar:/app/connector.jar:ro
+      - ./config/docker/ayuntamiento.properties:/config/connector.properties:ro
+      - ./keys:/keys:ro
+    ports: ["19193:19193", "19194:19194", "19291:19291"]
+    depends_on: [backend]
+
+  universidad:                        # CONSUMIDOR admitido
+    image: eclipse-temurin:17-jre
+    command: ["java", "-Dedc.fs.config=/config/connector.properties", "-jar", "/app/connector.jar"]
+    environment: { LAB_KEYS_DIR: /keys }
+    volumes:
+      - ./runtime/connector/build/libs/connector.jar:/app/connector.jar:ro
+      - ./config/docker/universidad.properties:/config/connector.properties:ro
+      - ./keys:/keys:ro
+    ports: ["29193:29193", "29194:29194"]
+
+  startup:                            # CONSUMIDOR que NO cumple la política de acceso
+    image: eclipse-temurin:17-jre
+    command: ["java", "-Dedc.fs.config=/config/connector.properties", "-jar", "/app/connector.jar"]
+    environment: { LAB_KEYS_DIR: /keys }
+    volumes:
+      - ./runtime/connector/build/libs/connector.jar:/app/connector.jar:ro
+      - ./config/docker/startup.properties:/config/connector.properties:ro
+      - ./keys:/keys:ro
+    ports: ["39193:39193", "39194:39194"]

@@ -1,0 +1,14 @@
+{
+  "@context": { "@vocab": "https://w3id.org/edc/v0.0.1/ns/" },
+  "@id": "cd-calidad-aire",
+  "accessPolicyId": "politica-abierta",
+  "contractPolicyId": "politica-universidades",
+  "assetsSelector": [
+    {
+      "@type": "CriterionDto",
+      "operandLeft": "https://w3id.org/edc/v0.0.1/ns/id",
+      "operator": "=",
+      "operandRight": "calidad-aire"
+    }
+  ]
+}
